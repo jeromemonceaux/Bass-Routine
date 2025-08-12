@@ -3,111 +3,153 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bibliothèque – Netlify + Supabase (vDB-2)</title>
+  <title>Bibliothèque — Import JSON rapide</title>
   <style>
-    :root{--bg:#0c0d10;--panel:#14161b;--muted:#9aa0aa;--text:#e9ebef;--accent:#63d1bb;--border:#262a31;--radius:16px}
-    *{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#090b10,#12151c);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
-    header{position:sticky;top:0;background:#0f1117d0;border-bottom:1px solid var(--border);backdrop-filter:blur(6px)}
-    .wrap{max-width:1200px;margin:0 auto;padding:14px 18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-    h1{margin:0;font-size:20px;font-weight:800}
-    main{max-width:1200px;margin:18px auto;padding:0 18px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    @media (max-width:980px){main{grid-template-columns:1fr}}
-    .card{background:#14161b;border:1px solid var(--border);border-radius:16px;overflow:hidden}
-    .card h2{margin:0;padding:12px 14px;border-bottom:1px solid var(--border);font-size:15px;color:#d7dbee}
-    .content{padding:12px 14px}
-    input,select,button{border:1px solid var(--border);background:#0f1117;color:var(--text);border-radius:12px;padding:10px 12px}
-    .rowcfg{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center}
-    .list{display:flex;flex-direction:column;gap:8px;max-height:70vh;overflow:auto}
-    .row{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:10px;border:1px solid #22262f;border-radius:12px;background:#0e1016}
-    .badge{display:inline-block;border:1px solid #2a2e36;border-radius:999px;padding:2px 8px;font-size:11px;color:#b4b9c2}
-    a.btn,button.btn{appearance:none;border:1px solid var(--border);background:#10131a;color:var(--text);border-radius:12px;padding:10px 14px;text-decoration:none;display:inline-block}
-    a.primary,button.primary{background:var(--accent);color:#072a22;border-color:#2e8}
-    .muted{color:#9aa0aa;font-size:12px}
+    body { margin:0; font-family: -apple-system, system-ui, Roboto, Arial, sans-serif; background:#fff; color:#111; }
+    header { position:sticky; top:0; background:#f7f7f7; border-bottom:1px solid #ddd; }
+    .wrap { max-width:1000px; margin:0 auto; padding:12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    .wrap h1 { font-size:16px; margin:0; font-weight:700; }
+    .actions { margin-left:auto; display:flex; gap:6px; flex-wrap:wrap; }
+    button, input[type=file] + label {
+      appearance:none; border:1px solid #ccc; background:#fff; color:#111; border-radius:10px;
+      padding:8px 12px; font-size:14px; line-height:1; cursor:pointer;
+    }
+    input[type=file] { display:none; }
+    main { max-width:1000px; margin:12px auto; padding:0 12px; display:grid; grid-template-columns:1fr; gap:12px; }
+    .card { border:1px solid #e5e5e5; border-radius:12px; overflow:hidden; background:#fff; }
+    .card h2 { margin:0; font-size:14px; font-weight:700; padding:10px 12px; border-bottom:1px solid #eee; background:#fafafa; }
+    .content { padding:12px; }
+    .row { display:grid; grid-template-columns:1fr auto auto; gap:8px; align-items:center; padding:8px; border:1px solid #eee; border-radius:10px; margin-bottom:8px; }
+    .muted { color:#666; font-size:12px; }
+    .badge { display:inline-block; padding:2px 8px; border-radius:999px; border:1px solid #ddd; font-size:11px; color:#333; }
   </style>
 </head>
 <body>
-<header><div class="wrap">
-  <h1>Bibliothèque — Netlify + Supabase (vDB-2)</h1>
-  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-    <button id="loadDb" class="primary">Charger depuis la DB</button>
-    <button id="saveDb">Enregistrer (DB)</button>
-    <button id="export">Exporter JSON</button>
-    <input id="altUrl" type="url" placeholder="(optionnel) URL JSON externe">
-    <button id="loadUrl">Charger URL</button>
+<header>
+  <div class="wrap">
+    <h1>Bibliothèque</h1>
+    <div class="actions">
+      <button id="btnLoad">Charger DB</button>
+      <input id="file" type="file" accept="application/json">
+      <label for="file">Importer JSON</label>
+      <button id="btnSend" disabled>Envoyer vers DB</button>
+      <button id="btnExport">Exporter JSON</button>
+      <a href="editor.html" style="text-decoration:none"><button>Éditeur</button></a>
+    </div>
   </div>
-</div></header>
+</header>
 
 <main>
   <section class="card">
     <h2>Catalogue</h2>
     <div class="content">
-      <div class="rowcfg"><input id="q" placeholder="Recherche titre/compositeur"><select id="filter"><option value="all">Tous</option><option value="pd">Domaine public</option><option value="meta">Métadonnées</option></select><button id="reset">Réinit</button></div>
-      <div style="height:10px"></div>
-      <div id="list" class="list"></div>
+      <div style="display:grid; grid-template-columns:1fr auto auto; gap:8px; align-items:center; margin-bottom:8px">
+        <input id="q" placeholder="Recherche titre/compositeur/ID" style="padding:8px 10px; border:1px solid #ddd; border-radius:10px">
+        <select id="filter" style="padding:8px 10px; border:1px solid #ddd; border-radius:10px">
+          <option value="all">Tous</option>
+          <option value="pd">Domaine public</option>
+          <option value="meta">Métadonnées</option>
+        </select>
+        <button id="btnReset">Réinit</button>
+      </div>
+      <div id="list"></div>
     </div>
   </section>
 
   <section class="card">
     <h2>Infos</h2>
     <div class="content">
-      <div class="muted">GET/PUT sur <code>/api/library</code>. PATCH unitaire dans l’éditeur.</div>
-      <div style="margin-top:10px">Entrée sélectionnée : <span id="sel" class="badge">—</span></div>
-      <div style="margin-top:10px" class="muted">Ouvrir dans l’éditeur → <code>editor.html?id=…</code>.</div>
+      <div class="badge" id="status">—</div>
+      <div class="muted" style="margin-top:8px">Importer JSON → choisit un fichier local (.json). Puis “Envoyer vers DB” fait un <code>PUT /api/library</code>.</div>
     </div>
   </section>
 </main>
 
 <script>
-const $=(id)=>document.getElementById(id);
-let LIBRARY=[];
+const API = '/api/library';
+const $ = (id) => document.getElementById(id);
+let LIBRARY = [];
+let IMPORT_PAYLOAD = null;
 
-const API='/api/library';
+function setStatus(t){ $('status').textContent = t; }
 
 async function loadFromDB(){
-  const res=await fetch(API, {method:'GET'});
-  if(!res.ok) throw new Error('HTTP '+res.status);
-  LIBRARY = await res.json();
+  const r = await fetch(API);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  LIBRARY = await r.json();
+  setStatus(LIBRARY.length+' items (DB)');
   renderList();
 }
 
-async function saveToDB(){
-  const res=await fetch(API, {method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(LIBRARY)});
-  if(!res.ok){ const t=await res.text(); throw new Error('HTTP '+res.status+' '+t); }
-  alert('Enregistré en base ✔');
+async function sendToDB(payload){
+  const r = await fetch(API, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  if(!r.ok){
+    const t = await r.text(); throw new Error('HTTP '+r.status+' '+t);
+  }
+  setStatus('Importé ✔');
+  $('btnSend').disabled = true;
+  await loadFromDB();
 }
-
-async function loadFromUrl(url){
-  const res=await fetch(url, {mode:'cors'});
-  if(!res.ok) throw new Error('HTTP '+res.status);
-  LIBRARY = await res.json(); renderList();
-}
-
-const listEl=$('list'), q=$('q'), filter=$('filter'), reset=$('reset'), sel=$('sel');
-q.oninput=renderList; filter.onchange=renderList; reset.onclick=()=>{ q.value=''; filter.value='all'; renderList(); };
-$('loadDb').onclick=()=>loadFromDB().catch(e=>alert(e.message));
-$('saveDb').onclick=()=>saveToDB().catch(e=>alert(e.message));
-$('loadUrl').onclick=()=>{ const u=$('altUrl').value.trim(); if(!u) return; loadFromUrl(u).catch(e=>alert(e.message)); };
-$('export').onclick=()=>{ const blob=new Blob([JSON.stringify(LIBRARY,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='jazz-library.json'; a.click(); URL.revokeObjectURL(a.href); };
 
 function renderList(){
-  const qq=(q.value||'').toLowerCase(), mode=filter.value;
-  const items=(LIBRARY||[]).filter(it=>{
-    const hay=((it.title||'')+' '+(it.composer||'')).toLowerCase();
-    if(qq && !hay.includes(qq)) return false;
+  const q = ($('q').value||'').toLowerCase();
+  const mode = $('filter').value;
+  const list = $('list');
+  const items = (LIBRARY||[]).filter(it=>{
+    const hay = ((it.id||'')+' '+(it.title||'')+' '+(it.composer||'')).toLowerCase();
+    if(q && !hay.includes(q)) return false;
     if(mode==='pd' && !it.is_public_domain) return false;
     if(mode==='meta' && it.is_public_domain) return false;
     return true;
   });
-  listEl.innerHTML = items.map(it=>`<div class="row">
-    <div>
-      <div style="font-weight:700">${escapeHtml(it.title||'Sans titre')}</div>
-      <div class="muted">${escapeHtml(it.composer||'')} • ${it.year||'—'} • ${escapeHtml(it.style||'')}</div>
+  list.innerHTML = items.map(it => `
+    <div class="row">
+      <div>
+        <div style="font-weight:700">${escapeHtml(it.title||'Sans titre')}</div>
+        <div class="muted">${escapeHtml(it.id||'')} • ${escapeHtml(it.composer||'')} • ${it.year||'—'} • ${escapeHtml(it.style||'')}</div>
+      </div>
+      <div><span class="badge ${it.is_public_domain?'':'warn'}">${it.is_public_domain?'Grille incluse (PD)':'Métadonnées'}</span></div>
+      <div><a href="editor.html?id=${encodeURIComponent(it.id)}"><button>Ouvrir</button></a></div>
     </div>
-    <div><span class="badge ${it.is_public_domain?'':'warn'}">${it.is_public_domain?'Grille incluse (PD)':'Métadonnées'}</span></div>
-    <div><a class="btn primary" href="editor.html?id=${encodeURIComponent(it.id)}" onclick="document.getElementById('sel').textContent='${escapeHtml(it.title||'')}'">Ouvrir</a></div>
-  </div>`).join('');
+  `).join('');
 }
+
 function escapeHtml(s){ return (''+s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+
+// UI wiring
+$('btnLoad').onclick = () => loadFromDB().catch(e=>alert(e.message));
+$('btnExport').onclick = () => {
+  const blob = new Blob([JSON.stringify(LIBRARY, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'jazz-library.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+$('btnReset').onclick = () => { $('q').value=''; $('filter').value='all'; renderList(); };
+$('q').oninput = renderList;
+$('filter').onchange = renderList;
+
+$('file').onchange = () => {
+  const f = $('file').files[0]; if(!f) return;
+  const rd = new FileReader();
+  rd.onload = () => {
+    try{
+      const data = JSON.parse(rd.result);
+      if(!Array.isArray(data)) throw new Error('Le JSON doit être un tableau');
+      IMPORT_PAYLOAD = data;
+      $('btnSend').disabled = false;
+      setStatus('Prêt à envoyer ('+data.length+' items)');
+    }catch(err){
+      alert('Fichier invalide: '+err.message);
+    }
+  };
+  rd.readAsText(f);
+};
+$('btnSend').onclick = () => {
+  if(!IMPORT_PAYLOAD) { alert('Aucun fichier importé'); return; }
+  sendToDB(IMPORT_PAYLOAD).catch(e=>alert(e.message));
+};
 </script>
 </body>
 </html>
