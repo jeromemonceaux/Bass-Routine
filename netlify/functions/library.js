@@ -1,3 +1,4 @@
+
 import { createClient } from '@supabase/supabase-js'
 
 const cors = {
@@ -20,7 +21,6 @@ export default async (request, context) => {
 
   const SUPABASE_URL = process.env.SUPABASE_URL
   const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE || process.env.SUPABASE_KEY
-
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     return json({ error: 'Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE/KEY' }, 500)
   }
