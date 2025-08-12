@@ -8,6 +8,20 @@
     "serve": "netlify dev"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.0"
-  }
+    "@supabase/supabase-js": "^2.55.0"
+  },
+  "version": "1.0.0",
+  "description": "Ce pack intègre la bibliothèque Supabase + l’éditeur + le visualiseur “compas” dans ton projet. - **index.html** : lecteur avec Random, recherche, métronome WebAudio, rendu compas (format standard), auto‑chargement de la DB, support `#grid=<id>`. - **library.html** : bibliothèque (Importer JSON → Envoyer vers DB, Jouer, Ouvrir). - **editor.html** : éditeur (pré-remplissage fiable par `?id=<id>`, insertion symboles, prévisualisation, PATCH DB). - **js/grid** : moteur commun parse + render (sections, reprises, directives, multi-accords/mesure, tolérance de notation). - **js/api** : client `/api/library` (fallback Blue Bossa si API KO). - **netlify/functions/library.js** : fonction Web API (Response), CORS inclus. - **netlify.toml** : redirections `/api/library`.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeromemonceaux/Bass-Routine.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeromemonceaux/Bass-Routine/issues"
+  },
+  "homepage": "https://github.com/jeromemonceaux/Bass-Routine#readme"
 }
