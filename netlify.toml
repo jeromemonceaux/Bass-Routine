@@ -1,0 +1,13 @@
+[functions]
+node_bundler = "esbuild"
+external_node_modules = ["@supabase/supabase-js"]
+
+[[redirects]]
+from = "/api/library"
+to = "/.netlify/functions/library"
+status = 200
+
+[[redirects]]
+from = "/api/library/*"
+to = "/.netlify/functions/library/:splat"
+status = 200

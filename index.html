@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bibliothèque — Netlify + Supabase</title>
+  <style>
+    body{margin:0;background:#0c0d10;color:#e9ebef;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+    header{position:sticky;top:0;background:#0f1117d0;border-bottom:1px solid #262a31;backdrop-filter:blur(6px)}
+    .wrap{max-width:1100px;margin:0 auto;padding:14px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    main{max-width:1100px;margin:16px auto;padding:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:980px){main{grid-template-columns:1fr}}
+    .card{background:#14161b;border:1px solid #262a31;border-radius:14px;overflow:hidden}
+    .card h2{margin:0;padding:10px 12px;border-bottom:1px solid #262a31;font-size:15px}
+    .content{padding:12px}
+    input,button,select{border:1px solid #262a31;background:#0f1117;color:#e9ebef;border-radius:10px;padding:8px 10px}
+    .list{display:flex;flex-direction:column;gap:8px;max-height:68vh;overflow:auto}
+    .row{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:10px;border:1px solid #22262f;border-radius:12px;background:#0e1016}
+    .muted{color:#9aa0aa;font-size:12px}
+    .badge{display:inline-block;border:1px solid #2a2e36;border-radius:999px;padding:2px 8px;font-size:11px;color:#b4b9c2}
+    a.btn{appearance:none;border:1px solid #262a31;background:#10131a;color:#e9ebef;border-radius:12px;padding:8px 12px;text-decoration:none}
+    a.primary{background:#63d1bb;color:#072a22;border-color:#2e8}
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <div style="font-weight:800">Bibliothèque — Netlify + Supabase</div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <button id="loadDb">Charger DB</button>
+    <button id="saveDb">Enregistrer DB</button>
+    <button id="export">Exporter JSON</button>
+  </div>
+</div></header>
+
+<main>
+  <section class="card">
+    <h2>Catalogue</h2>
+    <div class="content">
+      <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center">
+        <input id="q" placeholder="Recherche titre/compositeur">
+        <select id="filter"><option value="all">Tous</option><option value="pd">Domaine public</option><option value="meta">Métadonnées</option></select>
+        <button id="reset">Réinit</button>
+      </div>
+      <div style="height:8px"></div>
+      <div id="list" class="list"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Infos</h2>
+    <div class="content">
+      <div class="muted">Utilise <b>Charger DB</b> pour récupérer la bibliothèque depuis Supabase, puis <b>Enregistrer DB</b> pour écrire (PUT complet). Clique <b>Ouvrir</b> pour éditer un morceau.</div>
+    </div>
+  </section>
+</main>
+
+<script>
+const $=(id)=>document.getElementById(id);
+let LIBRARY=[];
+const API='/api/library';
+
+async function loadFromDB(){
+  const r=await fetch(API); if(!r.ok) throw new Error('HTTP '+r.status);
+  LIBRARY=await r.json(); renderList();
+}
+async function saveToDB(){
+  const r=await fetch(API,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(LIBRARY)});
+  if(!r.ok){ const t=await r.text(); throw new Error('HTTP '+r.status+' '+t); }
+  alert('Enregistré en base ✔');
+}
+
+const listEl=$('list'), q=$('q'), filter=$('filter');
+q.oninput=renderList; filter.onchange=renderList; $('reset').onclick=()=>{ q.value=''; filter.value='all'; renderList(); };
+$('loadDb').onclick=()=>loadFromDB().catch(e=>alert(e.message));
+$('saveDb').onclick=()=>saveToDB().catch(e=>alert(e.message));
+$('export').onclick=()=>{ const blob=new Blob([JSON.stringify(LIBRARY,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='jazz-library.json'; a.click(); URL.revokeObjectURL(a.href); };
+
+function renderList(){
+  const qq=(q.value||'').toLowerCase(), mode=filter.value;
+  const items=(LIBRARY||[]).filter(it=>{
+    const hay=((it.title||'')+' '+(it.composer||'')).toLowerCase();
+    if(qq && !hay.includes(qq)) return false;
+    if(mode==='pd' && !it.is_public_domain) return false;
+    if(mode==='meta' && it.is_public_domain) return false;
+    return true;
+  });
+  listEl.innerHTML=items.map(it=>`<div class="row">
+    <div>
+      <div style="font-weight:700">${escapeHtml(it.title||'Sans titre')}</div>
+      <div class="muted">${escapeHtml(it.composer||'')} • ${it.year||'—'} • ${escapeHtml(it.style||'')}</div>
+    </div>
+    <div><span class="badge ${it.is_public_domain?'':'warn'}">${it.is_public_domain?'Grille incluse (PD)':'Métadonnées'}</span></div>
+    <div><a class="btn primary" href="editor.html?id=${encodeURIComponent(it.id)}">Ouvrir</a></div>
+  </div>`).join('');
+}
+function escapeHtml(s){ return (''+s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+</script>
+</body>
+</html>
