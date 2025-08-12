@@ -20,6 +20,7 @@ export default async (request, context) => {
 
   const SUPABASE_URL = process.env.SUPABASE_URL
   const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE || process.env.SUPABASE_KEY
+
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     return json({ error: 'Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE/KEY' }, 500)
   }
@@ -40,22 +41,19 @@ export default async (request, context) => {
       if (!body || typeof body !== 'object') return json({ error: 'Body must be an object' }, 400)
       if (!body.id) body.id = itemId
 
-      const { data: row, error: selErr } = await supabase
-        .from('libraries').select('data').eq('id','default').maybeSingle()
+      const { data: row, error: selErr } = await supabase.from('libraries').select('data').eq('id','default').maybeSingle()
       if (selErr) throw selErr
       const lib = Array.isArray(row?.data) ? row.data : []
       const idx = lib.findIndex(x => x && x.id === itemId)
       if (idx >= 0) lib[idx] = { ...lib[idx], ...body }
       else lib.push(body)
-      const { error: upErr } = await supabase
-        .from('libraries').upsert({ id:'default', data: lib }).select()
+      const { error: upErr } = await supabase.from('libraries').upsert({ id:'default', data: lib }).select()
       if (upErr) throw upErr
       return json({ ok:true, id:itemId }, 200)
     }
 
     if (request.method === 'GET') {
-      const { data, error } = await supabase
-        .from('libraries').select('data').eq('id','default').maybeSingle()
+      const { data, error } = await supabase.from('libraries').select('data').eq('id','default').maybeSingle()
       if (error) throw error
       return json(data?.data ?? [], 200)
     }
@@ -64,8 +62,7 @@ export default async (request, context) => {
       let body
       try { body = await request.json() } catch { return json({ error: 'Invalid JSON' }, 400) }
       if (!Array.isArray(body)) return json({ error: 'Body must be an array' }, 400)
-      const { error } = await supabase
-        .from('libraries').upsert({ id:'default', data: body }).select()
+      const { error } = await supabase.from('libraries').upsert({ id:'default', data: body }).select()
       if (error) throw error
       return json({ ok:true }, 200)
     }
