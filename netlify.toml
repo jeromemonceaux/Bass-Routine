@@ -9,5 +9,5 @@ status = 200
 
 [[redirects]]
 from = "/api/library/*"
-to = "/.netlify/functions/library"
+to = "/.netlify/functions/library/:splat"
 status = 200

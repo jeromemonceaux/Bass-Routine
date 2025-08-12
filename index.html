@@ -3,153 +3,235 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bibliothèque — Import JSON rapide</title>
+  <title>Bass-Routine — Visualiseur</title>
   <style>
-    body { margin:0; font-family: -apple-system, system-ui, Roboto, Arial, sans-serif; background:#fff; color:#111; }
-    header { position:sticky; top:0; background:#f7f7f7; border-bottom:1px solid #ddd; }
-    .wrap { max-width:1000px; margin:0 auto; padding:12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-    .wrap h1 { font-size:16px; margin:0; font-weight:700; }
-    .actions { margin-left:auto; display:flex; gap:6px; flex-wrap:wrap; }
-    button, input[type=file] + label {
-      appearance:none; border:1px solid #ccc; background:#fff; color:#111; border-radius:10px;
-      padding:8px 12px; font-size:14px; line-height:1; cursor:pointer;
+    :root{
+      --bg:#0c0d10; --panel:#14161b; --text:#e9ebef; --muted:#9aa0aa; --border:#262a31;
+      --accent:#63d1bb; --radius:14px; --f-sans:Inter,system-ui,Segoe UI,Roboto,Arial;
+      --compas-cols:4; --show-numbers:0;
     }
-    input[type=file] { display:none; }
-    main { max-width:1000px; margin:12px auto; padding:0 12px; display:grid; grid-template-columns:1fr; gap:12px; }
-    .card { border:1px solid #e5e5e5; border-radius:12px; overflow:hidden; background:#fff; }
-    .card h2 { margin:0; font-size:14px; font-weight:700; padding:10px 12px; border-bottom:1px solid #eee; background:#fafafa; }
-    .content { padding:12px; }
-    .row { display:grid; grid-template-columns:1fr auto auto; gap:8px; align-items:center; padding:8px; border:1px solid #eee; border-radius:10px; margin-bottom:8px; }
-    .muted { color:#666; font-size:12px; }
-    .badge { display:inline-block; padding:2px 8px; border-radius:999px; border:1px solid #ddd; font-size:11px; color:#333; }
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#090b10,#12151c);color:var(--text);font-family:var(--f-sans)}
+    header{position:sticky;top:0;background:#0f1117d0;border-bottom:1px solid var(--border);backdrop-filter:blur(6px);z-index:5}
+    .wrap{max-width:1200px;margin:0 auto;padding:10px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .brand{font-weight:900;letter-spacing:.3px}
+    .toolbar{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    button,select,input{border:1px solid var(--border);background:#0f1117;color:var(--text);border-radius:12px;padding:8px 12px}
+    main{max-width:1200px;margin:16px auto;padding:0 14px;display:grid;grid-template-rows:auto 1fr;gap:12px}
+    .panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    .panel h2{margin:0;padding:10px 12px;border-bottom:1px solid var(--border);font-size:15px}
+    .content{padding:12px}
+    .toprow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+    .badge{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:2px 8px;font-size:11px;color:#c9ced6}
+    .title{font-weight:800;font-size:18px}
+    #fretboard{height:160px;border:1px dashed #394050;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#9aa0aa}
+    .compas{background:#0f1117;border:1px solid var(--border);border-radius:12px;padding:10px}
+    .grid{display:grid;gap:8px}
+    .row{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);gap:8px}
+    .pill{display:inline-block;padding:2px 8px;border:1px solid var(--border);border-radius:999px;font-size:11px;color:#d9deeb;margin:6px 0 0}
+    .cell{position:relative;min-height:62px;display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;border:1px solid #2a2f3a;border-radius:10px;font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1.25}
+    .cell small{position:absolute;top:6px;left:8px;opacity:calc(var(--show-numbers));font-size:10px}
+    .cell .multi{display:flex;flex-direction:column;gap:2px;white-space:pre-wrap}
+    .cell.empty{opacity:.6;font-style:italic}
+    .bracketL::before{content:'𝄆';position:absolute;left:-14px;top:50%;transform:translateY(-50%);font-size:18px}
+    .bracketR::after{content:'𝄇';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:18px}
+    .btn-accent{background:var(--accent);color:#06372e;border-color:#2e8}
   </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <h1>Bibliothèque</h1>
-    <div class="actions">
-      <button id="btnLoad">Charger DB</button>
-      <input id="file" type="file" accept="application/json">
-      <label for="file">Importer JSON</label>
-      <button id="btnSend" disabled>Envoyer vers DB</button>
-      <button id="btnExport">Exporter JSON</button>
+    <div class="brand">Bass‑Routine</div>
+    <div id="gridName" class="badge">—</div>
+    <div class="toolbar">
+      <button id="randomBtn" class="btn-accent">Random</button>
+      <select id="cols">
+        <option value="2">2 par ligne</option>
+        <option value="3">3 par ligne</option>
+        <option value="4" selected>4 par ligne</option>
+        <option value="8">8 par ligne</option>
+      </select>
       <a href="editor.html" style="text-decoration:none"><button>Éditeur</button></a>
     </div>
   </div>
 </header>
 
 <main>
-  <section class="card">
-    <h2>Catalogue</h2>
+  <section class="panel">
+    <h2>Manche & Outils</h2>
     <div class="content">
-      <div style="display:grid; grid-template-columns:1fr auto auto; gap:8px; align-items:center; margin-bottom:8px">
-        <input id="q" placeholder="Recherche titre/compositeur/ID" style="padding:8px 10px; border:1px solid #ddd; border-radius:10px">
-        <select id="filter" style="padding:8px 10px; border:1px solid #ddd; border-radius:10px">
-          <option value="all">Tous</option>
-          <option value="pd">Domaine public</option>
-          <option value="meta">Métadonnées</option>
-        </select>
-        <button id="btnReset">Réinit</button>
+      <div class="toprow">
+        <div id="fretboard">Ici viendra ton manche (compat outils + Random).</div>
+        <div>
+          <div class="badge">Recherche</div>
+          <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
+            <input id="q" placeholder="Titre/compositeur/ID">
+            <button id="searchBtn">Chercher</button>
+          </div>
+        </div>
       </div>
-      <div id="list"></div>
     </div>
   </section>
 
-  <section class="card">
-    <h2>Infos</h2>
+  <section class="panel">
+    <h2>Grille</h2>
     <div class="content">
-      <div class="badge" id="status">—</div>
-      <div class="muted" style="margin-top:8px">Importer JSON → choisit un fichier local (.json). Puis “Envoyer vers DB” fait un <code>PUT /api/library</code>.</div>
+      <div class="badge">Texte normalisé</div>
+      <div id="preview" style="white-space:pre-wrap;background:#0f1117;border:1px solid var(--border);border-radius:12px;padding:10px;min-height:100px;margin:6px 0 10px"></div>
+      <div class="badge">Rendu “compas”</div>
+      <div id="compas" class="compas"></div>
     </div>
   </section>
 </main>
 
 <script>
-const API = '/api/library';
-const $ = (id) => document.getElementById(id);
-let LIBRARY = [];
-let IMPORT_PAYLOAD = null;
+const $=(id)=>document.getElementById(id);
+const API='/api/library';
+let LIB=[], CURRENT=null;
 
-function setStatus(t){ $('status').textContent = t; }
-
-async function loadFromDB(){
-  const r = await fetch(API);
-  if(!r.ok) throw new Error('HTTP '+r.status);
-  LIBRARY = await r.json();
-  setStatus(LIBRARY.length+' items (DB)');
-  renderList();
-}
-
-async function sendToDB(payload){
-  const r = await fetch(API, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-  if(!r.ok){
-    const t = await r.text(); throw new Error('HTTP '+r.status+' '+t);
+const DIR_RE=/(D\\.?S\\.?\\s*al\\s*Coda|D\\.?S\\.?\\s*al\\s*Fine|D\\.?C\\.?\\s*al\\s*Coda|D\\.?C\\.?\\s*al\\s*Fine|To\\s*Coda|Fine|Segno\\s*𝄋|Segno|Coda\\s*𝄌|Coda|𝄋|𝄌)/i;
+function sectionFromLine(line){ const m=line.match(/^\\s*[\\[(]?(Intro|A\\d*|A|B\\d*|B|C|D|Bridge|Solo|Solos|Refrain|Coda|Segno)\\s*[:\\])]?\\s*$/i); return m?m[1].toUpperCase():null; }
+function normalizeChord(s){
+  let x=s.trim();
+  x=x.replace(/^([A-Ga-g])-(?!\\d)/,(_,r)=>r.toUpperCase()+'m').replace(/#/g,'♯');
+  if(/^(bb|Bb|BB)$/.test(x)) return 'B♭';
+  const m=x.match(/^([A-Ga-g])([b♭#♯]?)(.*)$/);
+  if(m){
+    let [_,r,a,rest]=m; r=r.toUpperCase(); if(a==='b') a='♭'; if(a==='#') a='♯';
+    rest=rest.replace(/maj/gi,'Δ').replace(/\\bM7\\b/g,'Δ7').replace(/dim/gi,'°')
+             .replace(/\\bo\\b(?=\\d|\\(|$)/g,'°').replace(/min/gi,'m').replace(/-7/g,'m7')
+             .replace(/m7b5/gi,'m7♭5').replace(/b(?=\\d)/g,'♭').replace(/\\+(?=\\d)/g,'♯')
+             .replace(/add\\s*(\\d+)/gi,'add$1').replace(/sus\\s*(2|4)/gi,'sus$1').replace(/alt/gi,'alt');
+    x=r+(a||'')+rest;
   }
-  setStatus('Importé ✔');
-  $('btnSend').disabled = true;
-  await loadFromDB();
+  x=x.replace(/\\( *([^)]*) *\\)/g,(_,i)=>'('+i.replace(/b(?=\\d)/g,'♭').replace(/#(?=\\d)/g,'♯').replace(/\\s+/g,'').replace(/,/g,'')+')');
+  x=x.replace(/\\/(.)(b|#)/g,(_,n,a)=>'/'+n.toUpperCase()+(a==='b'?'♭':'♯'));
+  return x;
 }
-
-function renderList(){
-  const q = ($('q').value||'').toLowerCase();
-  const mode = $('filter').value;
-  const list = $('list');
-  const items = (LIBRARY||[]).filter(it=>{
-    const hay = ((it.id||'')+' '+(it.title||'')+' '+(it.composer||'')).toLowerCase();
-    if(q && !hay.includes(q)) return false;
-    if(mode==='pd' && !it.is_public_domain) return false;
-    if(mode==='meta' && it.is_public_domain) return false;
-    return true;
+function isRecognizedChord(s){
+  const re=new RegExp('^[A-G](?:[♯♭])?(?:m|Δ|°|ø|dim|maj)?(?:6|7|9|11|13)?(?:sus[24])?(?:add(?:9|11|13))?(?:[♭♯]?\\d{1,2})*(?:\\((?:alt|[♭♯]?\\d{1,2})+(?:[♭♯]?\\d{1,2})*\\))?(?:\\/[A-G](?:[♯♭])?)?$','u');
+  return re.test(s);
+}
+function splitIntoChordTokens(str){
+  const raw=str.trim().split(/\\s+/); const out=[];
+  for(const b of raw){
+    if(!b) continue;
+    if(/^\\(.*\\)$/.test(b) && out.length && out[out.length-1].type==='chord'){ out[out.length-1].value+=b; }
+    else if(/^[()]+$/.test(b)){ out.push({type:'literal', value:b}); }
+    else out.push({type:'chord', value:b});
+  }
+  return out;
+}
+function normalizeDirective(d){
+  let s=d.replace(/\\s+/g,' ').trim();
+  s=s.replace(/D\\.?S\\.?/i,'D.S.').replace(/D\\.?C\\.?/i,'D.C.');
+  s=s.replace(/al\\s*Coda/i,'al Coda').replace(/al\\s*Fine/i,'al Fine');
+  s=s.replace(/To\\s*Coda/i,'To Coda');
+  return s;
+}
+function normalizeGrid(text){
+  const lines=text.split(/\\r?\\n/); let htmlLines=[], parse={measures:[]}, repeats=[]; let currentSection=null;
+  for(const raw of lines){
+    if(!raw.trim()){ htmlLines.push(''); continue; }
+    const sec=sectionFromLine(raw); if(sec){ currentSection=sec.replace(/\\d+/g,''); htmlLines.push('<span class="pill">▶ '+sec.toUpperCase().replace(/\\d+/g,'')+'</span>'); continue; }
+    let line=raw.replace(/\\s+/g,' ').trim();
+    const startsRepeat=/𝄆/.test(line), endsRepeat=/𝄇/.test(line);
+    line=line.replace(/𝄆\\s*(?!\\|)/g,'𝄆 | ').replace(/(?<!\\|)\\s*𝄇/g,' | 𝄇');
+    const parts=[]; let bar=[];
+    line.split(/(\\|𝄆|𝄇)/g).filter(Boolean).forEach(tok=>{
+      const t=tok.trim(); if(!t) return;
+      if(t==='|'){ parse.measures.push({section:currentSection, items:[...bar]}); bar=[]; parts.push('|'); return; }
+      if(t==='𝄆'||t==='𝄇'){ parts.push(t); return; }
+      let rest=t, m;
+      while((m=rest.match(DIR_RE))){
+        const idx=m.index; const dir=m[0];
+        const before=rest.slice(0,idx).trim();
+        if(before){
+          splitIntoChordTokens(before).forEach(x=>{
+            const n=normalizeChord(x.value); const ok=isRecognizedChord(n);
+            parts.push(ok?n:'<span style="border-bottom:2px dotted #f7c87a">'+n+'</span>');
+            if(ok) bar.push(n);
+          });
+        }
+        parts.push('<span class="pill">'+normalizeDirective(dir)+'</span>');
+        rest=rest.slice(idx+dir.length).trim();
+      }
+      if(rest){
+        splitIntoChordTokens(rest).forEach(x=>{
+          const n=normalizeChord(x.value); const ok=isRecognizedChord(n);
+          parts.push(ok?n:'<span style="border-bottom:2px dotted #f7c87a">'+n+'</span>');
+          if(ok) bar.push(n);
+        });
+      }
+    });
+    if(bar.length){ parse.measures.push({section:currentSection, items:[...bar]}); bar=[]; }
+    if(startsRepeat) repeats.push({pos: parse.measures.length, type:'L'});
+    if(endsRepeat) repeats.push({pos: parse.measures.length, type:'R'});
+    htmlLines.push(parts.join(' '));
+  }
+  return {html:htmlLines.join('\\n'), parse, repeats};
+}
+function updateCompas(parse, repeats){
+  const colsN=parseInt(document.getElementById('cols').value,10)||4;
+  const container=document.getElementById('compas'); container.innerHTML='';
+  const grid=document.createElement('div'); grid.className='grid'; grid.style.setProperty('--cols', colsN);
+  let currentSection=null, rowEl=null, cellCount=0, mi=0;
+  const repsL=new Set((repeats||[]).filter(r=>r.type==='L').map(r=>r.pos));
+  const repsR=new Set((repeats||[]).filter(r=>r.type==='R').map(r=>r.pos));
+  function newRow(){ rowEl=document.createElement('div'); rowEl.className='row'; grid.appendChild(rowEl); cellCount=0; }
+  (parse.measures||[]).forEach(m=>{
+    if(m.section!==currentSection){ currentSection=m.section; const sec=document.createElement('div'); sec.textContent=currentSection?('Section '+currentSection):'Section'; sec.className='pill'; grid.appendChild(sec); newRow(); }
+    if(!rowEl || cellCount>=colsN) newRow();
+    mi++;
+    const cell=document.createElement('div'); cell.className='cell';
+    const list=document.createElement('div'); list.className='multi';
+    if(m.items && m.items.length){ m.items.forEach(ch=>{ const line=document.createElement('div'); line.textContent=ch; list.appendChild(line); }); }
+    else { cell.classList.add('empty'); const line=document.createElement('div'); line.textContent='—'; list.appendChild(line); }
+    if(getComputedStyle(document.documentElement).getPropertyValue('--show-numbers').trim()==='1'){ const num=document.createElement('small'); num.textContent=mi; cell.appendChild(num); }
+    if(repsL.has(mi)) cell.classList.add('bracketL');
+    if(repsR.has(mi)) cell.classList.add('bracketR');
+    cell.appendChild(list); rowEl.appendChild(cell); cellCount++;
   });
-  list.innerHTML = items.map(it => `
-    <div class="row">
-      <div>
-        <div style="font-weight:700">${escapeHtml(it.title||'Sans titre')}</div>
-        <div class="muted">${escapeHtml(it.id||'')} • ${escapeHtml(it.composer||'')} • ${it.year||'—'} • ${escapeHtml(it.style||'')}</div>
-      </div>
-      <div><span class="badge ${it.is_public_domain?'':'warn'}">${it.is_public_domain?'Grille incluse (PD)':'Métadonnées'}</span></div>
-      <div><a href="editor.html?id=${encodeURIComponent(it.id)}"><button>Ouvrir</button></a></div>
-    </div>
-  `).join('');
+  container.appendChild(grid);
 }
 
-function escapeHtml(s){ return (''+s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+async function loadDB(){ const r=await fetch(API); if(!r.ok) throw new Error('HTTP '+r.status); return await r.json(); }
+function setTitle(t){ document.getElementById('gridName').textContent = t || '—'; }
+function render(item){
+  CURRENT=item;
+  setTitle(item?.title||item?.id||'—');
+  const text=item?.grid_text || '';
+  const norm=normalizeGrid(text);
+  document.getElementById('preview').innerHTML=norm.html;
+  updateCompas(norm.parse, norm.repeats);
+}
+function pickRandom(list){ if(!list?.length) return null; return list[Math.floor(Math.random()*list.length)]; }
 
-// UI wiring
-$('btnLoad').onclick = () => loadFromDB().catch(e=>alert(e.message));
-$('btnExport').onclick = () => {
-  const blob = new Blob([JSON.stringify(LIBRARY, null, 2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'jazz-library.json';
-  a.click();
-  URL.revokeObjectURL(a.href);
+document.getElementById('randomBtn').onclick=()=>{ const it=pickRandom(LIB); if(it) render(it); };
+document.getElementById('searchBtn').onclick=()=>{
+  const q=document.getElementById('q').value.trim().toLowerCase();
+  const it=(LIB||[]).find(x=> (x.title||'').toLowerCase().includes(q) || (x.composer||'').toLowerCase().includes(q) || (x.id||'').toLowerCase()===q );
+  if(it) render(it); else alert('Introuvable');
 };
-$('btnReset').onclick = () => { $('q').value=''; $('filter').value='all'; renderList(); };
-$('q').oninput = renderList;
-$('filter').onchange = renderList;
+document.getElementById('cols').onchange=()=>{ if(!CURRENT) return; const norm=normalizeGrid(CURRENT.grid_text||''); updateCompas(norm.parse, norm.repeats); };
 
-$('file').onchange = () => {
-  const f = $('file').files[0]; if(!f) return;
-  const rd = new FileReader();
-  rd.onload = () => {
-    try{
-      const data = JSON.parse(rd.result);
-      if(!Array.isArray(data)) throw new Error('Le JSON doit être un tableau');
-      IMPORT_PAYLOAD = data;
-      $('btnSend').disabled = false;
-      setStatus('Prêt à envoyer ('+data.length+' items)');
-    }catch(err){
-      alert('Fichier invalide: '+err.message);
-    }
-  };
-  rd.readAsText(f);
-};
-$('btnSend').onclick = () => {
-  if(!IMPORT_PAYLOAD) { alert('Aucun fichier importé'); return; }
-  sendToDB(IMPORT_PAYLOAD).catch(e=>alert(e.message));
-};
+async function boot(){
+  try{ LIB=await loadDB(); }catch(_){ LIB=[]; }
+  if(!LIB.length){
+    LIB=[{id:'blue-bossa', title:'Blue Bossa', composer:'Kenny Dorham', style:'Bossa', is_public_domain:false, grid_text:`A:
+𝄆 Cm7 | Fm7 | Dm7b5 G7 | Cm7 |
+| Cm7 | Fm7 | Dm7b5 G7 | Cm7 𝄇
+
+B: (Bridge)
+| E♭m7 A♭7 | D♭Δ | Dm7b5 G7 | Cm7 |
+
+A:
+| Cm7 | Fm7 | Dm7b5 G7 | Cm7 | Fine
+
+D.C. al Fine` }];
+  }
+  render(LIB[0]);
+}
+boot();
 </script>
 </body>
 </html>
