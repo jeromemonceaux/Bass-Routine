@@ -1,10 +1,11 @@
 {
-  "name": "jazz-library-netlify",
+  "name": "jazz-library-netlify-v2",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "netlify dev",
-    "build": "echo 'Static app'"
+    "build": "echo 'Static build'",
+    "serve": "netlify dev"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0"
