@@ -1,41 +1,49 @@
-const API = '/api/library';
+// js/api/library-client.js
+// Client pour /api/library (Netlify Function). Fallback local si indisponible.
+const API_BASE = '/api/library';
+
+async function safeJson(res){
+  const txt = await res.text();
+  try{ return JSON.parse(txt); }catch{ return txt; }
+}
+function normalizeList(json){
+  if(Array.isArray(json)) return json;
+  if(json && Array.isArray(json.data)) return json.data;
+  return [];
+}
+function normalizeItem(json){
+  if(Array.isArray(json)) return json[0] || null;
+  return json?.data ?? json ?? null;
+}
 
 export async function getAll(){
   try{
-    const r=await fetch(API, { cache:'no-store' });
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    return await r.json();
+    const res = await fetch(API_BASE, { headers: { 'Accept':'application/json' }});
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await safeJson(res);
+    const list = normalizeList(json);
+    if(list.length) return list;
+    throw new Error('liste vide');
   }catch(e){
-    console.warn('[library] fallback Blue Bossa', e);
-    return [{
-      id:'blue-bossa',
-      title:'Blue Bossa',
-      composer:'Kenny Dorham',
-      style:'Bossa',
-      is_public_domain:false,
-      grid_text:`A:
-𝄆 Cm7 | Fm7 | Dm7b5 G7 | Cm7 |
-| Cm7 | Fm7 | Dm7b5 G7 | Cm7 𝄇
-
-B: (Bridge)
-| E♭m7 A♭7 | D♭Δ | Dm7b5 G7 | Cm7 |
-
-A:
-| Cm7 | Fm7 | Dm7b5 G7 | Cm7 | Fine
-
-D.C. al Fine`
-    }];
+    // fallback local
+    const res2 = await fetch('./data/library.json');
+    const json2 = await res2.json();
+    return normalizeList(json2);
   }
 }
 
-export async function putAll(arr){
-  const r=await fetch(API,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(arr)});
-  if(!r.ok){ const t=await r.text(); throw new Error('HTTP '+r.status+' '+t); }
-  return true;
+export async function getOne(id){
+  try{
+    const res = await fetch(`${API_BASE}/${encodeURIComponent(id)}`, { headers: { 'Accept':'application/json' }});
+    if(res.status === 404) return null;
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await safeJson(res);
+    return normalizeItem(json);
+  }catch(e){
+    // fallback depuis la liste locale
+    const all = await getAll();
+    return all.find(x => (x.id===id) || (x.slug===id) || (x.title===id)) || null;
+  }
 }
 
-export async function patchOne(id, obj){
-  const r=await fetch(API+'/'+encodeURIComponent(id),{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)});
-  if(!r.ok){ const t=await r.text(); throw new Error('HTTP '+r.status+' '+t); }
-  return true;
-}
+export default { getAll, getOne };

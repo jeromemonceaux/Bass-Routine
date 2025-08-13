@@ -1,41 +1,46 @@
-
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bass‑Routine — Éditeur</title>
-<style>
-body{margin:0;background:#0c0d10;color:#e9ebef;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
-header{position:sticky;top:0;background:#0f1117d0;border-bottom:1px solid #262a31;backdrop-filter:blur(6px)}
-.wrap{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center}
-a{color:inherit;text-decoration:none;border:1px solid #262a31;padding:6px 10px;border-radius:10px;background:#0f1117}
-main{max-width:1100px;margin:18px auto;padding:0 16px;display:grid;grid-template-columns:1.05fr .95fr;gap:16px}
-@media(max-width:980px){main{grid-template-columns:1fr}}
-.card{background:#14161b;border:1px solid #262a31;border-radius:14px;overflow:hidden}
-.card h2{margin:0;padding:10px 12px;border-bottom:1px solid #262a31;font-size:15px}
-.content{padding:12px}
-input,select,button,textarea{border:1px solid #262a31;background:#0f1117;color:#e9ebef;border-radius:10px;padding:8px 10px;font-family:ui-monospace,Menlo,Consolas,monospace}
-textarea{width:100%;min-height:300px;white-space:pre;line-height:1.5}
-.badge{display:inline-block;border:1px solid #262a31;border-radius:999px;padding:2px 8px;font-size:11px;color:#c9ced6}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-details{position:relative} details>summary{list-style:none;cursor:pointer}
-.dropdown-menu{position:absolute;top:100%;left:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#0f1117;border:1px solid #262a31;padding:8px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;z-index:5}
-.chip{padding:6px 8px;border:1px solid #2a2f36;background:#10131a;border-radius:8px;cursor:pointer}
-.compas{background:#0f1117;border:1px solid #262a31;border-radius:12px;padding:10px}
-.grid{display:grid;gap:8px}
-.row{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);gap:8px}
-.cell{position:relative;min-height:62px;display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;border:1px solid #2a2f3a;border-radius:10px;font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1.25}
-.cell small{position:absolute;top:6px;left:8px;opacity:.55;font-size:10px}
-.cell .multi{display:flex;flex-direction:column;gap:2px;white-space:pre-wrap}
-.cell.empty{opacity:.6;font-style:italic}
-.bracketL::before{content:'𝄆';position:absolute;left:-14px;top:50%;transform:translateY(-50%);font-size:18px}
-.bracketR::after{content:'𝄇';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:18px}
-.warn{border-bottom:2px dotted #f7c87a}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Éditeur — Bass-Routine</title>
+  <style>
+    body{margin:0;background:#0c0d10;color:#e9ebef;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+    header{position:sticky;top:0;background:#0f1117d0;border-bottom:1px solid #262a31;backdrop-filter:blur(6px)}
+    .wrap{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center}
+    a{color:inherit;text-decoration:none;border:1px solid #262a31;padding:6px 10px;border-radius:10px;background:#0f1117}
+    main{max-width:1100px;margin:18px auto;padding:0 16px;display:grid;grid-template-columns:1.05fr .95fr;gap:16px}
+    @media(max-width:980px){main{grid-template-columns:1fr}}
+    .card{background:#14161b;border:1px solid #262a31;border-radius:14px;overflow:hidden}
+    .card h2{margin:0;padding:10px 12px;border-bottom:1px solid #262a31;font-size:15px}
+    .content{padding:12px}
+    input,select,button,textarea{border:1px solid #262a31;background:#0f1117;color:#e9ebef;border-radius:10px;padding:8px 10px;font-family:ui-monospace,Menlo,Consolas,monospace}
+    textarea{width:100%;min-height:300px;white-space:pre;line-height:1.5}
+    .badge{display:inline-block;border:1px solid #262a31;border-radius:999px;padding:2px 8px;font-size:11px;color:#c9ced6}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+    details{position:relative} details>summary{list-style:none;cursor:pointer}
+    .dropdown-menu{position:absolute;top:100%;left:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#0f1117;border:1px solid #262a31;padding:8px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;z-index:5}
+    .chip{padding:6px 8px;border:1px solid #2a2f36;background:#10131a;border-radius:8px;cursor:pointer}
+    .compas{background:#0f1117;border:1px solid #262a31;border-radius:12px;padding:10px}
+    .grid{display:grid;gap:8px}
+    .row{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);gap:8px}
+    .cell{position:relative;min-height:62px;display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;border:1px solid #2a2f3a;border-radius:10px;font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1.25}
+    .cell small{position:absolute;top:6px;left:8px;opacity:.55;font-size:10px}
+    .cell .multi{display:flex;flex-direction:column;gap:2px;white-space:pre-wrap}
+    .cell.empty{opacity:.6;font-style:italic}
+    .bracketL::before{content:'𝄆';position:absolute;left:-14px;top:50%;transform:translateY(-50%);font-size:18px}
+    .bracketR::after{content:'𝄇';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:18px}
+  </style>
 </head>
 <body>
-<header><div class="wrap"><a href="index.html">← Lecteur</a><h1 style="margin-left:8px;font-size:18px">Éditeur</h1><span id="saveStatus" style="margin-left:auto" class="badge"> </span></div></header>
+<header>
+  <div class="wrap">
+    <a href="library.html">← Bibliothèque</a>
+    <h1 style="margin-left:8px;font-size:18px">Éditeur</h1>
+    <span id="saveStatus" style="margin-left:auto" class="badge"> </span>
+    <button id="playBtn" class="badge">▶ Jouer dans le lecteur</button>
+  </div>
+</header>
 
 <main>
   <section class="card">
@@ -53,6 +58,8 @@ details{position:relative} details>summary{list-style:none;cursor:pointer}
         <span class="badge">Mesures/ligne</span><select id="cols"><option>2</option><option>3</option><option selected>4</option><option>8</option></select>
         <button id="saveDb" class="badge">Enregistrer (DB)</button>
         <button id="saveLocal" class="badge">Enregistrer (local)</button>
+        <button id="playInReader" class="badge">Jouer dans le lecteur</button>
+        <span id="keyBadge" class="badge">Tonalité : —</span>
       </div>
     </div>
   </section>
@@ -75,7 +82,7 @@ details{position:relative} details>summary{list-style:none;cursor:pointer}
             <button class="chip" data-insert="°">°</button><button class="chip" data-insert="sus4">sus4</button>
             <button class="chip" data-insert="sus2">sus2</button><button class="chip" data-insert="add9">add9</button>
             <button class="chip" data-insert="(alt)">(alt)</button><button class="chip" data-insert="/B♭">/B♭</button>
-            <button class="chip" data-insert="(♭9♯9♯11♭13)">(♭9♯9♯11♭13)</button>
+            <button class="chip" data-insert="(♭9♯11)">(♭9♯11)</button>
           </div>
         </details>
         <details><summary>Structure ▾</summary>
@@ -105,70 +112,219 @@ details{position:relative} details>summary{list-style:none;cursor:pointer}
   </section>
 </main>
 
-<script type="module">
-import { getAll, patchOne } from './js/api/library-client.js'
-import { normalizeGrid } from './js/grid/parse.js'
-import { renderCompas } from './js/grid/render.js'
+<!-- Dépendances: le parseur + le bridge -->
+<script src="js/grid/parse.js"></script>
+<script src="js/grid/grid-bridge.js"></script>
 
-const $=id=>document.getElementById(id);
-const params=new URLSearchParams(location.search); const itemId=params.get('id');
+<script>
+(function(){
+  'use strict';
 
-function update(){
-  const text=$('grid').value;
-  const norm=normalizeGrid(text);
-  $('preview').innerHTML=norm.html;
-  renderCompas($('compas'), text, parseInt($('cols').value,10)||4, true);
-}
+  const $ = (id)=>document.getElementById(id);
+  const params = new URLSearchParams(location.search);
+  const itemId = params.get('id') || 'temp';
 
-document.addEventListener('click',(e)=>{
-  const btn=e.target.closest('[data-insert]'); if(btn){
-    e.preventDefault();
-    const ta=$('grid'); ta.focus();
-    const s=ta.selectionStart, ed=ta.selectionEnd, v=ta.value;
-    ta.value=v.slice(0,s)+btn.dataset.insert+v.slice(ed);
-    const pos=(s||0)+btn.dataset.insert.length; ta.selectionStart=ta.selectionEnd=pos;
-    const d=btn.closest('details'); if(d) d.removeAttribute('open');
-    update(); return;
+  const API = '/api/library';
+
+  function badge(cls,text){ return '<span class="badge '+(cls||'')+'">'+text+'</span>'; }
+
+// --- remplace TOUTE ta fonction updateCompas par ceci ---
+function updateCompas(parse, repeats){
+  const colsN = parseInt(document.getElementById('cols').value,10) || 4;
+  const container = document.getElementById('compas');
+  container.innerHTML = '';
+
+  // Normalise les mesures depuis l'ancien ou le nouveau parseur
+  let measures = [];
+  if (parse && Array.isArray(parse.measures)) {
+    // ancien: [{section, items:[...]}]
+    measures = parse.measures.map(m => ({ section: m.section || null, items: m.items || [] }));
+  } else if (parse && Array.isArray(parse.bars)) {
+    // nouveau: bars:[ [chords...] ], sections:[{index,label}]
+    measures = parse.bars.map(arr => ({ section: null, items: Array.isArray(arr) ? arr : [] }));
   }
-  document.querySelectorAll('details[open]').forEach(d=>{ if(!d.contains(e.target)) d.removeAttribute('open'); });
-});
-$('cols').onchange=update;
 
-$('saveLocal').onclick=()=>{
-  const obj=collect();
-  localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
-  flash('Enregistré (local) ✔');
-};
-$('saveDb').onclick=async()=>{
-  const obj=collect();
-  if(!obj.id){ alert('ID requis'); return; }
-  try{ await patchOne(obj.id, obj); flash('Enregistré (DB) ✔'); }catch(e){ alert(e.message); }
-};
+  // Construit un mapping de sections si fourni par GridParse
+  let sections = Array.isArray(parse && parse.sections) ? parse.sections.slice().sort((a,b)=>a.index-b.index) : [];
+  let nextSecIdx = 0;
+  let nextSec = sections[0];
 
-function collect(){
-  return {
-    id:$('id').value.trim(),
-    title:$('title').value.trim(),
-    composer:$('author').value.trim(),
-    style:$('style').value.trim(),
-    grid_text:$('grid').value
-  };
+  // Normalise les reprises: accepte tableau [{type,pos}] ou objet {L:[...],R:[...]}
+  let repsL = new Set(), repsR = new Set();
+  if (Array.isArray(repeats)) {
+    repeats.forEach(r => {
+      if (!r) return;
+      if (r.type === 'L') repsL.add(r.pos);
+      else if (r.type === 'R') repsR.add(r.pos);
+    });
+  } else if (repeats && typeof repeats === 'object') {
+    (repeats.L || []).forEach(p => repsL.add(p));
+    (repeats.R || []).forEach(p => repsR.add(p));
+  } else if (parse && parse.repeats && typeof parse.repeats === 'object') {
+    (parse.repeats.L || []).forEach(p => repsL.add(p));
+    (parse.repeats.R || []).forEach(p => repsR.add(p));
+  }
+
+  const grid = document.createElement('div');
+  grid.className = 'grid';
+  grid.style.setProperty('--cols', colsN);
+
+  let rowEl = null, cellCount = 0, mi = 0;
+  function newRow(){ rowEl = document.createElement('div'); rowEl.className = 'row'; grid.appendChild(rowEl); cellCount = 0; }
+
+  measures.forEach((m, idx) => {
+    // Section depuis sections[index] (GridParse) OU m.section (ancien parse)
+    if (nextSec && (idx+1) === nextSec.index) {
+      const sec = document.createElement('div');
+      sec.textContent = 'Section ' + (nextSec.label || '');
+      sec.className = 'badge';
+      grid.appendChild(sec);
+      newRow();
+      nextSecIdx++; nextSec = sections[nextSecIdx];
+    } else if (m.section && (idx === 0 || measures[idx-1].section !== m.section)) {
+      const sec = document.createElement('div');
+      sec.textContent = 'Section ' + m.section;
+      sec.className = 'badge';
+      grid.appendChild(sec);
+      newRow();
+    }
+
+    if (!rowEl || cellCount >= colsN) newRow();
+    mi++;
+
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+
+    const list = document.createElement('div');
+    list.className = 'multi';
+
+    if (m.items && m.items.length) {
+      m.items.forEach(ch => { const d = document.createElement('div'); d.textContent = ch; list.appendChild(d); });
+    } else {
+      cell.classList.add('empty');
+      const d = document.createElement('div'); d.textContent = '—'; list.appendChild(d);
+    }
+
+    const num = document.createElement('small');
+    num.textContent = mi;
+
+    if (repsL.has(mi)) cell.classList.add('bracketL');
+    if (repsR.has(mi)) cell.classList.add('bracketR');
+
+    cell.appendChild(num);
+    cell.appendChild(list);
+    rowEl.appendChild(cell);
+    cellCount++;
+  });
+
+  container.appendChild(grid);
 }
-function flash(t){ $('saveStatus').textContent=t; setTimeout(()=>$('saveStatus').textContent=' ',1200); }
 
-async function boot(){
-  let lib=[];
-  try{ lib=await getAll(); }catch(_){}
-  const it = lib.find(x=>x.id===itemId) || null;
-  if(it){
-    $('id').value=it.id||''; $('title').value=it.title||''; $('author').value=it.composer||''; $('style').value=it.style||''; $('grid').value=it.grid_text||'';
-  }else{
-    // Default prefill Blue Bossa
-    $('id').value=itemId||'blue-bossa';
-    $('title').value='Blue Bossa';
-    $('author').value='Kenny Dorham';
-    $('style').value='Bossa';
-    $('grid').value=`A:
+  function normalizeAndPreview(){
+    const text = $('grid').value || '';
+    const res = window.GridParse.parse(text);
+    $('preview').innerHTML = res.html || '';
+    updateCompas(res, res.repeats||[]);
+    // Heuristique simple de tonalité (optionnel) — on affiche juste le nombre de mesures
+    $('keyBadge').textContent = 'Mesures : ' + (res.bars ? res.bars.length : 0);
+  }
+
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('[data-insert]');
+    if (btn){
+      e.preventDefault();
+      const ta = $('grid');
+      ta.focus();
+      const s = ta.selectionStart, ed = ta.selectionEnd, v = ta.value;
+      const ins = btn.dataset.insert;
+      ta.value = v.slice(0,s) + ins + v.slice(ed);
+      const pos = (s||0) + ins.length;
+      ta.selectionStart = ta.selectionEnd = pos;
+      const d = btn.closest('details'); if (d) d.removeAttribute('open');
+      normalizeAndPreview();
+      return;
+    }
+    // Ferme les menus si click ailleurs
+    document.querySelectorAll('details[open]').forEach(d => { if(!d.contains(e.target)) d.removeAttribute('open'); });
+  });
+
+  $('cols').onchange = normalizeAndPreview;
+
+  // Sauvegarde locale + DB (si dispo)
+  function makeDbRecord(){
+    return {
+      id: $('id').value.trim(),
+      title: $('title').value.trim(),
+      composer: $('author').value.trim(),
+      style: $('style').value.trim(),
+      grid_text: $('grid').value
+    };
+  }
+
+  $('saveLocal').onclick = function(){
+    const obj = makeDbRecord();
+    if (!obj.id){ alert('ID requis'); return; }
+    localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
+    // Met aussi à jour la librairie locale pour le lecteur
+    const gridObj = Bridge.upsertLocalGrid( (function(rec){ return (Bridge && Bridge.upsertLocalGrid)? Bridge.upsertLocalGrid.fromDbRecord? Bridge.upsertLocalGrid.fromDbRecord(rec) : null : null; })(obj) || (function(){ return (function convert(r){ return { id:r.id, name:r.title||r.id, author:r.composer||'', tpb:4, bars:(window.GridParse.parse(r.grid_text).bars||[]) }; })(obj); })() );
+    $('saveStatus').textContent = 'Enregistré (local) ✔';
+    setTimeout(()=>{ $('saveStatus').textContent=' '; }, 1200);
+  };
+
+  $('saveDb').onclick = async function(){
+    const obj = makeDbRecord();
+    if (!obj.id){ alert('ID requis'); return; }
+    try{
+      const r = await fetch(API + '/' + encodeURIComponent(obj.id), {
+        method:'PATCH',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(obj)
+      });
+      if (!r.ok) {
+        const t = await r.text();
+        throw new Error('HTTP '+r.status+' '+t);
+      }
+      // Miroir local pour le lecteur
+      const gridObj = { id:obj.id, name:obj.title||obj.id, author:obj.composer||'', tpb:4, bars:(window.GridParse.parse(obj.grid_text).bars||[]) };
+      Bridge.upsertLocalGrid(gridObj);
+      $('saveStatus').textContent = 'Enregistré (DB) ✔';
+      setTimeout(()=>{ $('saveStatus').textContent=' '; }, 1200);
+    }catch(e){
+      alert(e.message);
+    }
+  };
+
+  // Jouer dans le lecteur (sauve local pour être sûr)
+  $('playBtn').onclick = function(){
+    const obj = makeDbRecord();
+    if (!obj.id){ alert('ID requis'); return; }
+    const gridObj = { id:obj.id, name:obj.title||obj.id, author:obj.composer||'', tpb:4, bars:(window.GridParse.parse(obj.grid_text).bars||[]) };
+    Bridge.upsertLocalGrid(gridObj);
+    Bridge.playGrid(obj.id); // redirige via hash
+  };
+
+  // Boot : charge DB si présente, sinon initialise Blue Bossa
+  (async function boot(){
+    const id = itemId;
+    // Essaie DB
+    let rec = null;
+    try{
+      const r = await fetch(API);
+      if (r.ok) {
+        const arr = await r.json();
+        rec = (arr||[]).find(x => x && x.id === id) || null;
+      }
+    }catch(_){}
+
+    if (!rec) {
+      // fallback
+      rec = {
+        id: id,
+        title: 'Blue Bossa',
+        composer: 'Kenny Dorham',
+        style: 'Bossa',
+        grid_text:
+`A:
 𝄆 Cm7 | Fm7 | Dm7b5 G7 | Cm7 |
 | Cm7 | Fm7 | Dm7b5 G7 | Cm7 𝄇
 
@@ -178,11 +334,38 @@ B: (Bridge)
 A:
 | Cm7 | Fm7 | Dm7b5 G7 | Cm7 | Fine
 
-D.C. al Fine`;
-  }
-  update();
-}
-boot();
+D.C. al Fine`
+      };
+    }
+
+    $('id').value     = rec.id || '';
+    $('title').value  = rec.title || '';
+    $('author').value = rec.composer || '';
+    $('style').value  = rec.style || '';
+    $('grid').value   = rec.grid_text || '';
+
+    normalizeAndPreview();
+  })();
+  
+  document.getElementById('playInReader').onclick = ()=>{
+  const id = (document.getElementById('id').value || '').trim();
+  if(!id){ alert('Définis un ID avant de jouer dans le lecteur.'); return; }
+  // Sauvegarde locale rapide pour s’assurer que le lecteur pourra retrouver la grille si elle n’est pas encore en DB
+  try{
+    const obj = {
+      id,
+      title: (document.getElementById('title').value||'').trim(),
+      composer: (document.getElementById('author').value||'').trim(),
+      style: (document.getElementById('style').value||'').trim(),
+      grid_text: (document.getElementById('grid').value||'')
+    };
+    localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
+  }catch(_){}
+
+  location.href = 'index.html#grid=' + encodeURIComponent(id) + '&auto=1';
+};
+
+})();
 </script>
 </body>
 </html>

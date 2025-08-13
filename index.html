@@ -127,8 +127,6 @@
 </style>
 </head>
 <body>
-  <div id="grid-view"></div>
-
 <header>
   <div class="topbar">
     <div class="left">
@@ -557,7 +555,7 @@
       svg.push('<line x1="'+x+'" y1="'+(top-8)+'" x2="'+x+'" y2="'+(bottom+8)+'" stroke="var(--fretline)" stroke-width="'+((f%12===0)?2:1)+'"/>');
       var mod = f % 12;
       if (mod===3||mod===5||mod===7||mod===9){ svg.push('<circle cx="'+(x - fretGap/2)+'" cy="'+(H/2)+'" r="4.2" fill="var(--fretdot)"/>'); }
-      if (f%12===0){ svg.push('<circle cx="'+(x - fretGap/2)+'" cy="'+(H/2 - 10)+'" r="4.2" fill="var(--fretdot)"/><circle cx="'+(x - fretGap/2)+'" cy="'+(H/2 + 10)+'" r="var(--fretdot)"/>'); }
+      if (f%12===0){ svg.push('<circle cx="'+(x - fretGap/2)+'" cy="'+(H/2 - 10)+'" r="4.2" fill="var(--fretdot)"/><circle cx="'+(x - fretGap/2)+'" cy="'+(H/2 + 10)+'" r="4.2"/>'); }
     }
     for (var s=0; s<stringsInt.length; s++){
       var y = top + s*stringGap;
@@ -823,7 +821,7 @@
 
 <!-- mp_safe_fab + shim (v4.2) -->
 <style>
-  .mp-fab{position:fixed;bottom:14px;right:14px;z-index:99999;
+  .mp-fab{position:static;z-index:99999;
     background:#171e29;color:#e8ecf1;border:1px solid #101620;
     border-radius:12px;padding:8px 12px;font-weight:800;
     text-decoration:none;box-shadow:0 6px 16px rgba(0,0,0,.35); margin-left:8px}
@@ -851,32 +849,94 @@
   }catch(e){}
 })();</script>
 
-<script src="js/grid/parse.js"></script>
-<script src="js/grid/render.js"></script>
-<script src="js/api/library-client.js"></script>
+  <script src="./js/grid/parse.js"></script>
+<script src="./js/grid/grid-bridge.js"></script>
 
 <script>
-async function loadGridFromHash() {
-  const params = new URLSearchParams(location.hash.slice(1));
-  const id = params.get('grid') || params.get('id');
-  if (!id) return;
-  try {
-    if (window.LibraryClient && LibraryClient.getOne) {
-      const item = await LibraryClient.getOne(id);
-      if (item && item.grid) {
-        const ast = window.GridParse.parse(item.grid);
-        const html = window.GridRender.renderHTML(ast);
-        const target = document.getElementById('grid-view');
-        if (target) target.innerHTML = html;
-      }
-    }
-  } catch (e) {
-    console.error('Grid load error', e);
+(function(){
+  function curGridIdFromHash(){
+    var m = location.hash && location.hash.match(/grid=([^&]+)/);
+    return m ? decodeURIComponent(m[1]) : null;
   }
-}
-window.addEventListener('hashchange', loadGridFromHash);
-window.addEventListener('DOMContentLoaded', loadGridFromHash);
+  function setupEditBtn(){
+    var btn = document.getElementById('editBtn');
+    if(!btn) return;
+    function upd(){
+      var id = curGridIdFromHash();
+      btn.disabled = !id;
+      btn.onclick = id ? function(){ location.href = 'editor.html?id='+encodeURIComponent(id); } : null;
+    }
+    window.addEventListener('hashchange', upd);
+    document.addEventListener('DOMContentLoaded', upd);
+    upd();
+  }
+  setupEditBtn();
+})();
 </script>
+<script>
+(function(){
+  function firstChordOf(grid){
+    if(!grid || !grid.bars) return null;
+    for (var i=0;i<grid.bars.length;i++){
+      var c = Array.isArray(grid.bars[i]) ? grid.bars[i] : (grid.bars[i] && grid.bars[i].chords) || [];
+      if (c.length) return c[0];
+    }
+    return null;
+  }
+  window.addEventListener('grid:loaded', function(ev){
+    var g = ev.detail || {};
+    // Redessiner si le lecteur a des fonctions custom
+    if (typeof window.updateHeader==='function') window.updateHeader();
+    if (typeof window.renderMain==='function') window.renderMain();
+    if (typeof window.renderTicker==='function') window.renderTicker();
 
+    // Manche : premier accord
+    var fc = firstChordOf(g);
+    if (fc && typeof window.renderFretboardForChord==='function') window.renderFretboardForChord(fc);
+  });
+})();
+</script>
+<script>
+(function(){
+  function getHashParam(name){
+    const h = location.hash || '';
+    const m = h.match(new RegExp('[#&]' + name + '=([^&]+)'));
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  async function bootFromHash(){
+    const id = getHashParam('grid');
+    if (!id) return;
+
+    if (!window.Bridge || typeof window.Bridge.loadGridToReader !== 'function'){
+      console.warn('Bridge.loadGridToReader indisponible');
+      return;
+    }
+
+    try{
+      if (typeof window.Bridge.seedLibraryIfEmpty === 'function'){
+        try{ await window.Bridge.seedLibraryIfEmpty(); }catch(_){}
+      }
+      await window.Bridge.loadGridToReader(id);
+
+      if (typeof window.renderMain === 'function') window.renderMain();
+      if (typeof window.renderTicker === 'function') window.renderTicker();
+
+      const auto = getHashParam('auto');
+      if (auto === '1' || auto === 'true'){
+        if (typeof window.startPlay === 'function') window.startPlay();
+        else if (typeof window.play === 'function') window.play();
+        else if (typeof window.togglePlay === 'function') window.togglePlay(true);
+        // sinon: pas d’auto-lecture (pas de fonction disponible)
+      }
+    }catch(err){
+      console.error('Chargement de la grille échoué:', err);
+    }
+  }
+
+  window.addEventListener('hashchange', bootFromHash);
+  document.addEventListener('DOMContentLoaded', bootFromHash);
+})();
+</script>
 </body>
 </html>

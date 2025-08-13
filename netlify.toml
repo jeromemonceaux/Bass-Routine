@@ -2,7 +2,8 @@
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["@supabase/supabase-js"]
-
+  included_files = ["presets.json"]
+  
 [[redirects]]
   from = "/api/library"
   to = "/.netlify/functions/library"

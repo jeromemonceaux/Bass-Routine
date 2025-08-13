@@ -1,0 +1,9218 @@
+[
+  {
+    "id": "pop-four-c-1",
+    "name": "Pop Four (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Cmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Fmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "pop-four-db-2",
+    "name": "Pop Four (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Gbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "pop-four-d-3",
+    "name": "Pop Four (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dmaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Gmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "pop-four-eb-4",
+    "name": "Pop Four (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Abmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "pop-four-e-5",
+    "name": "Pop Four (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Emaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Amaj7"
+      ]
+    ]
+  },
+  {
+    "id": "pop-four-f-6",
+    "name": "Pop Four (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Fmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Bbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "pop-four-gb-7",
+    "name": "Pop Four (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Bmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "pop-four-g-8",
+    "name": "Pop Four (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gmaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Cmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "pop-four-ab-9",
+    "name": "Pop Four (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Abmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Dbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "pop-four-a-10",
+    "name": "Pop Four (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Amaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Dmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "pop-four-bb-11",
+    "name": "Pop Four (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bbmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Ebmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "pop-four-b-12",
+    "name": "Pop Four (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bmaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Emaj7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-c-13",
+    "name": "12-bar Blues (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "G7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-db-14",
+    "name": "12-bar Blues (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ab7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-d-15",
+    "name": "12-bar Blues (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "A7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-eb-16",
+    "name": "12-bar Blues (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Bb7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-e-17",
+    "name": "12-bar Blues (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "B7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-f-18",
+    "name": "12-bar Blues (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "C7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-gb-19",
+    "name": "12-bar Blues (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Db7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-g-20",
+    "name": "12-bar Blues (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "D7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-ab-21",
+    "name": "12-bar Blues (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Eb7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-a-22",
+    "name": "12-bar Blues (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "E7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-bb-23",
+    "name": "12-bar Blues (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "F7"
+      ]
+    ]
+  },
+  {
+    "id": "12-bar-blues-b-24",
+    "name": "12-bar Blues (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Gb7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-c-25",
+    "name": "Blue Bossa (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Cm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Dm7b5",
+        "G7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "G7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-db-26",
+    "name": "Blue Bossa (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Ebm7b5",
+        "Ab7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Ab7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-d-27",
+    "name": "Blue Bossa (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Em7b5",
+        "A7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "A7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-eb-28",
+    "name": "Blue Bossa (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ebm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Fm7b5",
+        "Bb7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Bb7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-e-29",
+    "name": "Blue Bossa (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Em7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Gbm7b5",
+        "B7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "B7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-f-30",
+    "name": "Blue Bossa (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Fm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Gm7b5",
+        "C7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "C7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-gb-31",
+    "name": "Blue Bossa (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gbm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Abm7b5",
+        "Db7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Db7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-g-32",
+    "name": "Blue Bossa (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Am7b5",
+        "D7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "D7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-ab-33",
+    "name": "Blue Bossa (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Abm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Bbm7b5",
+        "Eb7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Eb7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-a-34",
+    "name": "Blue Bossa (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Am7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Bm7b5",
+        "E7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "E7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-bb-35",
+    "name": "Blue Bossa (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bbm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Cm7b5",
+        "F7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "F7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-bossa-b-36",
+    "name": "Blue Bossa (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bm7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Dbm7b5",
+        "Gb7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Gb7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-c-37",
+    "name": "So What (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Dm7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-db-38",
+    "name": "So What (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ebm7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-d-39",
+    "name": "So What (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Em7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-eb-40",
+    "name": "So What (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Fm7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-e-41",
+    "name": "So What (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Gbm7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-f-42",
+    "name": "So What (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Gm7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-gb-43",
+    "name": "So What (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Abm7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-g-44",
+    "name": "So What (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Am7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-ab-45",
+    "name": "So What (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Bbm7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-a-46",
+    "name": "So What (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Bm7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-bb-47",
+    "name": "So What (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Cm7"
+      ]
+    ]
+  },
+  {
+    "id": "so-what-b-48",
+    "name": "So What (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Dbm7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-c-49",
+    "name": "Rhythm Changes AABA (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bbmaj7",
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbmaj7",
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "E°7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "F7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-db-50",
+    "name": "Rhythm Changes AABA (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bmaj7",
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bmaj7",
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "F°7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Gb7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-d-51",
+    "name": "Rhythm Changes AABA (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Cmaj7",
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cmaj7",
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Gb°7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "G7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-eb-52",
+    "name": "Rhythm Changes AABA (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dbmaj7",
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbmaj7",
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "G°7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Ab7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-e-53",
+    "name": "Rhythm Changes AABA (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dmaj7",
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dmaj7",
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Ab°7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "A7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-f-54",
+    "name": "Rhythm Changes AABA (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ebmaj7",
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebmaj7",
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "A°7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Bb7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-gb-55",
+    "name": "Rhythm Changes AABA (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Emaj7",
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Emaj7",
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Bb°7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "B7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-g-56",
+    "name": "Rhythm Changes AABA (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Fmaj7",
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fmaj7",
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "B°7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "C7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-ab-57",
+    "name": "Rhythm Changes AABA (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gbmaj7",
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbmaj7",
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "C°7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Db7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-a-58",
+    "name": "Rhythm Changes AABA (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gmaj7",
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gmaj7",
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Db°7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "D7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-bb-59",
+    "name": "Rhythm Changes AABA (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Abmaj7",
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abmaj7",
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "D°7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Eb7"
+      ]
+    ]
+  },
+  {
+    "id": "rhythm-changes-aaba-b-60",
+    "name": "Rhythm Changes AABA (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Amaj7",
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Amaj7",
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Eb°7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "E7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-c-61",
+    "name": "Autumn Leaves (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Am7b5",
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Em7b5",
+        "A7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Am7b5",
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Em7b5",
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-db-62",
+    "name": "Autumn Leaves (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bbm7b5",
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Fm7b5",
+        "Bb7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Bbm7b5",
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Fm7b5",
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-d-63",
+    "name": "Autumn Leaves (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bm7b5",
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Gbm7b5",
+        "B7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bm7b5",
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Gbm7b5",
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-eb-64",
+    "name": "Autumn Leaves (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Cm7b5",
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Gm7b5",
+        "C7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Cm7b5",
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Gm7b5",
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-e-65",
+    "name": "Autumn Leaves (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dbm7b5",
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Abm7b5",
+        "Db7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Dbm7b5",
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Abm7b5",
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-f-66",
+    "name": "Autumn Leaves (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dm7b5",
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Am7b5",
+        "D7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Dm7b5",
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Am7b5",
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-gb-67",
+    "name": "Autumn Leaves (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ebm7b5",
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Bbm7b5",
+        "Eb7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Ebm7b5",
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Bbm7b5",
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-g-68",
+    "name": "Autumn Leaves (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Em7b5",
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Bm7b5",
+        "E7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Em7b5",
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Bm7b5",
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-ab-69",
+    "name": "Autumn Leaves (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Fm7b5",
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Cm7b5",
+        "F7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Fm7b5",
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Cm7b5",
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-a-70",
+    "name": "Autumn Leaves (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gbm7b5",
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Dbm7b5",
+        "Gb7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Gbm7b5",
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Dbm7b5",
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-bb-71",
+    "name": "Autumn Leaves (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gm7b5",
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Dm7b5",
+        "G7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gm7b5",
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Dm7b5",
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "autumn-leaves-b-72",
+    "name": "Autumn Leaves (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Abm7b5",
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Ebm7b5",
+        "Ab7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Abm7b5",
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Ebm7b5",
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-c-73",
+    "name": "Satin Doll (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-db-74",
+    "name": "Satin Doll (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-d-75",
+    "name": "Satin Doll (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-eb-76",
+    "name": "Satin Doll (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-e-77",
+    "name": "Satin Doll (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-f-78",
+    "name": "Satin Doll (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-gb-79",
+    "name": "Satin Doll (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-g-80",
+    "name": "Satin Doll (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-ab-81",
+    "name": "Satin Doll (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-a-82",
+    "name": "Satin Doll (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-bb-83",
+    "name": "Satin Doll (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "satin-doll-b-84",
+    "name": "Satin Doll (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-c-85",
+    "name": "Take the A Train (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "C6"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C6"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-db-86",
+    "name": "Take the A Train (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Db6"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db6"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-d-87",
+    "name": "Take the A Train (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "D6"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D6"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-eb-88",
+    "name": "Take the A Train (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Eb6"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb6"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-e-89",
+    "name": "Take the A Train (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "E6"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E6"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-f-90",
+    "name": "Take the A Train (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "F6"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F6"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-gb-91",
+    "name": "Take the A Train (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gb6"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb6"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-g-92",
+    "name": "Take the A Train (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "G6"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G6"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-ab-93",
+    "name": "Take the A Train (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ab6"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab6"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-a-94",
+    "name": "Take the A Train (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "A6"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A6"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-bb-95",
+    "name": "Take the A Train (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bb6"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb6"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ]
+    ]
+  },
+  {
+    "id": "take-the-a-train-b-96",
+    "name": "Take the A Train (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "B6"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B6"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-c-97",
+    "name": "Girl from Ipanema (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Fmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Gm7",
+        "Gb7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Gm7",
+        "Gb7"
+      ],
+      [
+        "Fmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-db-98",
+    "name": "Girl from Ipanema (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Abm7",
+        "G7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Abm7",
+        "G7"
+      ],
+      [
+        "Gbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-d-99",
+    "name": "Girl from Ipanema (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gmaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Am7",
+        "Ab7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Am7",
+        "Ab7"
+      ],
+      [
+        "Gmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-eb-100",
+    "name": "Girl from Ipanema (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Abmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bbm7",
+        "A7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bbm7",
+        "A7"
+      ],
+      [
+        "Abmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-e-101",
+    "name": "Girl from Ipanema (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Amaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Bm7",
+        "Bb7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Bm7",
+        "Bb7"
+      ],
+      [
+        "Amaj7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-f-102",
+    "name": "Girl from Ipanema (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bbmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Cm7",
+        "B7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Cm7",
+        "B7"
+      ],
+      [
+        "Bbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-gb-103",
+    "name": "Girl from Ipanema (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bmaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Dbm7",
+        "C7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Dbm7",
+        "C7"
+      ],
+      [
+        "Bmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-g-104",
+    "name": "Girl from Ipanema (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Cmaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Dm7",
+        "Db7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Dm7",
+        "Db7"
+      ],
+      [
+        "Cmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-ab-105",
+    "name": "Girl from Ipanema (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ebm7",
+        "D7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ebm7",
+        "D7"
+      ],
+      [
+        "Dbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-a-106",
+    "name": "Girl from Ipanema (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Em7",
+        "Eb7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Em7",
+        "Eb7"
+      ],
+      [
+        "Dmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-bb-107",
+    "name": "Girl from Ipanema (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ebmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Fm7",
+        "E7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Fm7",
+        "E7"
+      ],
+      [
+        "Ebmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "girl-from-ipanema-b-108",
+    "name": "Girl from Ipanema (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Emaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gbm7",
+        "F7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gbm7",
+        "F7"
+      ],
+      [
+        "Emaj7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-c-109",
+    "name": "Latin Jam (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Cm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-db-110",
+    "name": "Latin Jam (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-d-111",
+    "name": "Latin Jam (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-eb-112",
+    "name": "Latin Jam (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ebm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-e-113",
+    "name": "Latin Jam (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Em7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-f-114",
+    "name": "Latin Jam (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Fm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-gb-115",
+    "name": "Latin Jam (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gbm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-g-116",
+    "name": "Latin Jam (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-ab-117",
+    "name": "Latin Jam (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Abm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-a-118",
+    "name": "Latin Jam (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Am7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-bb-119",
+    "name": "Latin Jam (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bbm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ]
+    ]
+  },
+  {
+    "id": "latin-jam-b-120",
+    "name": "Latin Jam (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bm7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-c-121",
+    "name": "Funk Groove (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Em7"
+      ],
+      [
+        "A7sus4",
+        "A7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "A7sus4",
+        "A7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "B7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-db-122",
+    "name": "Funk Groove (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Fm7"
+      ],
+      [
+        "Bb7sus4",
+        "Bb7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Bb7sus4",
+        "Bb7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "C7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-d-123",
+    "name": "Funk Groove (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gbm7"
+      ],
+      [
+        "B7sus4",
+        "B7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "B7sus4",
+        "B7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Db7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-eb-124",
+    "name": "Funk Groove (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gm7"
+      ],
+      [
+        "C7sus4",
+        "C7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "C7sus4",
+        "C7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "D7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-e-125",
+    "name": "Funk Groove (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Abm7"
+      ],
+      [
+        "Db7sus4",
+        "Db7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Db7sus4",
+        "Db7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Eb7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-f-126",
+    "name": "Funk Groove (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Am7"
+      ],
+      [
+        "D7sus4",
+        "D7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "D7sus4",
+        "D7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "E7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-gb-127",
+    "name": "Funk Groove (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bbm7"
+      ],
+      [
+        "Eb7sus4",
+        "Eb7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Eb7sus4",
+        "Eb7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "F7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-g-128",
+    "name": "Funk Groove (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bm7"
+      ],
+      [
+        "E7sus4",
+        "E7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "E7sus4",
+        "E7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Gb7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-ab-129",
+    "name": "Funk Groove (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Cm7"
+      ],
+      [
+        "F7sus4",
+        "F7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "F7sus4",
+        "F7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "G7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-a-130",
+    "name": "Funk Groove (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dbm7"
+      ],
+      [
+        "Gb7sus4",
+        "Gb7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Gb7sus4",
+        "Gb7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Ab7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-bb-131",
+    "name": "Funk Groove (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dm7"
+      ],
+      [
+        "G7sus4",
+        "G7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "G7sus4",
+        "G7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "A7"
+      ]
+    ]
+  },
+  {
+    "id": "funk-groove-b-132",
+    "name": "Funk Groove (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ebm7"
+      ],
+      [
+        "Ab7sus4",
+        "Ab7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ab7sus4",
+        "Ab7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Bb7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-c-133",
+    "name": "Blue Monk (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Edim7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "F7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-db-134",
+    "name": "Blue Monk (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Fdim7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Gb7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-d-135",
+    "name": "Blue Monk (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Gbdim7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "G7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-eb-136",
+    "name": "Blue Monk (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gdim7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ab7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-e-137",
+    "name": "Blue Monk (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Abdim7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "A7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-f-138",
+    "name": "Blue Monk (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Adim7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Bb7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-gb-139",
+    "name": "Blue Monk (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Bbdim7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "B7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-g-140",
+    "name": "Blue Monk (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bdim7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "C7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-ab-141",
+    "name": "Blue Monk (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Cdim7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Db7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-a-142",
+    "name": "Blue Monk (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Dbdim7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "D7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-bb-143",
+    "name": "Blue Monk (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ddim7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Eb7"
+      ]
+    ]
+  },
+  {
+    "id": "blue-monk-b-144",
+    "name": "Blue Monk (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Ebdim7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "E7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-c-145",
+    "name": "Wave (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dmaj7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Dmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-db-146",
+    "name": "Wave (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ebmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-d-147",
+    "name": "Wave (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Emaj7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Emaj7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-eb-148",
+    "name": "Wave (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Fmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-e-149",
+    "name": "Wave (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Gbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-f-150",
+    "name": "Wave (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gmaj7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Gmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-gb-151",
+    "name": "Wave (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Abmaj7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Abmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-g-152",
+    "name": "Wave (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Amaj7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Amaj7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-ab-153",
+    "name": "Wave (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Bbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-a-154",
+    "name": "Wave (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bmaj7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Bmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-bb-155",
+    "name": "Wave (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Cmaj7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Cmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "wave-b-156",
+    "name": "Wave (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Dbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-c-157",
+    "name": "Stella by Starlight (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Em7b5",
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Cmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-db-158",
+    "name": "Stella by Starlight (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Fm7b5",
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Dbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-d-159",
+    "name": "Stella by Starlight (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gbm7b5",
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Dmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-eb-160",
+    "name": "Stella by Starlight (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gm7b5",
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fm7",
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ebmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-e-161",
+    "name": "Stella by Starlight (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Abm7b5",
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbm7",
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Emaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-f-162",
+    "name": "Stella by Starlight (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Am7b5",
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gm7",
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Fmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-gb-163",
+    "name": "Stella by Starlight (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bbm7b5",
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abm7",
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Gbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-g-164",
+    "name": "Stella by Starlight (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bm7b5",
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Am7",
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "Gmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-ab-165",
+    "name": "Stella by Starlight (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Cm7b5",
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbm7",
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Abmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-a-166",
+    "name": "Stella by Starlight (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dbm7b5",
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Dm7",
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bm7",
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Amaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-bb-167",
+    "name": "Stella by Starlight (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dm7b5",
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Ebm7",
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cm7",
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Bbmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "stella-by-starlight-b-168",
+    "name": "Stella by Starlight (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ebm7b5",
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Em7",
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbm7",
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Bmaj7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-c-169",
+    "name": "Cherokee (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Bdim7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cm7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "D7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-db-170",
+    "name": "Cherokee (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bmaj7"
+      ],
+      [
+        "Cdim7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbm7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Eb7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-d-171",
+    "name": "Cherokee (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Cmaj7"
+      ],
+      [
+        "Dbdim7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dm7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "E7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-eb-172",
+    "name": "Cherokee (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Ddim7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebm7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "F7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-e-173",
+    "name": "Cherokee (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Dmaj7"
+      ],
+      [
+        "Ebdim7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Em7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gb7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-f-174",
+    "name": "Cherokee (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Edim7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fm7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "G7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-gb-175",
+    "name": "Cherokee (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Emaj7"
+      ],
+      [
+        "Fdim7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbm7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ebmaj7"
+      ],
+      [
+        "Ab7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-g-176",
+    "name": "Cherokee (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Fmaj7"
+      ],
+      [
+        "Gbdim7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gm7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Emaj7"
+      ],
+      [
+        "A7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-ab-177",
+    "name": "Cherokee (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Gdim7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abm7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Fmaj7"
+      ],
+      [
+        "Bb7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-a-178",
+    "name": "Cherokee (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gmaj7"
+      ],
+      [
+        "Abdim7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Am7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gbmaj7"
+      ],
+      [
+        "B7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-bb-179",
+    "name": "Cherokee (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Abmaj7"
+      ],
+      [
+        "Adim7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbm7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Dbmaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bmaj7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "Gmaj7"
+      ],
+      [
+        "C7"
+      ]
+    ]
+  },
+  {
+    "id": "cherokee-b-180",
+    "name": "Cherokee (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Amaj7"
+      ],
+      [
+        "Bbdim7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Amaj7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Bm7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "Dmaj7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "Cmaj7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bbmaj7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Abmaj7"
+      ],
+      [
+        "Db7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-c-181",
+    "name": "Blues turnaround (C)",
+    "author": "Preset",
+    "key": "C",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "C7",
+        "A7"
+      ],
+      [
+        "D7",
+        "G7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-db-182",
+    "name": "Blues turnaround (Db)",
+    "author": "Preset",
+    "key": "Db",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Db7",
+        "Bb7"
+      ],
+      [
+        "Eb7",
+        "Ab7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-d-183",
+    "name": "Blues turnaround (D)",
+    "author": "Preset",
+    "key": "D",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "D7",
+        "B7"
+      ],
+      [
+        "E7",
+        "A7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-eb-184",
+    "name": "Blues turnaround (Eb)",
+    "author": "Preset",
+    "key": "Eb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Eb7",
+        "C7"
+      ],
+      [
+        "F7",
+        "Bb7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-e-185",
+    "name": "Blues turnaround (E)",
+    "author": "Preset",
+    "key": "E",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "E7",
+        "Db7"
+      ],
+      [
+        "Gb7",
+        "B7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-f-186",
+    "name": "Blues turnaround (F)",
+    "author": "Preset",
+    "key": "F",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "F7",
+        "D7"
+      ],
+      [
+        "G7",
+        "C7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-gb-187",
+    "name": "Blues turnaround (Gb)",
+    "author": "Preset",
+    "key": "Gb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Gb7",
+        "Eb7"
+      ],
+      [
+        "Ab7",
+        "Db7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-g-188",
+    "name": "Blues turnaround (G)",
+    "author": "Preset",
+    "key": "G",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "G7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "C7"
+      ],
+      [
+        "G7",
+        "E7"
+      ],
+      [
+        "A7",
+        "D7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-ab-189",
+    "name": "Blues turnaround (Ab)",
+    "author": "Preset",
+    "key": "Ab",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Ab7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Db7"
+      ],
+      [
+        "Ab7",
+        "F7"
+      ],
+      [
+        "Bb7",
+        "Eb7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-a-190",
+    "name": "Blues turnaround (A)",
+    "author": "Preset",
+    "key": "A",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "A7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "D7"
+      ],
+      [
+        "A7",
+        "Gb7"
+      ],
+      [
+        "B7",
+        "E7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-bb-191",
+    "name": "Blues turnaround (Bb)",
+    "author": "Preset",
+    "key": "Bb",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "Bb7"
+      ],
+      [
+        "F7"
+      ],
+      [
+        "Eb7"
+      ],
+      [
+        "Bb7",
+        "G7"
+      ],
+      [
+        "C7",
+        "F7"
+      ]
+    ]
+  },
+  {
+    "id": "blues-turnaround-b-192",
+    "name": "Blues turnaround (B)",
+    "author": "Preset",
+    "key": "B",
+    "mode": "major",
+    "tpb": 4,
+    "bars": [
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "B7"
+      ],
+      [
+        "Gb7"
+      ],
+      [
+        "E7"
+      ],
+      [
+        "B7",
+        "Ab7"
+      ],
+      [
+        "Db7",
+        "Gb7"
+      ]
+    ]
+  }
+]
