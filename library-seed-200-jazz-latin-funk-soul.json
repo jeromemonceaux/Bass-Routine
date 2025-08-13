@@ -1,0 +1,2402 @@
+[
+  {
+    "id": "12-bar-blues-in-c",
+    "title": "12-Bar Blues in C",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | C7 | F7 | C7 | C7 |\n| F7 | F7 | C7 | C7 |\n| G7 | F7 | C7 | G7 𝄇"
+  },
+  {
+    "id": "12-bar-blues-in-f",
+    "title": "12-Bar Blues in F",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | F7 | Bb7 | F7 | F7 |\n| Bb7 | Bb7 | F7 | F7 |\n| C7 | Bb7 | F7 | C7 𝄇"
+  },
+  {
+    "id": "12-bar-blues-in-bb",
+    "title": "12-Bar Blues in Bb",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | Bb7 | Eb7 | Bb7 | Bb7 |\n| Eb7 | Eb7 | Bb7 | Bb7 |\n| F7 | Eb7 | Bb7 | F7 𝄇"
+  },
+  {
+    "id": "12-bar-blues-in-g",
+    "title": "12-Bar Blues in G",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | G7 | C7 | G7 | G7 |\n| C7 | C7 | G7 | G7 |\n| D7 | C7 | G7 | D7 𝄇"
+  },
+  {
+    "id": "12-bar-blues-in-d",
+    "title": "12-Bar Blues in D",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | D7 | G7 | D7 | D7 |\n| G7 | G7 | D7 | D7 |\n| A7 | G7 | D7 | A7 𝄇"
+  },
+  {
+    "id": "12-bar-blues-in-a",
+    "title": "12-Bar Blues in A",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | A7 | D7 | A7 | A7 |\n| D7 | D7 | A7 | A7 |\n| E7 | D7 | A7 | E7 𝄇"
+  },
+  {
+    "id": "12-bar-blues-in-e",
+    "title": "12-Bar Blues in E",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | E7 | A7 | E7 | E7 |\n| A7 | A7 | E7 | E7 |\n| B7 | A7 | E7 | B7 𝄇"
+  },
+  {
+    "id": "minor-blues-in-cm",
+    "title": "Minor Blues in Cm",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "minor-blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | Cm7 | Fm7 | Cm7 | Cm7 |\n| Fm7 | Fm7 | Cm7 | Cm7 |\n| A♭7 | G7(alt) | Cm7 | G7(alt) 𝄇"
+  },
+  {
+    "id": "minor-blues-in-fm",
+    "title": "Minor Blues in Fm",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "minor-blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | Fm7 | B♭m7 | Fm7 | Fm7 |\n| B♭m7 | B♭m7 | Fm7 | Fm7 |\n| D♭7 | C7(alt) | Fm7 | C7(alt) 𝄇"
+  },
+  {
+    "id": "minor-blues-in-gm",
+    "title": "Minor Blues in Gm",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "minor-blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | Gm7 | Cm7 | Gm7 | Gm7 |\n| Cm7 | Cm7 | Gm7 | Gm7 |\n| E♭7 | D7(alt) | Gm7 | D7(alt) 𝄇"
+  },
+  {
+    "id": "minor-blues-in-dm",
+    "title": "Minor Blues in Dm",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "minor-blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | Dm7 | Gm7 | Dm7 | Dm7 |\n| Gm7 | Gm7 | Dm7 | Dm7 |\n| B♭7 | A7(alt) | Dm7 | A7(alt) 𝄇"
+  },
+  {
+    "id": "minor-blues-in-am",
+    "title": "Minor Blues in Am",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "minor-blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | Am7 | Dm7 | Am7 | Am7 |\n| Dm7 | Dm7 | Am7 | Am7 |\n| F7 | E7(alt) | Am7 | E7(alt) 𝄇"
+  },
+  {
+    "id": "rhythm-changes-etude-in-bb",
+    "title": "Rhythm Changes Etude in Bb",
+    "composer": "Practice Form",
+    "style": "Jazz",
+    "year": 1930,
+    "is_public_domain": true,
+    "tags": [
+      "rhythm-changes",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | B♭6 | Gm7 | Cm7 | F7 |\n| B♭6 | Gm7 | Cm7 | F7 𝄇\n\nB:\n| D7 | G7 | C7 | F7 |\n\nA:\n| B♭6 | Gm7 | Cm7 | F7 | Fine\n\nD.C. al Fine"
+  },
+  {
+    "id": "rhythm-changes-etude-in-f",
+    "title": "Rhythm Changes Etude in F",
+    "composer": "Practice Form",
+    "style": "Jazz",
+    "year": 1930,
+    "is_public_domain": true,
+    "tags": [
+      "rhythm-changes",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | F6 | Dm7 | Gm7 | C7 |\n| F6 | Dm7 | Gm7 | C7 𝄇\n\nB:\n| A7 | D7 | G7 | C7 |\n\nA:\n| F6 | Dm7 | Gm7 | C7 | Fine\n\nD.C. al Fine"
+  },
+  {
+    "id": "rhythm-changes-etude-in-c",
+    "title": "Rhythm Changes Etude in C",
+    "composer": "Practice Form",
+    "style": "Jazz",
+    "year": 1930,
+    "is_public_domain": true,
+    "tags": [
+      "rhythm-changes",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | C6 | Am7 | Dm7 | G7 |\n| C6 | Am7 | Dm7 | G7 𝄇\n\nB:\n| E7 | A7 | D7 | G7 |\n\nA:\n| C6 | Am7 | Dm7 | G7 | Fine\n\nD.C. al Fine"
+  },
+  {
+    "id": "dorian-vamp-in-d",
+    "title": "Dorian Vamp in D",
+    "composer": "D Dorian",
+    "style": "Modal",
+    "year": 0,
+    "is_public_domain": true,
+    "tags": [
+      "modal",
+      "vamp"
+    ],
+    "grid_text": "A:\n𝄆 | Dm7 | Dm7 | Dm7 | Dm7 |\n| Dm7 | Dm7 | Dm7 | Dm7 |\n| Dm7 | Dm7 | Dm7 | Dm7 |\n| Dm7 | Dm7 | Dm7 | Dm7 | 𝄇"
+  },
+  {
+    "id": "dorian-vamp-in-e",
+    "title": "Dorian Vamp in E",
+    "composer": "E Dorian",
+    "style": "Modal",
+    "year": 0,
+    "is_public_domain": true,
+    "tags": [
+      "modal",
+      "vamp"
+    ],
+    "grid_text": "A:\n𝄆 | Em7 | Em7 | Em7 | Em7 |\n| Em7 | Em7 | Em7 | Em7 |\n| Em7 | Em7 | Em7 | Em7 |\n| Em7 | Em7 | Em7 | Em7 | 𝄇"
+  },
+  {
+    "id": "aeolian-vamp-in-a",
+    "title": "Aeolian Vamp in A",
+    "composer": "A Aeolian",
+    "style": "Modal",
+    "year": 0,
+    "is_public_domain": true,
+    "tags": [
+      "modal",
+      "vamp"
+    ],
+    "grid_text": "A:\n𝄆 | Am7 | Am7 | Am7 | Am7 |\n| Am7 | Am7 | Am7 | Am7 |\n| Am7 | Am7 | Am7 | Am7 |\n| Am7 | Am7 | Am7 | Am7 | 𝄇"
+  },
+  {
+    "id": "mixolydian-vamp-in-g",
+    "title": "Mixolydian Vamp in G",
+    "composer": "G Mixolydian",
+    "style": "Modal",
+    "year": 0,
+    "is_public_domain": true,
+    "tags": [
+      "modal",
+      "vamp"
+    ],
+    "grid_text": "A:\n𝄆 | G7 | G7 | G7 | G7 |\n| G7 | G7 | G7 | G7 |\n| G7 | G7 | G7 | G7 |\n| G7 | G7 | G7 | G7 | 𝄇"
+  },
+  {
+    "id": "bossa-etude-in-c-minor",
+    "title": "Bossa Etude in C minor",
+    "composer": "Etude",
+    "style": "Latin/Bossa",
+    "year": 1960,
+    "is_public_domain": true,
+    "tags": [
+      "bossa",
+      "ii-v"
+    ],
+    "grid_text": "A:\n𝄆 | Cm7 | Fm7 | Dm7♭5 G7 | Cm7 |\n| Cm7 | Fm7 | Dm7♭5 G7 | Cm7 𝄇\n\nB (Bridge):\n| E♭m7 A♭7 | D♭Δ | Dm7♭5 G7 | Cm7 |"
+  },
+  {
+    "id": "prog:ii-v-i-major-c",
+    "title": "ii–V–I in C Major",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Dm7 | G7 | CΔ | CΔ |\n| Dm7 | G7 | CΔ | CΔ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-c",
+    "title": "ii–V–i in C Minor",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Dm7♭5 | G7(alt) | Cm | Cm |\n| Dm7♭5 | G7(alt) | Cm | Cm 𝄇",
+    "tags": [
+      "ii-v-i",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:turnaround-i-vi-ii-v",
+    "title": "I–vi–ii–V Turnaround in Bb",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | B♭Δ | G7 | Cm7 | F7 |\n| B♭Δ | G7 | Cm7 | F7 𝄇",
+    "tags": [
+      "turnaround"
+    ]
+  },
+  {
+    "id": "prog:backdoor-ii-v",
+    "title": "Backdoor ii–V in C",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Dm7 | G7 | B♭m7 | E♭7 |\n| CΔ | CΔ | Dm7 G7 | CΔ 𝄇",
+    "tags": [
+      "backdoor",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:coltrane-giant-steps-cycle",
+    "title": "Coltrane Cycle (Giant Steps keys)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | BΔ D7 | GΔ B♭7 | E♭Δ A7 | DΔ F7 |\n| BΔ D7 | GΔ B♭7 | E♭Δ A7 | DΔ G7 𝄇",
+    "tags": [
+      "coltrane",
+      "cycle-of-major-thirds"
+    ]
+  },
+  {
+    "id": "blue-bossa",
+    "title": "Blue Bossa",
+    "composer": "Kenny Dorham",
+    "style": "Latin/Bossa",
+    "year": 1963,
+    "is_public_domain": false,
+    "tags": [
+      "latin"
+    ]
+  },
+  {
+    "id": "song-for-my-father",
+    "title": "Song for My Father",
+    "composer": "Horace Silver",
+    "style": "Latin/Jazz",
+    "year": 1964,
+    "is_public_domain": false,
+    "tags": [
+      "latin"
+    ]
+  },
+  {
+    "id": "chameleon",
+    "title": "Chameleon",
+    "composer": "Herbie Hancock",
+    "style": "Funk",
+    "year": 1973,
+    "is_public_domain": false,
+    "tags": [
+      "funk"
+    ]
+  },
+  {
+    "id": "cissy-strut",
+    "title": "Cissy Strut",
+    "composer": "The Meters",
+    "style": "Funk",
+    "year": 1969,
+    "is_public_domain": false,
+    "tags": [
+      "funk"
+    ]
+  },
+  {
+    "id": "so-what",
+    "title": "So What",
+    "composer": "Miles Davis",
+    "style": "Modal Jazz",
+    "year": 1959,
+    "is_public_domain": false,
+    "tags": [
+      "modal jazz"
+    ]
+  },
+  {
+    "id": "all-blues",
+    "title": "All Blues",
+    "composer": "Miles Davis",
+    "style": "Modal Jazz",
+    "year": 1959,
+    "is_public_domain": false,
+    "tags": [
+      "modal jazz"
+    ]
+  },
+  {
+    "id": "maiden-voyage",
+    "title": "Maiden Voyage",
+    "composer": "Herbie Hancock",
+    "style": "Modal Jazz",
+    "year": 1965,
+    "is_public_domain": false,
+    "tags": [
+      "modal jazz"
+    ]
+  },
+  {
+    "id": "footprints",
+    "title": "Footprints",
+    "composer": "Wayne Shorter",
+    "style": "Jazz Waltz",
+    "year": 1966,
+    "is_public_domain": false,
+    "tags": [
+      "jazz waltz"
+    ]
+  },
+  {
+    "id": "watermelon-man",
+    "title": "Watermelon Man",
+    "composer": "Herbie Hancock",
+    "style": "Latin/Funk",
+    "year": 1962,
+    "is_public_domain": false,
+    "tags": [
+      "latin"
+    ]
+  },
+  {
+    "id": "the-sidewinder",
+    "title": "The Sidewinder",
+    "composer": "Lee Morgan",
+    "style": "Soul Jazz",
+    "year": 1963,
+    "is_public_domain": false,
+    "tags": [
+      "soul jazz"
+    ]
+  },
+  {
+    "id": "mercy-mercy-mercy",
+    "title": "Mercy, Mercy, Mercy",
+    "composer": "Joe Zawinul",
+    "style": "Soul Jazz",
+    "year": 1966,
+    "is_public_domain": false,
+    "tags": [
+      "soul jazz"
+    ]
+  },
+  {
+    "id": "ain-t-no-sunshine",
+    "title": "Ain't No Sunshine",
+    "composer": "Bill Withers",
+    "style": "Soul",
+    "year": 1971,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "what-s-going-on",
+    "title": "What's Going On",
+    "composer": "Marvin Gaye",
+    "style": "Soul",
+    "year": 1971,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "samba-de-uma-nota-s",
+    "title": "Samba de Uma Nota Só",
+    "composer": "Jobim",
+    "style": "Bossa",
+    "year": 1960,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "desafinado",
+    "title": "Desafinado",
+    "composer": "Jobim",
+    "style": "Bossa",
+    "year": 1959,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "wave",
+    "title": "Wave",
+    "composer": "Jobim",
+    "style": "Bossa",
+    "year": 1967,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "girl-from-ipanema",
+    "title": "Girl from Ipanema",
+    "composer": "Jobim",
+    "style": "Bossa",
+    "year": 1962,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "spain",
+    "title": "Spain",
+    "composer": "Chick Corea",
+    "style": "Latin Jazz",
+    "year": 1971,
+    "is_public_domain": false,
+    "tags": [
+      "latin jazz"
+    ]
+  },
+  {
+    "id": "oye-como-va",
+    "title": "Oye Como Va",
+    "composer": "Tito Puente",
+    "style": "Latin",
+    "year": 1962,
+    "is_public_domain": false,
+    "tags": [
+      "latin"
+    ]
+  },
+  {
+    "id": "st-thomas",
+    "title": "St. Thomas",
+    "composer": "Sonny Rollins",
+    "style": "Calypso",
+    "year": 1956,
+    "is_public_domain": false,
+    "tags": [
+      "calypso"
+    ]
+  },
+  {
+    "id": "equinox",
+    "title": "Equinox",
+    "composer": "John Coltrane",
+    "style": "Modal",
+    "year": 1960,
+    "is_public_domain": false,
+    "tags": [
+      "modal"
+    ]
+  },
+  {
+    "id": "nardis",
+    "title": "Nardis",
+    "composer": "Miles Davis",
+    "style": "Modal",
+    "year": 1958,
+    "is_public_domain": false,
+    "tags": [
+      "modal"
+    ]
+  },
+  {
+    "id": "black-orpheus-manh-de-carnaval",
+    "title": "Black Orpheus (Manhã de Carnaval)",
+    "composer": "Luiz Bonfá",
+    "style": "Bossa",
+    "year": 1959,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "sunny",
+    "title": "Sunny",
+    "composer": "Bobby Hebb",
+    "style": "Soul",
+    "year": 1963,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "feel-like-makin-love",
+    "title": "Feel Like Makin' Love",
+    "composer": "Gene McDaniels",
+    "style": "Soul/Jazz",
+    "year": 1974,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "red-clay",
+    "title": "Red Clay",
+    "composer": "Freddie Hubbard",
+    "style": "Jazz Funk",
+    "year": 1970,
+    "is_public_domain": false,
+    "tags": [
+      "jazz funk"
+    ]
+  },
+  {
+    "id": "actual-proof",
+    "title": "Actual Proof",
+    "composer": "Herbie Hancock",
+    "style": "Jazz Funk",
+    "year": 1974,
+    "is_public_domain": false,
+    "tags": [
+      "jazz funk"
+    ]
+  },
+  {
+    "id": "naima",
+    "title": "Naima",
+    "composer": "John Coltrane",
+    "style": "Ballad",
+    "year": 1959,
+    "is_public_domain": false,
+    "tags": [
+      "ballad"
+    ]
+  },
+  {
+    "id": "my-favorite-things",
+    "title": "My Favorite Things",
+    "composer": "Rodgers & Hammerstein",
+    "style": "Waltz",
+    "year": 1959,
+    "is_public_domain": false,
+    "tags": [
+      "waltz"
+    ]
+  },
+  {
+    "id": "afro-blue",
+    "title": "Afro Blue",
+    "composer": "Mongo Santamaria",
+    "style": "Afro-Cuban",
+    "year": 1959,
+    "is_public_domain": false,
+    "tags": [
+      "afro-cuban"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-c",
+    "title": "ii–V–I in C (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Dm7 | G7 | CΔ | CΔ |\n| Dm7 | G7 | CΔ | CΔ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-g",
+    "title": "ii–V–I in G (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Am7 | D7 | GΔ | GΔ |\n| Am7 | D7 | GΔ | GΔ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-d",
+    "title": "ii–V–I in D (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Em7 | A7 | DΔ | DΔ |\n| Em7 | A7 | DΔ | DΔ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-a",
+    "title": "ii–V–I in A (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Bm7 | E7 | AΔ | AΔ |\n| Bm7 | E7 | AΔ | AΔ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-e",
+    "title": "ii–V–I in E (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | F♯m7 | B7 | EΔ | EΔ |\n| F♯m7 | B7 | EΔ | EΔ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-b",
+    "title": "ii–V–I in B (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | C♯m7 | F♯7 | BΔ | BΔ |\n| C♯m7 | F♯7 | BΔ | BΔ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-f",
+    "title": "ii–V–I in F♯ (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | G♯m7 | C♯7 | F♯Δ | F♯Δ |\n| G♯m7 | C♯7 | F♯Δ | F♯Δ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-c",
+    "title": "ii–V–I in C♯ (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | D♯m7 | G♯7 | C♯Δ | C♯Δ |\n| D♯m7 | G♯7 | C♯Δ | C♯Δ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-f",
+    "title": "ii–V–I in F (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Gm7 | C7 | FΔ | FΔ |\n| Gm7 | C7 | FΔ | FΔ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-b",
+    "title": "ii–V–I in B♭ (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Cm7 | F7 | B♭Δ | B♭Δ |\n| Cm7 | F7 | B♭Δ | B♭Δ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-e",
+    "title": "ii–V–I in E♭ (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Fm7 | B♭7 | E♭Δ | E♭Δ |\n| Fm7 | B♭7 | E♭Δ | E♭Δ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-major-a",
+    "title": "ii–V–I in A♭ (Major)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | B♭m7 | E♭7 | A♭Δ | A♭Δ |\n| B♭m7 | E♭7 | A♭Δ | A♭Δ 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "major"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-cm",
+    "title": "ii–V–i in Cm (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Dm7♭5 | G7(alt) | Cm | Cm |\n| Dm7♭5 | G7(alt) | Cm | Cm 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-gm",
+    "title": "ii–V–i in Gm (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Am7♭5 | D7(alt) | Gm | Gm |\n| Am7♭5 | D7(alt) | Gm | Gm 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-dm",
+    "title": "ii–V–i in Dm (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Em7♭5 | A7(alt) | Dm | Dm |\n| Em7♭5 | A7(alt) | Dm | Dm 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-am",
+    "title": "ii–V–i in Am (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Bm7♭5 | E7(alt) | Am | Am |\n| Bm7♭5 | E7(alt) | Am | Am 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-em",
+    "title": "ii–V–i in Em (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | F♯m7♭5 | B7(alt) | Em | Em |\n| F♯m7♭5 | B7(alt) | Em | Em 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-bm",
+    "title": "ii–V–i in Bm (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | C♯m7♭5 | F♯7(alt) | Bm | Bm |\n| C♯m7♭5 | F♯7(alt) | Bm | Bm 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-f-m",
+    "title": "ii–V–i in F♯m (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | G♯m7♭5 | C♯7(alt) | F♯m | F♯m |\n| G♯m7♭5 | C♯7(alt) | F♯m | F♯m 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-c-m",
+    "title": "ii–V–i in C♯m (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | D♯m7♭5 | G♯7(alt) | C♯m | C♯m |\n| D♯m7♭5 | G♯7(alt) | C♯m | C♯m 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-fm",
+    "title": "ii–V–i in Fm (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Gm7♭5 | C7(alt) | Fm | Fm |\n| Gm7♭5 | C7(alt) | Fm | Fm 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-b-m",
+    "title": "ii–V–i in B♭m (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Cm7♭5 | F7(alt) | B♭m | B♭m |\n| Cm7♭5 | F7(alt) | B♭m | B♭m 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-e-m",
+    "title": "ii–V–i in E♭m (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Fm7♭5 | B♭7(alt) | E♭m | E♭m |\n| Fm7♭5 | B♭7(alt) | E♭m | E♭m 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:ii-v-i-minor-a-m",
+    "title": "ii–V–i in A♭m (Minor)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | B♭m7♭5 | E♭7(alt) | A♭m | A♭m |\n| B♭m7♭5 | E♭7(alt) | A♭m | A♭m 𝄇",
+    "tags": [
+      "ii-v-i",
+      "etude",
+      "minor"
+    ]
+  },
+  {
+    "id": "prog:turnaround-c",
+    "title": "Turnaround I–vi–ii–V in C",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | CΔ | Am7 | Dm7 | G7 |\n| CΔ | Am7 | Dm7 | G7 𝄇",
+    "tags": [
+      "turnaround"
+    ]
+  },
+  {
+    "id": "prog:turnaround-g",
+    "title": "Turnaround I–vi–ii–V in G",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | GΔ | Em7 | Am7 | D7 |\n| GΔ | Em7 | Am7 | D7 𝄇",
+    "tags": [
+      "turnaround"
+    ]
+  },
+  {
+    "id": "prog:turnaround-f",
+    "title": "Turnaround I–vi–ii–V in F",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | FΔ | Dm7 | Gm7 | C7 |\n| FΔ | Dm7 | Gm7 | C7 𝄇",
+    "tags": [
+      "turnaround"
+    ]
+  },
+  {
+    "id": "prog:turnaround-b",
+    "title": "Turnaround I–vi–ii–V in B♭",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | B♭Δ | Gm7 | Cm7 | F7 |\n| B♭Δ | Gm7 | Cm7 | F7 𝄇",
+    "tags": [
+      "turnaround"
+    ]
+  },
+  {
+    "id": "prog:turnaround-e",
+    "title": "Turnaround I–vi–ii–V in E♭",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | E♭Δ | Cm7 | Fm7 | B♭7 |\n| E♭Δ | Cm7 | Fm7 | B♭7 𝄇",
+    "tags": [
+      "turnaround"
+    ]
+  },
+  {
+    "id": "prog:turnaround-a",
+    "title": "Turnaround I–vi–ii–V in A♭",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | A♭Δ | Fm7 | B♭m7 | E♭7 |\n| A♭Δ | Fm7 | B♭m7 | E♭7 𝄇",
+    "tags": [
+      "turnaround"
+    ]
+  },
+  {
+    "id": "prog:turnaround-d",
+    "title": "Turnaround I–vi–ii–V in D",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | DΔ | Bm7 | Em7 | A7 |\n| DΔ | Bm7 | Em7 | A7 𝄇",
+    "tags": [
+      "turnaround"
+    ]
+  },
+  {
+    "id": "prog:turnaround-a",
+    "title": "Turnaround I–vi–ii–V in A",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | AΔ | F♯m7 | Bm7 | E7 |\n| AΔ | F♯m7 | Bm7 | E7 𝄇",
+    "tags": [
+      "turnaround"
+    ]
+  },
+  {
+    "id": "prog:turnaround-e",
+    "title": "Turnaround I–vi–ii–V in E",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | EΔ | C♯m7 | F♯m7 | B7 |\n| EΔ | C♯m7 | F♯m7 | B7 𝄇",
+    "tags": [
+      "turnaround"
+    ]
+  },
+  {
+    "id": "funk-vamp-in-e7",
+    "title": "Funk Vamp in E7",
+    "composer": "Groove",
+    "style": "Funk",
+    "year": 1970,
+    "is_public_domain": true,
+    "tags": [
+      "funk",
+      "vamp"
+    ],
+    "grid_text": "A:\n𝄆 | E7 | E7 | E7 | E7 |\n| E7 | E7 | E7 | E7 |\n| E7 | E7 | E7 | E7 |\n| E7 | E7 | E7 | E7 | 𝄇"
+  },
+  {
+    "id": "funk-vamp-in-a7",
+    "title": "Funk Vamp in A7",
+    "composer": "Groove",
+    "style": "Funk",
+    "year": 1970,
+    "is_public_domain": true,
+    "tags": [
+      "funk",
+      "vamp"
+    ],
+    "grid_text": "A:\n𝄆 | A7 | A9 | A13 | A7 |\n| A7 | A9 | A13 | A7 |\n| A7 | A9 | A13 | A7 |\n| A7 | A9 | A13 | A7 | 𝄇"
+  },
+  {
+    "id": "funk-vamp-in-d7",
+    "title": "Funk Vamp in D7",
+    "composer": "Groove",
+    "style": "Funk",
+    "year": 1970,
+    "is_public_domain": true,
+    "tags": [
+      "funk",
+      "vamp"
+    ],
+    "grid_text": "A:\n𝄆 | D7 | D9 | D13 | D7 |\n| D7 | D9 | D13 | D7 |\n| D7 | D9 | D13 | D7 |\n| D7 | D9 | D13 | D7 | 𝄇"
+  },
+  {
+    "id": "funk-two-chord-bm7-e7",
+    "title": "Funk Two-Chord (Bm7–E7)",
+    "composer": "Groove",
+    "style": "Funk",
+    "year": 1970,
+    "is_public_domain": true,
+    "tags": [
+      "funk",
+      "vamp"
+    ],
+    "grid_text": "A:\n𝄆 | Bm7 | E7 | Bm7 | E7 |\n| Bm7 | E7 | Bm7 | E7 |\n| Bm7 | E7 | Bm7 | E7 |\n| Bm7 | E7 | Bm7 | E7 | 𝄇"
+  },
+  {
+    "id": "soul-i-bvii-bvi-v-in-a",
+    "title": "Soul i–bVII–bVI–V in A",
+    "composer": "Groove",
+    "style": "Soul",
+    "year": 1970,
+    "is_public_domain": true,
+    "tags": [
+      "soul",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | Am7 | G7 | F7 | E7 |\n| Am7 | G7 | F7 | E7 |\n| Am7 | G7 | F7 | E7 |\n| Am7 | G7 | F7 | E7 | 𝄇"
+  },
+  {
+    "id": "soul-i-bvii-iv-iv-in-e",
+    "title": "Soul i–bVII–IV–iv in E",
+    "composer": "Groove",
+    "style": "Soul",
+    "year": 1970,
+    "is_public_domain": true,
+    "tags": [
+      "soul",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | Em7 | D7 | A7 | Am7 |\n| Em7 | D7 | A7 | Am7 |\n| Em7 | D7 | A7 | Am7 |\n| Em7 | D7 | A7 | Am7 | 𝄇"
+  },
+  {
+    "id": "soul-iv-v-iii-vi-in-c",
+    "title": "Soul IV–V–iii–vi in C",
+    "composer": "Groove",
+    "style": "Soul",
+    "year": 1970,
+    "is_public_domain": true,
+    "tags": [
+      "soul",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | FΔ | G7 | Em7 | Am7 |\n| FΔ | G7 | Em7 | Am7 |\n| FΔ | G7 | Em7 | Am7 |\n| FΔ | G7 | Em7 | Am7 | 𝄇"
+  },
+  {
+    "id": "montuno-etude-in-c",
+    "title": "Montuno Etude in C",
+    "composer": "Etude",
+    "style": "Latin",
+    "year": 1960,
+    "is_public_domain": true,
+    "tags": [
+      "latin",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | Cm7 | Fm7 | G7 | G7 |\n| Cm7 | Fm7 | G7 | G7 |\n| Cm7 | Fm7 | G7 | G7 |\n| Cm7 | Fm7 | G7 | G7 | 𝄇"
+  },
+  {
+    "id": "montuno-etude-in-f",
+    "title": "Montuno Etude in F",
+    "composer": "Etude",
+    "style": "Latin",
+    "year": 1960,
+    "is_public_domain": true,
+    "tags": [
+      "latin",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | Fm7 | B♭m7 | C7 | C7 |\n| Fm7 | B♭m7 | C7 | C7 |\n| Fm7 | B♭m7 | C7 | C7 |\n| Fm7 | B♭m7 | C7 | C7 | 𝄇"
+  },
+  {
+    "id": "bossa-etude-in-a-minor",
+    "title": "Bossa Etude in A minor",
+    "composer": "Etude",
+    "style": "Latin",
+    "year": 1960,
+    "is_public_domain": true,
+    "tags": [
+      "latin",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | Am7 | Dm7 | E7 | Am7 |\n| Am7 | Dm7 | E7 | Am7 |\n| Am7 | Dm7 | E7 | Am7 |\n| Am7 | Dm7 | E7 | Am7 | 𝄇"
+  },
+  {
+    "id": "samba-cadence-in-d",
+    "title": "Samba Cadence in D",
+    "composer": "Etude",
+    "style": "Latin",
+    "year": 1960,
+    "is_public_domain": true,
+    "tags": [
+      "latin",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | DΔ | C♯m7 F♯7 | Bm7 E7 | AΔ |\n| DΔ | C♯m7 F♯7 | Bm7 E7 | AΔ |\n| DΔ | C♯m7 F♯7 | Bm7 E7 | AΔ |\n| DΔ | C♯m7 F♯7 | Bm7 E7 | AΔ | 𝄇"
+  },
+  {
+    "id": "superstition",
+    "title": "Superstition",
+    "composer": "Stevie Wonder",
+    "style": "Funk",
+    "year": 1972,
+    "is_public_domain": false,
+    "tags": [
+      "funk"
+    ]
+  },
+  {
+    "id": "i-wish",
+    "title": "I Wish",
+    "composer": "Stevie Wonder",
+    "style": "Funk",
+    "year": 1976,
+    "is_public_domain": false,
+    "tags": [
+      "funk"
+    ]
+  },
+  {
+    "id": "pick-up-the-pieces",
+    "title": "Pick Up the Pieces",
+    "composer": "Average White Band",
+    "style": "Funk",
+    "year": 1974,
+    "is_public_domain": false,
+    "tags": [
+      "funk"
+    ]
+  },
+  {
+    "id": "get-lucky",
+    "title": "Get Lucky",
+    "composer": "Daft Punk",
+    "style": "Funk/Disco",
+    "year": 2013,
+    "is_public_domain": false,
+    "tags": [
+      "funk"
+    ]
+  },
+  {
+    "id": "le-freak",
+    "title": "Le Freak",
+    "composer": "Chic",
+    "style": "Funk/Disco",
+    "year": 1978,
+    "is_public_domain": false,
+    "tags": [
+      "funk"
+    ]
+  },
+  {
+    "id": "i-got-you-i-feel-good",
+    "title": "I Got You (I Feel Good)",
+    "composer": "James Brown",
+    "style": "Funk",
+    "year": 1965,
+    "is_public_domain": false,
+    "tags": [
+      "funk"
+    ]
+  },
+  {
+    "id": "sex-machine",
+    "title": "Sex Machine",
+    "composer": "James Brown",
+    "style": "Funk",
+    "year": 1970,
+    "is_public_domain": false,
+    "tags": [
+      "funk"
+    ]
+  },
+  {
+    "id": "give-up-the-funk",
+    "title": "Give Up the Funk",
+    "composer": "Parliament",
+    "style": "Funk",
+    "year": 1975,
+    "is_public_domain": false,
+    "tags": [
+      "funk"
+    ]
+  },
+  {
+    "id": "cantaloupe-island",
+    "title": "Cantaloupe Island",
+    "composer": "Herbie Hancock",
+    "style": "Soul Jazz",
+    "year": 1964,
+    "is_public_domain": false,
+    "tags": [
+      "soul jazz"
+    ]
+  },
+  {
+    "id": "kuduro",
+    "title": "Kuduro",
+    "composer": "Buraka Som Sistema",
+    "style": "Funk/Latin",
+    "year": 2006,
+    "is_public_domain": false,
+    "tags": [
+      "funk"
+    ]
+  },
+  {
+    "id": "ain-t-nobody",
+    "title": "Ain't Nobody",
+    "composer": "Chaka Khan",
+    "style": "Soul/Funk",
+    "year": 1983,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "just-the-two-of-us",
+    "title": "Just the Two of Us",
+    "composer": "Bill Withers",
+    "style": "Soul/Jazz",
+    "year": 1980,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "lovely-day",
+    "title": "Lovely Day",
+    "composer": "Bill Withers",
+    "style": "Soul",
+    "year": 1977,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "let-s-stay-together",
+    "title": "Let's Stay Together",
+    "composer": "Al Green",
+    "style": "Soul",
+    "year": 1972,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "use-me",
+    "title": "Use Me",
+    "composer": "Bill Withers",
+    "style": "Soul",
+    "year": 1972,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "superfly",
+    "title": "Superfly",
+    "composer": "Curtis Mayfield",
+    "style": "Soul/Funk",
+    "year": 1972,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "i-heard-it-through-the-grapevine",
+    "title": "I Heard It Through the Grapevine",
+    "composer": "Marvin Gaye",
+    "style": "Soul",
+    "year": 1968,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "chain-of-fools",
+    "title": "Chain of Fools",
+    "composer": "Aretha Franklin",
+    "style": "Soul",
+    "year": 1967,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "respect",
+    "title": "Respect",
+    "composer": "Otis Redding",
+    "style": "Soul",
+    "year": 1965,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "let-s-get-it-on",
+    "title": "Let's Get It On",
+    "composer": "Marvin Gaye",
+    "style": "Soul",
+    "year": 1973,
+    "is_public_domain": false,
+    "tags": [
+      "soul"
+    ]
+  },
+  {
+    "id": "chega-de-saudade",
+    "title": "Chega de Saudade",
+    "composer": "Jobim",
+    "style": "Bossa",
+    "year": 1958,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "corcovado",
+    "title": "Corcovado",
+    "composer": "Jobim",
+    "style": "Bossa",
+    "year": 1960,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "meditation",
+    "title": "Meditation",
+    "composer": "Jobim",
+    "style": "Bossa",
+    "year": 1962,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "triste",
+    "title": "Triste",
+    "composer": "Jobim",
+    "style": "Bossa",
+    "year": 1966,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "a-felicidade",
+    "title": "A Felicidade",
+    "composer": "Jobim",
+    "style": "Bossa",
+    "year": 1958,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "agua-de-beber",
+    "title": "Agua de Beber",
+    "composer": "Jobim",
+    "style": "Bossa",
+    "year": 1961,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "chega-de-saudade",
+    "title": "Chega de Saudade",
+    "composer": "João Gilberto",
+    "style": "Bossa",
+    "year": 1959,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "besame-mucho",
+    "title": "Besame Mucho",
+    "composer": "Consuelo Velázquez",
+    "style": "Bolero",
+    "year": 1940,
+    "is_public_domain": false,
+    "tags": [
+      "bolero"
+    ]
+  },
+  {
+    "id": "sway-qui-n-ser",
+    "title": "Sway (¿Quién será?)",
+    "composer": "Pablo Beltrán Ruiz",
+    "style": "Latin",
+    "year": 1953,
+    "is_public_domain": false,
+    "tags": [
+      "latin"
+    ]
+  },
+  {
+    "id": "candela",
+    "title": "Candela",
+    "composer": "Buena Vista Social Club",
+    "style": "Son Cubano",
+    "year": 1997,
+    "is_public_domain": false,
+    "tags": [
+      "son cubano"
+    ]
+  },
+  {
+    "id": "autumn-leaves",
+    "title": "Autumn Leaves",
+    "composer": "Joseph Kosma",
+    "style": "Jazz Ballad",
+    "year": 1945,
+    "is_public_domain": false,
+    "tags": [
+      "jazz ballad"
+    ]
+  },
+  {
+    "id": "solar",
+    "title": "Solar",
+    "composer": "Miles Davis",
+    "style": "Jazz",
+    "year": 1954,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "stella-by-starlight",
+    "title": "Stella by Starlight",
+    "composer": "Victor Young",
+    "style": "Jazz Ballad",
+    "year": 1944,
+    "is_public_domain": false,
+    "tags": [
+      "jazz ballad"
+    ]
+  },
+  {
+    "id": "there-will-never-be-another-you",
+    "title": "There Will Never Be Another You",
+    "composer": "Harry Warren",
+    "style": "Jazz",
+    "year": 1942,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "all-the-things-you-are",
+    "title": "All the Things You Are",
+    "composer": "Jerome Kern",
+    "style": "Jazz",
+    "year": 1939,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "donna-lee",
+    "title": "Donna Lee",
+    "composer": "Charlie Parker",
+    "style": "Bebop",
+    "year": 1947,
+    "is_public_domain": false,
+    "tags": [
+      "bebop"
+    ]
+  },
+  {
+    "id": "confirmation",
+    "title": "Confirmation",
+    "composer": "Charlie Parker",
+    "style": "Bebop",
+    "year": 1946,
+    "is_public_domain": false,
+    "tags": [
+      "bebop"
+    ]
+  },
+  {
+    "id": "anthropology",
+    "title": "Anthropology",
+    "composer": "Parker/Gillespie",
+    "style": "Bebop",
+    "year": 1946,
+    "is_public_domain": false,
+    "tags": [
+      "bebop"
+    ]
+  },
+  {
+    "id": "dolphin-dance",
+    "title": "Dolphin Dance",
+    "composer": "Herbie Hancock",
+    "style": "Jazz",
+    "year": 1965,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "giant-steps",
+    "title": "Giant Steps",
+    "composer": "John Coltrane",
+    "style": "Hard Bop",
+    "year": 1959,
+    "is_public_domain": false,
+    "tags": [
+      "hard bop"
+    ]
+  },
+  {
+    "id": "moment-s-notice",
+    "title": "Moment's Notice",
+    "composer": "John Coltrane",
+    "style": "Hard Bop",
+    "year": 1957,
+    "is_public_domain": false,
+    "tags": [
+      "hard bop"
+    ]
+  },
+  {
+    "id": "recorda-me",
+    "title": "Recorda-Me",
+    "composer": "Joe Henderson",
+    "style": "Bossa/Jazz",
+    "year": 1963,
+    "is_public_domain": false,
+    "tags": [
+      "bossa"
+    ]
+  },
+  {
+    "id": "yes-or-no",
+    "title": "Yes or No",
+    "composer": "Wayne Shorter",
+    "style": "Jazz",
+    "year": 1964,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "speak-no-evil",
+    "title": "Speak No Evil",
+    "composer": "Wayne Shorter",
+    "style": "Jazz",
+    "year": 1964,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "stablemates",
+    "title": "Stablemates",
+    "composer": "Benny Golson",
+    "style": "Jazz",
+    "year": 1955,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "whisper-not",
+    "title": "Whisper Not",
+    "composer": "Benny Golson",
+    "style": "Jazz",
+    "year": 1956,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "bernie-s-tune",
+    "title": "Bernie's Tune",
+    "composer": "Bernie Miller",
+    "style": "Cool Jazz",
+    "year": 1952,
+    "is_public_domain": false,
+    "tags": [
+      "cool jazz"
+    ]
+  },
+  {
+    "id": "four",
+    "title": "Four",
+    "composer": "Miles Davis",
+    "style": "Jazz",
+    "year": 1954,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "seven-steps-to-heaven",
+    "title": "Seven Steps to Heaven",
+    "composer": "Miles Davis",
+    "style": "Jazz",
+    "year": 1963,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "cedar-s-blues",
+    "title": "Cedar's Blues",
+    "composer": "Cedar Walton",
+    "style": "Jazz",
+    "year": 1961,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "nica-s-dream",
+    "title": "Nica's Dream",
+    "composer": "Horace Silver",
+    "style": "Latin/Jazz",
+    "year": 1954,
+    "is_public_domain": false,
+    "tags": [
+      "latin"
+    ]
+  },
+  {
+    "id": "cape-verdean-blues",
+    "title": "Cape Verdean Blues",
+    "composer": "Horace Silver",
+    "style": "Latin/Jazz",
+    "year": 1965,
+    "is_public_domain": false,
+    "tags": [
+      "latin"
+    ]
+  },
+  {
+    "id": "nutville",
+    "title": "Nutville",
+    "composer": "Horace Silver",
+    "style": "Latin/Jazz",
+    "year": 1966,
+    "is_public_domain": false,
+    "tags": [
+      "latin"
+    ]
+  },
+  {
+    "id": "blue-train",
+    "title": "Blue Train",
+    "composer": "John Coltrane",
+    "style": "Hard Bop",
+    "year": 1957,
+    "is_public_domain": false,
+    "tags": [
+      "hard bop"
+    ]
+  },
+  {
+    "id": "mr-p-c",
+    "title": "Mr. P.C.",
+    "composer": "John Coltrane",
+    "style": "Minor Blues",
+    "year": 1959,
+    "is_public_domain": false,
+    "tags": [
+      "minor blues"
+    ]
+  },
+  {
+    "id": "work-song",
+    "title": "Work Song",
+    "composer": "Nat Adderley",
+    "style": "Soul Jazz",
+    "year": 1960,
+    "is_public_domain": false,
+    "tags": [
+      "soul jazz"
+    ]
+  },
+  {
+    "id": "moanin",
+    "title": "Moanin'",
+    "composer": "Bobby Timmons",
+    "style": "Soul Jazz",
+    "year": 1958,
+    "is_public_domain": false,
+    "tags": [
+      "soul jazz"
+    ]
+  },
+  {
+    "id": "along-came-betty",
+    "title": "Along Came Betty",
+    "composer": "Benny Golson",
+    "style": "Jazz",
+    "year": 1958,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "killer-joe",
+    "title": "Killer Joe",
+    "composer": "Benny Golson",
+    "style": "Jazz",
+    "year": 1960,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "invitation",
+    "title": "Invitation",
+    "composer": "Kaper/Webster",
+    "style": "Jazz",
+    "year": 1950,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "on-green-dolphin-street",
+    "title": "On Green Dolphin Street",
+    "composer": "Kaper/Washington",
+    "style": "Jazz",
+    "year": 1947,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "beautiful-love",
+    "title": "Beautiful Love",
+    "composer": "Young/King/Alstyne",
+    "style": "Jazz",
+    "year": 1931,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "i-remember-you",
+    "title": "I Remember You",
+    "composer": "Victor Schertzinger",
+    "style": "Jazz",
+    "year": 1941,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "how-high-the-moon",
+    "title": "How High the Moon",
+    "composer": "Hamilton/Lewis",
+    "style": "Jazz",
+    "year": 1940,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "it-could-happen-to-you",
+    "title": "It Could Happen to You",
+    "composer": "Van Heusen",
+    "style": "Jazz",
+    "year": 1944,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "have-you-met-miss-jones",
+    "title": "Have You Met Miss Jones?",
+    "composer": "Rodgers & Hart",
+    "style": "Jazz",
+    "year": 1937,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "my-funny-valentine",
+    "title": "My Funny Valentine",
+    "composer": "Rodgers & Hart",
+    "style": "Jazz Ballad",
+    "year": 1937,
+    "is_public_domain": false,
+    "tags": [
+      "jazz ballad"
+    ]
+  },
+  {
+    "id": "someday-my-prince-will-come",
+    "title": "Someday My Prince Will Come",
+    "composer": "Churchill/Morey",
+    "style": "Jazz Waltz",
+    "year": 1937,
+    "is_public_domain": false,
+    "tags": [
+      "jazz waltz"
+    ]
+  },
+  {
+    "id": "you-don-t-know-what-love-is",
+    "title": "You Don't Know What Love Is",
+    "composer": "De Paul/Raye",
+    "style": "Jazz Ballad",
+    "year": 1941,
+    "is_public_domain": false,
+    "tags": [
+      "jazz ballad"
+    ]
+  },
+  {
+    "id": "body-and-soul",
+    "title": "Body and Soul",
+    "composer": "Green",
+    "style": "Jazz Ballad",
+    "year": 1930,
+    "is_public_domain": false,
+    "tags": [
+      "jazz ballad"
+    ]
+  },
+  {
+    "id": "i-got-rhythm",
+    "title": "I Got Rhythm",
+    "composer": "Gershwin",
+    "style": "Jazz",
+    "year": 1930,
+    "is_public_domain": false,
+    "tags": [
+      "jazz"
+    ]
+  },
+  {
+    "id": "caravan",
+    "title": "Caravan",
+    "composer": "Duke Ellington",
+    "style": "Latin/Jazz",
+    "year": 1936,
+    "is_public_domain": false,
+    "tags": [
+      "latin"
+    ]
+  },
+  {
+    "id": "perdido",
+    "title": "Perdido",
+    "composer": "Juan Tizol",
+    "style": "Latin/Jazz",
+    "year": 1941,
+    "is_public_domain": false,
+    "tags": [
+      "latin"
+    ]
+  },
+  {
+    "id": "12-bar-blues-in-e",
+    "title": "12-Bar Blues in E♭",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | E♭7 | A♭7 | E♭7 | E♭7 |\n| A♭7 | A♭7 | E♭7 | E♭7 |\n| B♭7 | A♭7 | E♭7 | B♭7 𝄇"
+  },
+  {
+    "id": "12-bar-blues-in-a",
+    "title": "12-Bar Blues in A♭",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | A♭7 | D♭7 | A♭7 | A♭7 |\n| D♭7 | D♭7 | A♭7 | A♭7 |\n| E♭7 | D♭7 | A♭7 | E♭7 𝄇"
+  },
+  {
+    "id": "12-bar-blues-in-d",
+    "title": "12-Bar Blues in D♭",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | D♭7 | G♭7 | D♭7 | D♭7 |\n| G♭7 | G♭7 | D♭7 | D♭7 |\n| A♭7 | G♭7 | D♭7 | A♭7 𝄇"
+  },
+  {
+    "id": "12-bar-blues-in-g",
+    "title": "12-Bar Blues in G♭",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | G♭7 | B7 | G♭7 | G♭7 |\n| B7 | B7 | G♭7 | G♭7 |\n| D♭7 | B7 | G♭7 | D♭7 𝄇"
+  },
+  {
+    "id": "12-bar-blues-in-b",
+    "title": "12-Bar Blues in B",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | B7 | E7 | B7 | B7 |\n| E7 | E7 | B7 | B7 |\n| F♯7 | E7 | B7 | F♯7 𝄇"
+  },
+  {
+    "id": "minor-blues-in-e-m",
+    "title": "Minor Blues in E♭m",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "minor-blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | E♭m7 | A♭m7 | E♭m7 | E♭m7 |\n| A♭m7 | A♭m7 | E♭m7 | E♭m7 |\n| C♭7 | B♭7(alt) | E♭m7 | B♭7(alt) 𝄇"
+  },
+  {
+    "id": "minor-blues-in-a-m",
+    "title": "Minor Blues in A♭m",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "minor-blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | A♭m7 | D♭m7 | A♭m7 | A♭m7 |\n| D♭m7 | D♭m7 | A♭m7 | A♭m7 |\n| E7 | E♭7(alt) | A♭m7 | E♭7(alt) 𝄇"
+  },
+  {
+    "id": "minor-blues-in-c-m",
+    "title": "Minor Blues in C♯m",
+    "composer": "Traditional",
+    "style": "Jazz/Blues",
+    "year": 1910,
+    "is_public_domain": true,
+    "tags": [
+      "minor-blues",
+      "etude"
+    ],
+    "grid_text": "A:\n𝄆 | C♯m7 | F♯m7 | C♯m7 | C♯m7 |\n| F♯m7 | F♯m7 | C♯m7 | C♯m7 |\n| A7 | G♯7(alt) | C♯m7 | G♯7(alt) 𝄇"
+  },
+  {
+    "id": "prog:ii-subv-i-c",
+    "title": "ii–(♭II)–I in C (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Dm7 | D♭7 | CΔ | CΔ |\n| Dm7 | D♭7 | CΔ | CΔ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:ii-subv-i-g",
+    "title": "ii–(♭II)–I in G (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Am7 | A♭7 | GΔ | GΔ |\n| Am7 | A♭7 | GΔ | GΔ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:ii-subv-i-d",
+    "title": "ii–(♭II)–I in D (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Em7 | E♭7 | DΔ | DΔ |\n| Em7 | E♭7 | DΔ | DΔ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:ii-subv-i-a",
+    "title": "ii–(♭II)–I in A (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Bm7 | B♭7 | AΔ | AΔ |\n| Bm7 | B♭7 | AΔ | AΔ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:ii-subv-i-e",
+    "title": "ii–(♭II)–I in E (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | F♯m7 | F7 | EΔ | EΔ |\n| F♯m7 | F7 | EΔ | EΔ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:ii-subv-i-b",
+    "title": "ii–(♭II)–I in B (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | C♯m7 | C7 | BΔ | BΔ |\n| C♯m7 | C7 | BΔ | BΔ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:ii-subv-i-f",
+    "title": "ii–(♭II)–I in F♯ (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | G♯m7 | G7 | F♯Δ | F♯Δ |\n| G♯m7 | G7 | F♯Δ | F♯Δ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:ii-subv-i-c",
+    "title": "ii–(♭II)–I in C♯ (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | D♯m7 | D♭7 | C♯Δ | C♯Δ |\n| D♯m7 | D♭7 | C♯Δ | C♯Δ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:ii-subv-i-f",
+    "title": "ii–(♭II)–I in F (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Gm7 | G♭7 | FΔ | FΔ |\n| Gm7 | G♭7 | FΔ | FΔ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:ii-subv-i-b",
+    "title": "ii–(♭II)–I in B♭ (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Cm7 | B7 | B♭Δ | B♭Δ |\n| Cm7 | B7 | B♭Δ | B♭Δ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:ii-subv-i-e",
+    "title": "ii–(♭II)–I in E♭ (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Fm7 | E7 | E♭Δ | E♭Δ |\n| Fm7 | E7 | E♭Δ | E♭Δ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:ii-subv-i-a",
+    "title": "ii–(♭II)–I in A♭ (Tritone Sub)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | B♭m7 | A7 | A♭Δ | A♭Δ |\n| B♭m7 | A7 | A♭Δ | A♭Δ 𝄇",
+    "tags": [
+      "tritone-sub",
+      "ii-v"
+    ]
+  },
+  {
+    "id": "prog:soul-vi-iv-i-v-in-g",
+    "title": "Soul vi–IV–I–V in G",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Em7 | CΔ | GΔ | D7 |\n| Em7 | CΔ | GΔ | D7 |\n| Em7 | CΔ | GΔ | D7 |\n| Em7 | CΔ | GΔ | D7 | 𝄇",
+    "tags": [
+      "etude"
+    ]
+  },
+  {
+    "id": "prog:soul-ii-v-i-in-f",
+    "title": "Soul ii–V–I in F (slow)",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Gm7 | C7 | FΔ | FΔ |\n| Gm7 | C7 | FΔ | FΔ |\n| Gm7 | C7 | FΔ | FΔ |\n| Gm7 | C7 | FΔ | FΔ | 𝄇",
+    "tags": [
+      "etude"
+    ]
+  },
+  {
+    "id": "prog:latin-ii-v-i-major-d",
+    "title": "Latin ii–V–I in D",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Em7 A7 | DΔ | Em7 A7 | DΔ |\n| Em7 A7 | DΔ | Em7 A7 | DΔ |\n| Em7 A7 | DΔ | Em7 A7 | DΔ |\n| Em7 A7 | DΔ | Em7 A7 | DΔ | 𝄇",
+    "tags": [
+      "etude"
+    ]
+  },
+  {
+    "id": "prog:latin-i-iv-v-in-a",
+    "title": "Latin I–IV–V in A",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | AΔ | DΔ | E7 | E7 |\n| AΔ | DΔ | E7 | E7 |\n| AΔ | DΔ | E7 | E7 |\n| AΔ | DΔ | E7 | E7 | 𝄇",
+    "tags": [
+      "etude"
+    ]
+  },
+  {
+    "id": "prog:funk-e9-groove",
+    "title": "Funk E9 Groove",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | E9 | E9 | E9 | E9 |\n| E9 | E9 | E9 | E9 |\n| E9 | E9 | E9 | E9 |\n| E9 | E9 | E9 | E9 | 𝄇",
+    "tags": [
+      "etude"
+    ]
+  },
+  {
+    "id": "prog:funk-a13-groove",
+    "title": "Funk A13 Groove",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | A13 | A13 | A13 | A13 |\n| A13 | A13 | A13 | A13 |\n| A13 | A13 | A13 | A13 |\n| A13 | A13 | A13 | A13 | 𝄇",
+    "tags": [
+      "etude"
+    ]
+  },
+  {
+    "id": "prog:boogaloo-c",
+    "title": "Boogaloo in C",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | C7 | F7 | C7 | G7 |\n| C7 | F7 | C7 | G7 |\n| C7 | F7 | C7 | G7 |\n| C7 | F7 | C7 | G7 | 𝄇",
+    "tags": [
+      "etude"
+    ]
+  },
+  {
+    "id": "prog:samba-bossa-cycle-g",
+    "title": "Bossa Cycle in G",
+    "composer": "Practice",
+    "style": "Progression",
+    "year": null,
+    "is_public_domain": true,
+    "grid_text": "A:\n𝄆 | Am7 D7 | GΔ | Bm7 E7 | AΔ |\n| Am7 D7 | GΔ | Bm7 E7 | AΔ |\n| Am7 D7 | GΔ | Bm7 E7 | AΔ |\n| Am7 D7 | GΔ | Bm7 E7 | AΔ | 𝄇",
+    "tags": [
+      "etude"
+    ]
+  }
+]

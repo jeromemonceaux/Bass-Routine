@@ -1,200 +1,190 @@
 // js/grid/grid-bridge.js
 (function (w) {
-  'use strict';
-
   var LIB_KEY = 'mp_library_v3';
 
-  function getJSON(k, fb) {
-    try { return JSON.parse(localStorage.getItem(k) || ''); }
-    catch (e) { return fb; }
-  }
-  function setJSON(k, v) {
-    try { localStorage.setItem(k, JSON.stringify(v || null)); }
-    catch (e) {}
-  }
+  function getJSON(k, fb) { try { return JSON.parse(localStorage.getItem(k) || ''); } catch (e) { return fb; } }
+  function setJSON(k, v) { try { localStorage.setItem(k, JSON.stringify(v || null)); } catch (e) {} }
 
-  function fingerprintGrid(it){
-    try{
+  function fingerprintGrid(it) {
+    try {
       var bars = (it && it.bars) || [];
-      return (it.name||it.title||'')+'|'+bars.map(function(b){
-        var c = Array.isArray(b)? b : (b&&b.chords)||[];
-        return (c||[]).join(',');
+      return (it.name || it.title || '') + '|' + bars.map(function (b) {
+        return (Array.isArray(b) ? b : (b && b.chords) || []).join(',');
       }).join('|');
-    }catch(e){ return it && it.id || Math.random().toString(36).slice(2); }
+    } catch (e) { return it && it.id || Math.random().toString(36).slice(2); }
   }
-  function mergeDedup(base, extra){
-    var a = (base||[]).slice();
-    var seenById = {}; for (var i=0;i<a.length;i++){ var it=a[i]; if(it&&it.id) seenById[it.id]=i; }
-    var seenByFp = {}; for (var i=0;i<a.length;i++){ seenByFp[fingerprintGrid(a[i])] = true; }
-    for (var j=0;j<(extra||[]).length;j++){
-      var e = extra[j]; if(!e) continue;
+  function mergeDedup(base, extra) {
+    var a = (base || []).slice();
+    var seenById = {}; for (var i = 0; i < a.length; i++) { var it = a[i]; if (it && it.id) seenById[it.id] = i; }
+    var seenByFp = {}; for (var i = 0; i < a.length; i++) { seenByFp[fingerprintGrid(a[i])] = true; }
+    for (var j = 0; j < (extra || []).length; j++) {
+      var e = extra[j]; if (!e) continue;
       if (e.id && seenById[e.id] != null) continue;
       var fp = fingerprintGrid(e);
       if (seenByFp[fp]) continue;
       a.push(e);
-      if(e.id) seenById[e.id]=a.length-1;
-      seenByFp[fp]=true;
+      if (e.id) seenById[e.id] = a.length - 1;
+      seenByFp[fp] = true;
     }
     return a;
   }
 
-  // Convertit un enregistrement DB -> objet lecteur
-  function fromDbRecord(rec) {
-    var id = rec.id;
-    var name = rec.title || rec.name || id;
-    var author = rec.composer || rec.author || '';
-    var tpb = 4;
-    var bars = [];
+  function asId(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
 
-    if (rec.grid_text && w.GridParse && typeof w.GridParse.parse === 'function') {
-      try {
-        var p = w.GridParse.parse(rec.grid_text);
-        bars = p.bars || [];
-        tpb  = p.tpb  || 4;
-      } catch(e) {}
-    } else if (rec.bars) {
-      bars = rec.bars;
-    }
-
-    return { id:id, name:name, author:author, tpb:tpb, bars:bars };
-  }
-
-  // Importe styles INSP -> librairie locale (optionnel)
-  function importStylesToLibrary(){
+  // Import optionnel depuis INSP (styles embarqués)
+  function importStylesToLibrary(tonic, mode) {
+    tonic = tonic || 'C'; mode = (mode === 'minor' ? 'minor' : 'major');
     var out = [];
-    try{
+    try {
       var IN = (w && w.INSP) ? w.INSP : null;
       if (!IN) return [];
-      Object.keys(IN).forEach(function(key){
-        var item = IN[key]; if(!item || !item.base || !item.base.length) return;
+      Object.keys(IN).forEach(function (key) {
+        var item = IN[key]; if (!item || !item.base || !item.base.length) return;
         var name = item.label || key;
-        var id = "style/"+String(name).toLowerCase().replace(/[^a-z0-9]+/g,'-');
-        var bars = (item.base||[]).map(function(m){
-          if (Array.isArray(m)) return m;
-          return String(m||'').trim().split(/\s+/);
+        var id = 'style/' + asId(name) + '-' + asId(tonic + '-' + mode);
+        // transforme base -> bars via roman/tonic si besoin (optionnel ici)
+        var bars = (item.base || []).map(function (b) { return Array.isArray(b) ? b : [String(b)]; });
+        out.push({
+          id: id,
+          name: 'Style · ' + name + ' (' + tonic + ' ' + (mode === 'minor' ? 'minor' : 'major') + ')',
+          author: 'Style',
+          key: tonic, mode: mode, tpb: 4, bars: bars
         });
-        out.push({ id:id, name:'Style · '+name, author:'Style', tpb:4, bars:bars });
       });
-    }catch(e){}
+    } catch (_) {}
     var cur = getJSON(LIB_KEY, []);
     var merged = mergeDedup(cur, out);
     setJSON(LIB_KEY, merged);
     return out;
   }
 
-  // Charge presets.json + merge local + styles
   function seedLibraryIfEmpty() {
-    return new Promise(function(resolve){
-      var existing = getJSON(LIB_KEY, null);
-      if (existing && Array.isArray(existing) && existing.length) {
-        try { importStylesToLibrary(); } catch(_){}
-        resolve(existing);
-        return;
-      }
+    return new Promise(function (resolve) {
+      try {
+        var a = getJSON(LIB_KEY, null);
+        if (a && Array.isArray(a) && a.length) {
+          try { importStylesToLibrary('C', 'major'); } catch (_) {}
+          resolve(a);
+          return;
+        }
+      } catch (_) {}
       fetch('./presets.json')
-        .then(function(r){ return r.ok ? r.json() : []; })
-        .then(function(pres){
+        .then(function (r) { return r.json(); })
+        .then(function (p) {
           var cur = getJSON(LIB_KEY, []);
-          try { importStylesToLibrary(); } catch(_){}
-          var merged = mergeDedup(cur, pres||[]);
+          var merged = mergeDedup(cur, p || []);
+          try { var styles = importStylesToLibrary('C', 'major'); merged = mergeDedup(merged, styles); } catch (_) {}
           setJSON(LIB_KEY, merged);
           resolve(merged);
         })
-        .catch(function(){
-          try { importStylesToLibrary(); } catch(_){}
-          resolve(getJSON(LIB_KEY, [])||[]);
+        .catch(function () {
+          try { importStylesToLibrary('C', 'major'); } catch (_) {}
+          resolve(getJSON(LIB_KEY, []) || []);
         });
     });
   }
 
-  function getGridById(id) {
+  // Transforme un enregistrement (bars[] OU grid_text) -> {seq,desc,...} pour le lecteur
+  function toReaderState(grid) {
+    var s = w.state || w.__mp_state__ || {};
+    if (grid.key) s.key = grid.key;
+    if (grid.mode) s.mode = grid.mode;
+    if (grid.tpb) s.beatsPerBar = grid.tpb;
+
+    var bars = null;
+    if (Array.isArray(grid.bars) && grid.bars.length) {
+      bars = grid.bars;
+    } else if (grid.grid_text && w.GridParse && typeof w.GridParse.parse === 'function') {
+      try {
+        var parsed = w.GridParse.parse(grid.grid_text);
+        bars = parsed && parsed.bars;
+      } catch (e) { console.warn('[Bridge] parse grid_text failed:', e); }
+    }
+
+    if (bars && bars.length) s.measures = bars.length;
+    var seq = (bars || []).map(function (bar) {
+      var chords = Array.isArray(bar) ? bar : (bar && bar.chords) || [];
+      return { chords: chords, split: chords.length >= 2 };
+    });
+    s.seq = seq;
+    s.desc = (grid.title || grid.name || grid.id || '') + (grid.composer || grid.author ? ' — ' + (grid.composer || grid.author) : '');
+    return s;
+  }
+
+  function applyReaderState(s) {
+    try {
+      if (typeof w.updateHeader === 'function') w.updateHeader();
+      if (typeof w.renderMain === 'function') w.renderMain();
+      if (typeof w.renderTicker === 'function') w.renderTicker();
+    } catch (e) {
+      console.warn('[Bridge] render refresh:', e);
+    }
+  }
+
+  function getGridByIdLocal(id) {
     var a = getJSON(LIB_KEY, []);
-    for (var i=0;i<a.length;i++){
-      if (a[i] && a[i].id === id) return a[i];
-    }
-    return null;
+    return (a || []).find(function (x) { return x && x.id === id; }) || null;
   }
 
-  // Ajoute/écrase une grille dans la librairie locale
-  function upsertLocalGrid(obj){
-    var a = getJSON(LIB_KEY, []) || [];
-    var out = [];
-    var found = false;
-    for (var i=0;i<a.length;i++){
-      var it = a[i];
-      if (it && it.id === obj.id) { out.push(obj); found=true; }
-      else out.push(it);
-    }
-    if (!found) out.push(obj);
-    setJSON(LIB_KEY, out);
-    return obj;
-  }
-
-  // Charge dans le lecteur via l’état global attendu
-  function loadGridToReader(id){
-    return new Promise(function(resolve, reject){
-      try{
-        var g = getGridById(id);
-        if (!g) return reject(new Error('grid not found: '+id));
-
-        var s = w.state || w.__mp_state__ || {};
-        if (g.key)  s.key  = g.key;
-        if (g.mode) s.mode = g.mode;
-        if (g.tpb)  s.beatsPerBar = g.tpb;
-        if (g.bars && g.bars.length) s.measures = g.bars.length;
-
-        var bars = (g.bars||[]).map(function(bar){
-          var chords = Array.isArray(bar) ? bar : (bar && bar.chords) || [];
-          return { chords: chords, split: chords.length>=2 };
-        });
-
-        s.seq  = bars;
-        s.desc = (g.name||'') + (g.author ? ' — '+g.author : '');
-        w.state = s;
-
-        if (typeof w.updateHeader   === 'function') w.updateHeader();
-        if (typeof w.renderMain     === 'function') w.renderMain();
-        if (typeof w.renderTicker   === 'function') w.renderTicker();
-        if (typeof w.renderFretboardForChord === 'function') {
-          var first = (bars[0] && bars[0].chords && bars[0].chords[0]) || null;
-          if (first) w.renderFretboardForChord(first);
-        }
-
-        resolve(g);
-      }catch(err){ reject(err); }
+  // Charge d’abord la DB (API) puis fallback local/presets
+  function fetchGridFromAPI(id) {
+    return fetch('/api/library/' + encodeURIComponent(id)).then(function (r) {
+      if (r.status === 404) return null;
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }).catch(function (e) {
+      console.warn('[Bridge] API get one failed', e);
+      return null;
     });
   }
 
-  // Lecture via hash #grid=<id>
-  function currentHashGrid(){
+  function loadGridToReader(id) {
+    return new Promise(function (resolve, reject) {
+      (async function () {
+        try {
+          var g = await fetchGridFromAPI(id);
+          if (!g) {
+            // fallback local
+            g = getGridByIdLocal(id);
+          }
+          if (!g) {
+            // dernier recours: presets.json
+            try {
+              var p = await fetch('./presets.json').then(r => r.json());
+              g = (p || []).find(x => x && x.id === id) || null;
+            } catch (_) {}
+          }
+          if (!g) { reject(new Error('grid not found')); return; }
+
+          var s = toReaderState(g);
+          // expose pour le player
+          w.state = w.__mp_state__ = s;
+          applyReaderState(s);
+          resolve(g);
+        } catch (err) { reject(err); }
+      })();
+    });
+  }
+
+  function hashGrid() {
     var m = location.hash && location.hash.match(/grid=([^&]+)/);
     return m ? decodeURIComponent(m[1]) : null;
   }
-  function applyHashLoad(){
-    var id = currentHashGrid();
-    if (id) {
-      loadGridToReader(id).catch(function(e){ console.error(e); });
-    }
-  }
 
-  w.addEventListener('DOMContentLoaded', function(){
-    seedLibraryIfEmpty().then(applyHashLoad);
-  });
-  w.addEventListener('hashchange', applyHashLoad);
-
-  // Utilitaires pour la bibliothèque / éditeur
-  function playGrid(id){ location.hash = '#grid=' + encodeURIComponent(id); }
-  function openEditor(id){ location.href = 'editor.html?id=' + encodeURIComponent(id); }
-
-  // Expose API Bridge
   w.Bridge = {
     seedLibraryIfEmpty: seedLibraryIfEmpty,
-    getGridById: getGridById,
-    upsertLocalGrid: upsertLocalGrid,
     loadGridToReader: loadGridToReader,
-    playGrid: playGrid,
-    openEditor: openEditor,
-    fromDbRecord: fromDbRecord
+    getGridById: getGridByIdLocal
   };
 
+  w.addEventListener('DOMContentLoaded', function () {
+    seedLibraryIfEmpty().then(function () {
+      var id = hashGrid();
+      if (id) { loadGridToReader(id).catch(function (e) { console.error(e); }); }
+    });
+  });
+  w.addEventListener('hashchange', function () {
+    var id = hashGrid();
+    if (id) { loadGridToReader(id).catch(function (e) { console.error(e); }); }
+  });
 })(window);
