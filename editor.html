@@ -58,7 +58,6 @@
         <span class="badge">Mesures/ligne</span><select id="cols"><option>2</option><option>3</option><option selected>4</option><option>8</option></select>
         <button id="saveDb" class="badge">Enregistrer (DB)</button>
         <button id="saveLocal" class="badge">Enregistrer (local)</button>
-        <button id="playInReader" class="badge">Jouer dans le lecteur</button>
         <span id="keyBadge" class="badge">Tonalité : —</span>
       </div>
     </div>
@@ -112,7 +111,7 @@
   </section>
 </main>
 
-<!-- Dépendances: le parseur + le bridge -->
+<!-- Dépendances -->
 <script src="js/grid/parse.js"></script>
 <script src="js/grid/grid-bridge.js"></script>
 
@@ -120,137 +119,157 @@
 (function(){
   'use strict';
 
+  // --- Utils ---
   const $ = (id)=>document.getElementById(id);
   const params = new URLSearchParams(location.search);
   const itemId = params.get('id') || 'temp';
-
   const API = '/api/library';
+  const escapeHtml = s => (''+s)
+    .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 
-  function badge(cls,text){ return '<span class="badge '+(cls||'')+'">'+text+'</span>'; }
+  // --- Normalisation “compas” (corrigée, sans mesures fantômes) ---
+  function updateCompas(parse, repeats){
+    const colsN = parseInt(($('cols')||{}).value,10) || 4;
+    const container = $('compas'); if (!container) return;
+    container.innerHTML = '';
 
-// --- remplace TOUTE ta fonction updateCompas par ceci ---
-function updateCompas(parse, repeats){
-  const colsN = parseInt(document.getElementById('cols').value,10) || 4;
-  const container = document.getElementById('compas');
-  container.innerHTML = '';
+    // 1) Normalise mesures depuis parseur (bars) ou ancien format (measures/items)
+    let measures = [];
+    if (parse && Array.isArray(parse.bars)) {
+      measures = parse.bars.map(arr => ({ section: null, items: Array.isArray(arr) ? arr : [] }));
+    } else if (parse && Array.isArray(parse.measures)) {
+      measures = parse.measures.map(m => ({ section: m.section || null, items: Array.isArray(m.items)? m.items : [] }));
+    }
 
-  // Normalise les mesures depuis l'ancien ou le nouveau parseur
-  let measures = [];
-  if (parse && Array.isArray(parse.measures)) {
-    // ancien: [{section, items:[...]}]
-    measures = parse.measures.map(m => ({ section: m.section || null, items: m.items || [] }));
-  } else if (parse && Array.isArray(parse.bars)) {
-    // nouveau: bars:[ [chords...] ], sections:[{index,label}]
-    measures = parse.bars.map(arr => ({ section: null, items: Array.isArray(arr) ? arr : [] }));
-  }
+    // 2) Sections éventuelles
+    let sections = Array.isArray(parse && parse.sections) ? parse.sections.slice().sort((a,b)=>a.index-b.index) : [];
+    let nextSecIdx = 0; let nextSec = sections[0];
 
-  // Construit un mapping de sections si fourni par GridParse
-  let sections = Array.isArray(parse && parse.sections) ? parse.sections.slice().sort((a,b)=>a.index-b.index) : [];
-  let nextSecIdx = 0;
-  let nextSec = sections[0];
+    // 3) Reprises (L/R)
+    const repsL = new Set(), repsR = new Set();
+    const R = (repeats && typeof repeats === 'object' && !Array.isArray(repeats)) ? repeats : null;
+    const arrRep = Array.isArray(repeats) ? repeats : null;
+    if (arrRep){
+      arrRep.forEach(r=>{ if(r?.type==='L') repsL.add(r.pos); else if(r?.type==='R') repsR.add(r.pos); });
+    } else if (R){
+      (R.L||[]).forEach(p=>repsL.add(p)); (R.R||[]).forEach(p=>repsR.add(p));
+    } else if (parse && parse.repeats){
+      (parse.repeats.L||[]).forEach(p=>repsL.add(p)); (parse.repeats.R||[]).forEach(p=>repsR.add(p));
+    }
 
-  // Normalise les reprises: accepte tableau [{type,pos}] ou objet {L:[...],R:[...]}
-  let repsL = new Set(), repsR = new Set();
-  if (Array.isArray(repeats)) {
-    repeats.forEach(r => {
-      if (!r) return;
-      if (r.type === 'L') repsL.add(r.pos);
-      else if (r.type === 'R') repsR.add(r.pos);
+    // 4) Grille
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+    grid.style.setProperty('--cols', colsN);
+
+    let rowEl = null, cellCount = 0, mi = 0;
+    function newRow(){ rowEl = document.createElement('div'); rowEl.className = 'row'; grid.appendChild(rowEl); cellCount = 0; }
+
+    measures.forEach((m, idx) => {
+      // Section (depuis parse.sections)…
+      if (nextSec && (idx+1) === nextSec.index) {
+        const sec = document.createElement('div');
+        sec.textContent = 'Section ' + (nextSec.label || '');
+        sec.className = 'badge';
+        grid.appendChild(sec);
+        newRow();
+        nextSecIdx++; nextSec = sections[nextSecIdx];
+      }
+      // …ou depuis l’ancien parse (section sur la mesure)
+      else if (m.section && (idx === 0 || measures[idx-1].section !== m.section)) {
+        const sec = document.createElement('div');
+        sec.textContent = 'Section ' + m.section;
+        sec.className = 'badge';
+        grid.appendChild(sec);
+        newRow();
+      }
+
+      if (!rowEl || cellCount >= colsN) newRow();
+      mi++;
+
+      const cell = document.createElement('div'); cell.className = 'cell';
+      const list = document.createElement('div'); list.className = 'multi';
+
+      // Filtre les tokens vides, séparateurs et artefacts
+      const items = (m.items||[]).filter(ch => ch && ch!=='|' && ch!=='𝄆' && ch!=='𝄇');
+
+      if (items.length){
+        items.forEach(ch => { const d = document.createElement('div'); d.textContent = ch; list.appendChild(d); });
+      } else {
+        cell.classList.add('empty');
+        const d = document.createElement('div'); d.textContent = '—'; list.appendChild(d);
+      }
+
+      const num = document.createElement('small'); num.textContent = mi;
+      if (repsL.has(mi)) cell.classList.add('bracketL');
+      if (repsR.has(mi)) cell.classList.add('bracketR');
+
+      cell.appendChild(num); cell.appendChild(list);
+      rowEl.appendChild(cell); cellCount++;
     });
-  } else if (repeats && typeof repeats === 'object') {
-    (repeats.L || []).forEach(p => repsL.add(p));
-    (repeats.R || []).forEach(p => repsR.add(p));
-  } else if (parse && parse.repeats && typeof parse.repeats === 'object') {
-    (parse.repeats.L || []).forEach(p => repsL.add(p));
-    (parse.repeats.R || []).forEach(p => repsR.add(p));
+
+    container.appendChild(grid);
   }
 
-  const grid = document.createElement('div');
-  grid.className = 'grid';
-  grid.style.setProperty('--cols', colsN);
-
-  let rowEl = null, cellCount = 0, mi = 0;
-  function newRow(){ rowEl = document.createElement('div'); rowEl.className = 'row'; grid.appendChild(rowEl); cellCount = 0; }
-
-  measures.forEach((m, idx) => {
-    // Section depuis sections[index] (GridParse) OU m.section (ancien parse)
-    if (nextSec && (idx+1) === nextSec.index) {
-      const sec = document.createElement('div');
-      sec.textContent = 'Section ' + (nextSec.label || '');
-      sec.className = 'badge';
-      grid.appendChild(sec);
-      newRow();
-      nextSecIdx++; nextSec = sections[nextSecIdx];
-    } else if (m.section && (idx === 0 || measures[idx-1].section !== m.section)) {
-      const sec = document.createElement('div');
-      sec.textContent = 'Section ' + m.section;
-      sec.className = 'badge';
-      grid.appendChild(sec);
-      newRow();
+  // Génère un “texte normalisé” de secours à partir des bars si le parseur ne fournit pas html
+  function buildNormalizedText(res){
+    if (res && typeof res.html === 'string' && res.html.trim()) return res.html;
+    const bars = Array.isArray(res?.bars) ? res.bars : [];
+    if (!bars.length) return '';
+    const perLine = 4;
+    const lines = [];
+    for (let i=0; i<bars.length; i+=perLine){
+      const chunk = bars.slice(i,i+perLine).map(m=>{
+        const arr = Array.isArray(m) ? m : (m && m.chords) || [];
+        return arr.length ? arr.join(' ') : '—';
+      });
+      lines.push('| '+chunk.join(' | ')+' |');
     }
-
-    if (!rowEl || cellCount >= colsN) newRow();
-    mi++;
-
-    const cell = document.createElement('div');
-    cell.className = 'cell';
-
-    const list = document.createElement('div');
-    list.className = 'multi';
-
-    if (m.items && m.items.length) {
-      m.items.forEach(ch => { const d = document.createElement('div'); d.textContent = ch; list.appendChild(d); });
-    } else {
-      cell.classList.add('empty');
-      const d = document.createElement('div'); d.textContent = '—'; list.appendChild(d);
-    }
-
-    const num = document.createElement('small');
-    num.textContent = mi;
-
-    if (repsL.has(mi)) cell.classList.add('bracketL');
-    if (repsR.has(mi)) cell.classList.add('bracketR');
-
-    cell.appendChild(num);
-    cell.appendChild(list);
-    rowEl.appendChild(cell);
-    cellCount++;
-  });
-
-  container.appendChild(grid);
-}
+    return escapeHtml(lines.join('\n'));
+  }
 
   function normalizeAndPreview(){
-    const text = $('grid').value || '';
-    const res = window.GridParse.parse(text);
-    $('preview').innerHTML = res.html || '';
+    const text = ($('grid')?.value)||'';
+    const res = (window.GridParse && typeof window.GridParse.parse==='function')
+      ? window.GridParse.parse(text)
+      : { html: escapeHtml(text), bars: [], repeats: {L:[],R:[]}, sections: [] };
+
+    $('preview').innerHTML = buildNormalizedText(res);
     updateCompas(res, res.repeats||[]);
-    // Heuristique simple de tonalité (optionnel) — on affiche juste le nombre de mesures
-    $('keyBadge').textContent = 'Mesures : ' + (res.bars ? res.bars.length : 0);
+    // Petit indicateur : nombre de mesures détectées
+    $('keyBadge').textContent = 'Mesures : ' + (Array.isArray(res?.bars) ? res.bars.length : (Array.isArray(res?.measures)? res.measures.length : 0));
   }
 
-  document.addEventListener('click', (e)=>{
-    const btn = e.target.closest('[data-insert]');
-    if (btn){
+  // Insertion via la palette
+  document.addEventListener('click',(e)=>{
+    const btn = e.target.closest('[data-insert]'); if(btn){
       e.preventDefault();
-      const ta = $('grid');
-      ta.focus();
-      const s = ta.selectionStart, ed = ta.selectionEnd, v = ta.value;
-      const ins = btn.dataset.insert;
-      ta.value = v.slice(0,s) + ins + v.slice(ed);
-      const pos = (s||0) + ins.length;
-      ta.selectionStart = ta.selectionEnd = pos;
-      const d = btn.closest('details'); if (d) d.removeAttribute('open');
+      const ta=$('grid'); ta.focus();
+      const s=ta.selectionStart, ed=ta.selectionEnd, v=ta.value;
+      const ins=btn.dataset.insert;
+      ta.value=v.slice(0,s)+ins+v.slice(ed);
+      const pos=(s||0)+ins.length; ta.selectionStart=ta.selectionEnd=pos;
+      const d=btn.closest('details'); if(d) d.removeAttribute('open');
       normalizeAndPreview();
-      return;
     }
-    // Ferme les menus si click ailleurs
-    document.querySelectorAll('details[open]').forEach(d => { if(!d.contains(e.target)) d.removeAttribute('open'); });
+    document.querySelectorAll('details[open]').forEach(d=>{ if(!d.contains(e.target)) d.removeAttribute('open'); });
   });
-
   $('cols').onchange = normalizeAndPreview;
 
-  // Sauvegarde locale + DB (si dispo)
+  // Conversion DB -> objet bridge (pour le lecteur)
+  function toBridgeGrid(rec){
+    const parsed = (window.GridParse && window.GridParse.parse) ? window.GridParse.parse(rec.grid_text||'') : { bars: [] };
+    return {
+      id: rec.id,
+      name: rec.title || rec.id,
+      author: rec.composer || '',
+      key: rec.key || null,
+      mode: rec.mode || null,
+      tpb: rec.tpb || 4,
+      bars: Array.isArray(parsed.bars) ? parsed.bars : []
+    };
+  }
+
   function makeDbRecord(){
     return {
       id: $('id').value.trim(),
@@ -261,70 +280,68 @@ function updateCompas(parse, repeats){
     };
   }
 
+  // Save local
   $('saveLocal').onclick = function(){
     const obj = makeDbRecord();
-    if (!obj.id){ alert('ID requis'); return; }
+    if(!obj.id){ alert('ID requis'); return; }
     localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
-    // Met aussi à jour la librairie locale pour le lecteur
-    const gridObj = Bridge.upsertLocalGrid( (function(rec){ return (Bridge && Bridge.upsertLocalGrid)? Bridge.upsertLocalGrid.fromDbRecord? Bridge.upsertLocalGrid.fromDbRecord(rec) : null : null; })(obj) || (function(){ return (function convert(r){ return { id:r.id, name:r.title||r.id, author:r.composer||'', tpb:4, bars:(window.GridParse.parse(r.grid_text).bars||[]) }; })(obj); })() );
-    $('saveStatus').textContent = 'Enregistré (local) ✔';
-    setTimeout(()=>{ $('saveStatus').textContent=' '; }, 1200);
+    // miroir local pour le lecteur
+    if (window.Bridge && typeof Bridge.upsertLocalGrid==='function'){
+      Bridge.upsertLocalGrid(toBridgeGrid(obj));
+    }
+    $('saveStatus').textContent='Enregistré (local) ✔'; setTimeout(()=>{$('saveStatus').textContent=' ';},1200);
   };
 
+  // Save DB
   $('saveDb').onclick = async function(){
     const obj = makeDbRecord();
-    if (!obj.id){ alert('ID requis'); return; }
+    if(!obj.id){ alert('ID requis'); return; }
     try{
-      const r = await fetch(API + '/' + encodeURIComponent(obj.id), {
+      const r = await fetch(API+'/'+encodeURIComponent(obj.id),{
         method:'PATCH',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify(obj)
       });
-      if (!r.ok) {
-        const t = await r.text();
-        throw new Error('HTTP '+r.status+' '+t);
+      if(!r.ok){ const t=await r.text(); throw new Error('HTTP '+r.status+' '+t); }
+      if (window.Bridge && typeof Bridge.upsertLocalGrid==='function'){
+        Bridge.upsertLocalGrid(toBridgeGrid(obj));
       }
-      // Miroir local pour le lecteur
-      const gridObj = { id:obj.id, name:obj.title||obj.id, author:obj.composer||'', tpb:4, bars:(window.GridParse.parse(obj.grid_text).bars||[]) };
-      Bridge.upsertLocalGrid(gridObj);
-      $('saveStatus').textContent = 'Enregistré (DB) ✔';
-      setTimeout(()=>{ $('saveStatus').textContent=' '; }, 1200);
-    }catch(e){
-      alert(e.message);
-    }
+      $('saveStatus').textContent='Enregistré (DB) ✔'; setTimeout(()=>{$('saveStatus').textContent=' ';},1200);
+    }catch(e){ alert(e.message); }
   };
 
-  // Jouer dans le lecteur (sauve local pour être sûr)
-  $('playBtn').onclick = function(){
+  // Play (même handler pour le bouton entête et — si tu le remets — le bouton dans le formulaire)
+  function doPlay(){
     const obj = makeDbRecord();
-    if (!obj.id){ alert('ID requis'); return; }
-    const gridObj = { id:obj.id, name:obj.title||obj.id, author:obj.composer||'', tpb:4, bars:(window.GridParse.parse(obj.grid_text).bars||[]) };
-    Bridge.upsertLocalGrid(gridObj);
-    Bridge.playGrid(obj.id); // redirige via hash
-  };
+    if(!obj.id){ alert('ID requis'); return; }
+    // Sauvegarde locale rapide (pour le lecteur)
+    localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
+    if (window.Bridge && typeof Bridge.upsertLocalGrid==='function'){
+      Bridge.upsertLocalGrid(toBridgeGrid(obj));
+    }
+    if (window.Bridge && typeof Bridge.playGrid==='function'){
+      Bridge.playGrid(obj.id); // redirige vers index.html#grid=<id>&auto=1
+    } else {
+      location.href = 'index.html#grid=' + encodeURIComponent(obj.id) + '&auto=1';
+    }
+  }
+  $('playBtn').onclick = doPlay;
+  // si tu gardes un second bouton dans le DOM :
+  const playInReader = document.getElementById('playInReader');
+  if (playInReader) playInReader.onclick = doPlay;
 
-  // Boot : charge DB si présente, sinon initialise Blue Bossa
+  // Boot : charge l’item par ID (endpoint /api/library/:id), sinon fallback
   (async function boot(){
     const id = itemId;
-    // Essaie DB
     let rec = null;
     try{
-      const r = await fetch(API);
-      if (r.ok) {
-        const arr = await r.json();
-        rec = (arr||[]).find(x => x && x.id === id) || null;
-      }
+      const r = await fetch(API+'/'+encodeURIComponent(id));
+      if (r.ok) rec = await r.json();
     }catch(_){}
-
-    if (!rec) {
-      // fallback
+    if (!rec){
       rec = {
-        id: id,
-        title: 'Blue Bossa',
-        composer: 'Kenny Dorham',
-        style: 'Bossa',
-        grid_text:
-`A:
+        id, title:'Blue Bossa', composer:'Kenny Dorham', style:'Bossa',
+        grid_text:`A:
 𝄆 Cm7 | Fm7 | Dm7b5 G7 | Cm7 |
 | Cm7 | Fm7 | Dm7b5 G7 | Cm7 𝄇
 
@@ -337,33 +354,13 @@ A:
 D.C. al Fine`
       };
     }
-
     $('id').value     = rec.id || '';
     $('title').value  = rec.title || '';
     $('author').value = rec.composer || '';
     $('style').value  = rec.style || '';
     $('grid').value   = rec.grid_text || '';
-
     normalizeAndPreview();
   })();
-  
-  document.getElementById('playInReader').onclick = ()=>{
-  const id = (document.getElementById('id').value || '').trim();
-  if(!id){ alert('Définis un ID avant de jouer dans le lecteur.'); return; }
-  // Sauvegarde locale rapide pour s’assurer que le lecteur pourra retrouver la grille si elle n’est pas encore en DB
-  try{
-    const obj = {
-      id,
-      title: (document.getElementById('title').value||'').trim(),
-      composer: (document.getElementById('author').value||'').trim(),
-      style: (document.getElementById('style').value||'').trim(),
-      grid_text: (document.getElementById('grid').value||'')
-    };
-    localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
-  }catch(_){}
-
-  location.href = 'index.html#grid=' + encodeURIComponent(id) + '&auto=1';
-};
 
 })();
 </script>
