@@ -613,7 +613,8 @@
       var m = list[bi];
       var wrap = document.createElement('div'); wrap.className='measure'+(bi===state.curBar?' active':'');
       if (m.ghost) wrap.classList.add('ghost');
-      var num = document.createElement('div'); num.className='num'; num.textContent='M'+(((bi%state.seq.length)+1)); wrap.appendChild(num);
+      // SUPPRESSION DES NUMÉROS DE MESURE :
+      // var num = document.createElement('div'); num.className='num'; num.textContent='M'+(((bi%state.seq.length)+1)); wrap.appendChild(num);
       var grid = document.createElement('div'); grid.className = m.split ? 'halfgrid' : 'mgrid';
       for (var k=0;k<m.chords.length;k++){
         var sym = m.chords[k];
@@ -816,6 +817,72 @@
   var seq0 = (insp0.diatonic===false) ? insp0.base.slice() : toDiatonic(insp0, state.key, state.mode);
   buildFrom(seq0, insp0.desc);
   if (state.loopNext){ computeNextPreview(); }
+
+
+  // === API exposée pour recevoir une grille externe (bibliothèque / éditeur) ===
+  // Appelée par Bridge.loadGridToReader(id)
+  window.Reader = window.Reader || {};
+
+  window.Reader.applyGrid = function(g){
+    try{
+      // g.bars attendu = tableau de mesures, chaque mesure = tableau d'accords ["Cm7"] ou ["Dm7","G7"]
+      var rawBars = Array.isArray(g && g.bars) ? g.bars : [];
+      // normalise vers le format interne {chords:[...], split:boolean}
+      var seq = rawBars.map(function(b){
+        var arr = Array.isArray(b) ? b : (b && b.chords) || [];
+        return { chords: arr.slice(0,2), split: arr.length >= 2 };
+      });
+      if (!seq.length) return;
+
+      // Remplit le moteur
+      state.seq = seq;
+      state.chordSyms = [];
+      for (var i=0;i<seq.length;i++){
+        for (var k=0;k<seq[i].chords.length;k++) state.chordSyms.push(seq[i].chords[k]);
+      }
+
+      // Beats/mesure éventuel (4 par défaut)
+      if (g && g.tpb) {
+        var bpb = parseInt(g.tpb,10);
+        if (bpb && (bpb===3 || bpb===4)) {
+          state.beatsPerBar = bpb;
+          if (typeof tpmSel !== 'undefined' && tpmSel) tpmSel.value = String(bpb);
+        }
+      }
+
+      // Reset curseur & mode
+      state.curBar = 0;
+      state.curBeat = 0;
+      state.inspiration = 'external'; // évite les regénérations "inspiration"
+      state.desc = (g && (g.name || g.title)) ? 'Loaded: '+(g.name || g.title) : state.desc;
+
+      // UI
+      renderMain();
+      renderTicker();
+
+    }catch(e){
+      console.error('Reader.applyGrid error', e);
+    }
+  };
+
+  // Expose play/pause si Bridge veut auto-lancer
+  window.startPlay = function(){ start(); };
+  window.stopPlay  = function(){ stop();  };
+  window.togglePlay = function(force){
+    if (force===true) return start();
+    if (force===false) return stop();
+    return state.playing ? stop() : start();
+  };
+
+  // IMPORTANT : si l’URL a déjà #grid=…, on ne construit PAS la progression par défaut
+  var HAS_HASH_GRID = /(^|#|&)grid=/.test(location.hash||'');
+  if (!HAS_HASH_GRID){
+    // Boot par défaut (ton code actuel)
+    var insp0 = INSP["yours"]; state.inspiration="yours"; inspSel.value="yours";
+    var seq0 = (insp0.diatonic===false) ? insp0.base.slice() : toDiatonic(insp0, state.key, state.mode);
+    buildFrom(seq0, insp0.desc);
+    if (state.loopNext){ computeNextPreview(); }
+  }
 })();
 </script>
 
@@ -938,5 +1005,6 @@
   document.addEventListener('DOMContentLoaded', bootFromHash);
 })();
 </script>
+<script src="js/grid/reader-bridge-shim.js"></script>
 </body>
 </html>

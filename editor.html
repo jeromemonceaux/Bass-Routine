@@ -18,17 +18,9 @@
     textarea{width:100%;min-height:300px;white-space:pre;line-height:1.5}
     .badge{display:inline-block;border:1px solid #262a31;border-radius:999px;padding:2px 8px;font-size:11px;color:#c9ced6}
     .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-    details{position:relative}
-    details>summary{list-style:none;cursor:pointer}
+    details{position:relative} details>summary{list-style:none;cursor:pointer}
     .dropdown-menu{position:absolute;top:100%;left:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#0f1117;border:1px solid #262a31;padding:8px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;z-index:5}
     .chip{padding:6px 8px;border:1px solid #2a2f36;background:#10131a;border-radius:8px;cursor:pointer}
-
-    /* Aperçu (texte normalisé) */
-    #preview{white-space:pre-wrap;background:#0f1117;border:1px solid #262a31;border-radius:12px;padding:10px;min-height:140px;font-family:ui-monospace,Menlo,Consolas,monospace}
-    #preview .line{margin:2px 0}
-    #preview .section{display:inline-block;margin:2px 0 6px}
-    #preview .sep{opacity:.85}
-    #preview .dir{margin:0 4px 0 0}
   </style>
 </head>
 <body>
@@ -101,7 +93,7 @@
     <h2>Aperçus</h2>
     <div class="content">
       <div class="badge">Texte normalisé</div>
-      <div id="preview"></div>
+      <div id="preview" style="white-space:pre-wrap;background:#0f1117;border:1px solid #262a31;border-radius:12px;padding:10px;min-height:140px"></div>
     </div>
   </section>
 </main>
@@ -113,145 +105,41 @@
 <script>
 (function(){
   'use strict';
-
-  // --- Utils ---
   const $ = (id)=>document.getElementById(id);
-  const params = new URLSearchParams(location.search);
-  const itemId = params.get('id') || 'temp';
-  const API = '/api/library';
+  const params=new URLSearchParams(location.search);
+  const itemId=params.get('id')||'temp';
+  const API='/api/library';
 
-  // Directives (split + test exact) — pas de /g sur DIR_ONLY_RE (évite toute boucle liée à lastIndex)
-  const DIR_PAT = '(D\\.?S\\.?\\s*al\\s*Coda|D\\.?S\\.?\\s*al\\s*Fine|D\\.?C\\.?\\s*al\\s*Coda|D\\.?C\\.?\\s*al\\s*Fine|To\\s*Coda|Fine|Segno\\s*𝄋|Segno|Coda\\s*𝄌|Coda|𝄋|𝄌)';
-  const DIR_SPLIT_RE = new RegExp(DIR_PAT, 'gi');
-  const DIR_ONLY_RE  = new RegExp('^' + DIR_PAT + '$', 'i');
-
-  function sectionFromLine(line){
-    const m = String(line||'').match(/^\s*[\[(]?(Intro|A\d*|A|B\d*|B|C|D|Bridge|Solo|Solos|Refrain|Coda|Segno)\s*[:\])]?\s*$/i);
-    return m ? m[1] : null;
-  }
-  function escapeHtml(s){ return (''+s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
-
-  // Rendu texte (sans “compas”), en évitant les doubles symboles (ex: “𝄆 |”, “| 𝄇”, “||”)
-  function renderPreview(text){
-    const lines = String(text||'').split(/\r?\n/);
-    const out = [];
-
-    for (let raw of lines){
-      if (!raw.trim()){ out.push(''); continue; }
-
-      // Section → badge dédiée (PAS une mesure)
-      const sec = sectionFromLine(raw);
-      if (sec){
-        out.push('<div class="line section"><span class="badge">▶ ' + escapeHtml(sec.replace(/\d+/g,'')) + '</span></div>');
-        continue;
-      }
-
-      // Normalisation douce (espaces autour des séparateurs)
-      let line = raw.replace(/\s+/g,' ').trim();
-      line = line.replace(/𝄆/g,' 𝄆 ').replace(/𝄇/g,' 𝄇 ').replace(/\|/g,' | ');
-
-      // Découpe en gardant les directives
-      const chunks = line.split(DIR_SPLIT_RE);
-      const tokens = [];
-
-      // Construit des tokens: accords/texte, |, 𝄆, 𝄇, directives
-      for (const chunk of chunks){
-        const c = chunk && chunk.trim();
-        if (!c) continue;
-
-        if (DIR_ONLY_RE.test(c)) {
-          tokens.push({type:'dir',val:c});
-          continue;
-        }
-
-        // re-split sur symboles simples
-        const sub = c.split(/(\||𝄆|𝄇)/);
-        for (const t of sub){
-          const tt = t && t.trim();
-          if (!tt) continue;
-          if (tt==='|' || tt==='𝄆' || tt==='𝄇'){ tokens.push({type:'sym',val:tt}); }
-          else { tokens.push({type:'txt',val:tt}); }
-        }
-      }
-
-      // Filtrage “anti-doublons”:
-      // - supprime '|' si juste après '𝄆'
-      // - supprime '|' si juste avant '𝄇'
-      // - compresse les '|' successifs
-      const cleaned = [];
-      for (let i=0;i<tokens.length;i++){
-        const t = tokens[i];
-        const prev = cleaned[cleaned.length-1];
-        const next = tokens[i+1];
-
-        if (t.type==='sym' && t.val==='|') {
-          if (prev && prev.type==='sym' && prev.val==='𝄆') continue;
-          if (next && next.type==='sym' && next.val==='𝄇') continue;
-          if (prev && prev.type==='sym' && prev.val==='|') continue; // compresse ||
-        }
-        cleaned.push(t);
-      }
-
-      // Sortie HTML
-      const parts = cleaned.map(t=>{
-        if (t.type==='sym' && (t.val==='|' || t.val==='𝄆' || t.val==='𝄇')) return '<span class="sep">'+t.val+'</span>';
-        if (t.type==='dir') return '<span class="badge dir">'+escapeHtml(t.val)+'</span>';
-        return escapeHtml(t.val);
-      });
-
-      out.push('<div class="line">'+parts.join(' ')+'</div>');
-    }
-
-    return out.join('\n');
+  function sanitizePreviewText(s){
+    if (!s) return '';
+    return (GridParse && GridParse._cleanForPreview) ? GridParse._cleanForPreview(s) : String(s);
   }
 
-  function normalizeAndPreview(){
-    const text = ($('grid')?.value)||'';
-    let barsCount = 0;
-    try{
-      if (window.GridParse && typeof window.GridParse.parse==='function'){
-        const res = window.GridParse.parse(text);
-        barsCount = Array.isArray(res?.bars) ? res.bars.length : 0;
-      } else {
-        // fallback très approximatif
-        barsCount = (text.match(/\|/g)||[]).length;
-      }
-    }catch(_){}
-
-    $('preview').innerHTML = renderPreview(text);
-    $('keyBadge').textContent = 'Mesures : ' + barsCount;
+  function renderPreview(){
+    const txt=$('grid').value||'';
+    const res=(window.GridParse&&GridParse.parse)?GridParse.parse(txt):{bars:[],html:txt};
+    $('preview').textContent = sanitizePreviewText(res.html||txt);
+    $('keyBadge').textContent = 'Mesures : '+ (Array.isArray(res.bars)?res.bars.length:0);
   }
 
-  // Insertion via la palette
+  // Palette insertion
   document.addEventListener('click',(e)=>{
-    const btn = e.target.closest('[data-insert]'); if(btn){
-      e.preventDefault();
-      const ta=$('grid'); ta.focus();
-      const s=ta.selectionStart, ed=ta.selectionEnd, v=ta.value;
-      const ins=btn.dataset.insert;
-      ta.value=v.slice(0,s)+ins+v.slice(ed);
-      const pos=(s||0)+ins.length; ta.selectionStart=ta.selectionEnd=pos;
-      const d=btn.closest('details'); if(d) d.removeAttribute('open');
-      normalizeAndPreview();
-    }
-    document.querySelectorAll('details[open]').forEach(d=>{ if(!d.contains(e.target)) d.removeAttribute('open'); });
+    const b=e.target.closest('[data-insert]'); if(!b) return;
+    e.preventDefault();
+    const ta=$('grid'); ta.focus();
+    const s=ta.selectionStart, ed=ta.selectionEnd, v=ta.value;
+    const ins=b.dataset.insert;
+    ta.value=v.slice(0,s)+ins+v.slice(ed);
+    const pos=(s||0)+ins.length; ta.selectionStart=ta.selectionEnd=pos;
+    const d=b.closest('details'); if(d) d.removeAttribute('open');
+    renderPreview();
   });
 
-  // Conversion DB -> format standard (pour Bridge / lecteur)
   function toBridgeGrid(rec){
-    const parsed = (window.GridParse && window.GridParse.parse) ? window.GridParse.parse(rec.grid_text||'') : { bars: [] };
-    return {
-      id: rec.id,
-      name: rec.title || rec.id,
-      author: rec.composer || '',
-      key: rec.key || null,
-      mode: rec.mode || null,
-      tpb: rec.tpb || 4,
-      bars: Array.isArray(parsed.bars) ? parsed.bars : []   // format: [ [ "Cm7" ], [ "F7" ], ... ]
-    };
+    const parsed=(window.GridParse&&GridParse.parse)?GridParse.parse(rec.grid_text||''):{bars:[]};
+    return { id:rec.id, name:rec.title||rec.id, author:rec.composer||'', tpb:4, bars:parsed.bars||[], grid_text:rec.grid_text||'' };
   }
-
-  function makeDbRecord(){
+  function makeRec(){
     return {
       id: $('id').value.trim(),
       title: $('title').value.trim(),
@@ -261,69 +149,42 @@
     };
   }
 
-  // Save local (et miroir lecteur)
-  $('saveLocal').onclick = function(){
-    const obj = makeDbRecord();
-    if(!obj.id){ alert('ID requis'); return; }
+  $('saveLocal').onclick=function(){
+    const obj=makeRec(); if(!obj.id){ alert('ID requis'); return; }
     localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
-    if (window.Bridge && typeof Bridge.upsertLocalGrid==='function'){
-      Bridge.upsertLocalGrid(toBridgeGrid(obj));
-    }
+    if (window.Bridge && Bridge.upsertLocalGrid) Bridge.upsertLocalGrid(toBridgeGrid(obj));
     $('saveStatus').textContent='Enregistré (local) ✔'; setTimeout(()=>{$('saveStatus').textContent=' ';},1200);
   };
 
-  // Save DB (et miroir lecteur)
-  $('saveDb').onclick = async function(){
-    const obj = makeDbRecord();
-    if(!obj.id){ alert('ID requis'); return; }
+  $('saveDb').onclick=async function(){
+    const obj=makeRec(); if(!obj.id){ alert('ID requis'); return; }
     try{
-      const r = await fetch(API+'/'+encodeURIComponent(obj.id),{
-        method:'PATCH',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify(obj)
-      });
+      const r=await fetch(API+'/'+encodeURIComponent(obj.id),{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)});
       if(!r.ok){ const t=await r.text(); throw new Error('HTTP '+r.status+' '+t); }
-      if (window.Bridge && typeof Bridge.upsertLocalGrid==='function'){
-        Bridge.upsertLocalGrid(toBridgeGrid(obj));
-      }
+      if (window.Bridge && Bridge.upsertLocalGrid) Bridge.upsertLocalGrid(toBridgeGrid(obj));
       $('saveStatus').textContent='Enregistré (DB) ✔'; setTimeout(()=>{$('saveStatus').textContent=' ';},1200);
     }catch(e){ alert(e.message); }
   };
 
-  // Jouer dans le player : on prépare la grille pour le ticker et on redirige
-  function doPlay(){
-    const obj = makeDbRecord();
-    if(!obj.id){ alert('ID requis'); return; }
-
-    // 1) miroir local brut (pour sécurité)
+  function playNow(){
+    const obj=makeRec(); if(!obj.id){ alert('ID requis'); return; }
+    // miroir local au cas où
     localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
-
-    // 2) upsert format standard pour le lecteur (ticker)
-    if (window.Bridge && typeof Bridge.upsertLocalGrid==='function'){
-      Bridge.upsertLocalGrid(toBridgeGrid(obj));
-    }
-
-    // 3) ouverture du player avec l’ID (le Bridge côté lecteur chargera et poussera dans le ticker)
-    if (window.Bridge && typeof Bridge.playGrid==='function'){
-      Bridge.playGrid(obj.id); // redirige vers index.html#grid=<id>&auto=1 (selon ton Bridge)
-    } else {
-      location.href = 'index.html#grid=' + encodeURIComponent(obj.id) + '&auto=1';
-    }
+    if (window.Bridge && Bridge.upsertLocalGrid) Bridge.upsertLocalGrid(toBridgeGrid(obj));
+    if (window.Bridge && Bridge.playGrid) Bridge.playGrid(obj.id);
+    else location.href='index.html#grid='+encodeURIComponent(obj.id)+'&auto=1';
   }
-  $('playBtn').onclick = doPlay;
+  $('playBtn').onclick=playNow;
 
-  // Boot : charge /api/library/:id si dispo, sinon fallback d’exemple
-  (async function boot(){
-    const id = itemId;
-    let rec = null;
+  // Boot
+  (async function(){
+    let rec=null;
     try{
-      const r = await fetch(API+'/'+encodeURIComponent(id));
-      if (r.ok) rec = await r.json();
+      const r=await fetch(API+'/'+encodeURIComponent(itemId));
+      if(r.ok) rec=await r.json();
     }catch(_){}
-
-    if (!rec){
-      rec = {
-        id, title:'Blue Bossa', composer:'Kenny Dorham', style:'Bossa',
+    if(!rec){
+      rec={ id:itemId, title:'Blue Bossa', composer:'Kenny Dorham', style:'Bossa',
         grid_text:`A:
 𝄆 Cm7 | Fm7 | Dm7b5 G7 | Cm7 |
 | Cm7 | Fm7 | Dm7b5 G7 | Cm7 𝄇
@@ -334,18 +195,11 @@ B: (Bridge)
 A:
 | Cm7 | Fm7 | Dm7b5 G7 | Cm7 | Fine
 
-D.C. al Fine`
-      };
+D.C. al Fine` };
     }
-
-    $('id').value     = rec.id || '';
-    $('title').value  = rec.title || '';
-    $('author').value = rec.composer || '';
-    $('style').value  = rec.style || '';
-    $('grid').value   = rec.grid_text || '';
-    normalizeAndPreview();
+    $('id').value=rec.id||''; $('title').value=rec.title||''; $('author').value=rec.composer||''; $('style').value=rec.style||''; $('grid').value=rec.grid_text||'';
+    renderPreview();
   })();
-
 })();
 </script>
 </body>

@@ -1,71 +1,93 @@
-(function(w){
-  function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+/* js/grid/parse.js
+   Parseur minimal pour:
+   - ignorer les lignes de section (A:, B:, Intro:, Bridge:…)
+   - ignorer les directives (D.S., D.C., Segno, Coda, 𝄆, 𝄇, Fine…)
+   - extraire des mesures (1 ou 2 accords/mesure)
+   - fournir un html de prévisualisation "nettoyé" (sans "𝄆 |", "| 𝄇", "||")
+*/
+(function(){
+  const SECTION_RE = /^\s*[\[(]?(Intro|A\d*|A|B\d*|B|C|D|Bridge|Solo|Solos|Refrain|Coda|Segno)\s*[:\])]?\s*$/i;
+  const DIR_RE = /(D\.?S\.?\s*al\s*Coda|D\.?S\.?\s*al\s*Fine|D\.?C\.?\s*al\s*Coda|D\.?C\.?\s*al\s*Fine|To\s*Coda|Fine|Segno\s*𝄋|Segno|Coda\s*𝄌|Coda|𝄋|𝄌)/i;
 
-  // Split a line into tokens and collect chords per bar.
-  function parseLine(line){
-    var bars=[], cur=[];
-    var tokens = String(line||'').split('|');
-    for (var i=0;i<tokens.length;i++){
-      var t = tokens[i].trim();
-      if (!t){ // empty from leading/trailing ||
-        // commit only if cur has content
-        if (cur.length){ bars.push(cur); cur=[]; }
-        continue;
+  function cleanForPreview(str){
+    if (!str) return '';
+    let s = String(str);
+    // Espaces uniformes autour de '|'
+    s = s.replace(/\s*\|\s*/g,' | ');
+    // Supprimer les combos indésirables : "𝄆 |" et "| 𝄇"
+    s = s.replace(/𝄆\s*\|\s*/g,'𝄆 ');
+    s = s.replace(/\s*\|\s*𝄇/g,' 𝄇');
+    // Nettoyer les pipes doublés "||" -> "| |" (mesures vides explicites)
+    s = s.replace(/\|\|/g,'| |');
+    // Espaces multiples → simple
+    s = s.replace(/\s{2,}/g,' ').trim();
+    return s;
+  }
+
+  function tokenizeMeasureText(t){
+    // t = "Dm7 G7" => ["Dm7","G7"]
+    const raw = String(t||'').trim();
+    if (!raw) return [];
+    const parts = raw.split(/\s+/).filter(Boolean);
+    // Coller "(...)" au symbole précédent si présent
+    const out = [];
+    for (const p of parts){
+      if (/^\(.*\)$/.test(p) && out.length){
+        out[out.length-1] += p;
+      } else {
+        out.push(p);
       }
-      var parts = t.split(/\s+/).filter(Boolean);
-      for (var j=0;j<parts.length;j++){
-        var p = parts[j].trim();
-        if (!p) continue;
-        if (/^𝄆$|^𝄇$/.test(p)){ continue; }
-        cur.push(p);
-      }
-      if (cur.length){ bars.push(cur); cur=[]; }
     }
-    if (cur.length){ bars.push(cur); }
-    return bars;
+    return out;
   }
 
   function parse(text){
-    var lines = String(text||'').split(/\r?\n/);
-    var allBars=[]; var htmlLines=[]; var repeats=[]; var measureIndex=0;
-    for (var li=0; li<lines.length; li++){
-      var raw = lines[li];
-      if (!raw.trim()){ htmlLines.push(''); continue; }
-      var line = raw.replace(/\s+/g,' ').trim();
-      // Normalize double bars / repeats to have separators around them
-      line = line.replace(/𝄆/g,' 𝄆 ').replace(/𝄇/g,' 𝄇 ');
-      var bars = parseLine(line);
-      // Build HTML preview for this line
-      var preview = [];
-      for (var bi=0; bi<bars.length; bi++){
-        var bar = bars[bi];
-        measureIndex++;
-        var content = bar.length? esc(bar.join(' ')) : '—';
-        preview.push('| '+content+' ');
-        // repeats detection around measure boundaries
+    const lines = String(text||'').split(/\r?\n/);
+
+    const bars = [];           // ex: [ ["Cm7"], ["Fm7"], ["Dm7b5","G7"], ... ]
+    const previewLines = [];   // texte normalisé pour <div id="preview">
+
+    for (let raw of lines){
+      const line = String(raw||'').trim();
+      if (!line){ previewLines.push(''); continue; }
+
+      // Sections / titres de parties → apparaissent en preview, pas en mesures
+      if (SECTION_RE.test(line)){
+        previewLines.push(cleanForPreview(line));
+        continue;
       }
-      if (preview.length) preview.push('|');
-      allBars = allBars.concat(bars);
-      htmlLines.push(preview.join(''));
+
+      // Lignes purement directives (ou mélange accords+directives) :
+      // On les laisse apparaître dans la preview (nettoyées), mais
+      // on filtre les directives du côté "bars".
+      const forPreview = cleanForPreview(line);
+      previewLines.push(forPreview);
+
+      // Extraction des mesures : on coupe sur "|"
+      const cut = forPreview.split('|').map(s => s.trim());
+      for (let seg of cut){
+        if (!seg) continue;
+        // Ignorer segments qui sont juste des symboles/directives
+        if (DIR_RE.test(seg) || seg==='𝄆' || seg==='𝄇') continue;
+        if (SECTION_RE.test(seg)) continue;           // au cas où un "A:" traîne dans la ligne
+        if (/^\s*[:;]+$/.test(seg)) continue;
+
+        // À ce stade, seg est une mesure candidate: "Dm7", "Dm7 G7", "CΔ (♭9♯11)"...
+        const chords = tokenizeMeasureText(seg).filter(tok=>{
+          // Filtrer token si c'est une directive isolée
+          if (DIR_RE.test(tok) || tok==='𝄆' || tok==='𝄇') return false;
+          return true;
+        });
+
+        if (!chords.length) continue;
+        // On garde max 2 accords / mesure pour un split propre
+        bars.push(chords.slice(0,2));
+      }
     }
-    // Remove accidental empties (shouldn't have any, but just in case)
-    allBars = allBars.filter(function(b){ return Array.isArray(b) && b.length; });
-    return { html: htmlLines.join('\n'), bars: allBars, repeats: repeats };
+
+    const html = previewLines.join('\n');
+    return { bars, html, repeats:{L:[],R:[]}, sections:[] };
   }
 
-  function toGridText(bars, perLine){
-    perLine = perLine || 4;
-    var out=[], buf=[];
-    for (var i=0;i<(bars||[]).length;i++){
-      var cell = (Array.isArray(bars[i]) && bars[i].length)? bars[i].join(' ') : '—';
-      buf.push(cell);
-      if (buf.length>=perLine){
-        out.push('| '+buf.join(' | ')+' |'); buf=[];
-      }
-    }
-    if (buf.length) out.push('| '+buf.join(' | ')+' |');
-    return out.join('\n');
-  }
-
-  w.GridParse = { parse: parse, toGridText: toGridText };
-})(window);
+  window.GridParse = { parse, _cleanForPreview: cleanForPreview };
+})();
