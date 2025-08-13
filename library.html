@@ -24,10 +24,19 @@
 <header>
   <div class="wrap">
     <div class="title">Bibliothèque</div>
-    <input id="q" class="chip" type="text" placeholder="Rechercher…">
-    <label class="badge"><input id="onlyGrid" type="checkbox" style="margin-right:6px">grille uniquement</label>
+    <input id="q" class="chip" type="text" placeholder="Rechercher (titre, auteur, id)…">
+    <label class="badge"><input id="onlyGrid" type="checkbox" style="margin-right:6px">avec grille uniquement</label>
     <label class="badge"><input id="onlyMeta" type="checkbox" style="margin-right:6px">métadonnées seulement</label>
-    <a class="badge" href="index.html">Lecteur</a>
+    <a id="readerLink" class="badge" href="index.html">Lecteur</a>
+    <details class="admin">
+      <summary class="badge">Admin ▾</summary>
+      <div class="adminmenu">
+        <button id="seedBtn" class="badge">Seed</button>
+        <button id="resyncBtn" class="badge">Resync</button>
+        <button id="backfillBtn" class="badge">Backfill</button>
+        <button id="wipeBtn" class="badge" style="border-color:#7a2f2f;color:#ffb3b3">Vider</button>
+      </div>
+    </details>
   </div>
 </header>
 <main>
@@ -37,50 +46,124 @@
 <script>
 const $=s=>document.querySelector(s);
 const API='/api/library';
-const icons={ play:'▶', edit:'✎' };
+const icons = {
+  play: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
+  edit: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41L18.37 3.29a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>',
+};
+function badge(text){ return '<span class="badge">'+text+'</span>'; }
 
-let LIB=[]; let Q=''; let FG=false; let FM=false;
+let LIB=[]; let Q=''; let FILTER_GRID=false; let FILTER_META=false;
 
-function match(it){
-  const has = !!(it.grid_text && it.grid_text.trim());
-  if (Q){
-    const hay=((it.title||'')+' '+(it.composer||'')+' '+(it.id||'')).toLowerCase();
-    if (!hay.includes(Q)) return false;
-  }
-  if (FG && !has) return false;
-  if (FM && has) return false;
+function saveFilters(){
+  try{ localStorage.setItem('lib_filters', JSON.stringify({ q:($('#q')?.value)||'', onlyGrid:$('#onlyGrid')?.checked||false, onlyMeta:$('#onlyMeta')?.checked||false })); }catch(_){}
+}
+function loadFilters(){
+  try{
+    const f = JSON.parse(localStorage.getItem('lib_filters')||'{}');
+    if ('q' in f) { $('#q').value = f.q; Q = (f.q||'').toLowerCase(); }
+    if ('onlyGrid' in f) { $('#onlyGrid').checked = !!f.onlyGrid; FILTER_GRID = !!f.onlyGrid; }
+    if ('onlyMeta' in f) { $('#onlyMeta').checked = !!f.onlyMeta; FILTER_META = !!f.onlyMeta; }
+  }catch(_){}
+}
+function refreshReaderLink(){
+  try{
+    const s = JSON.parse(localStorage.getItem('mp_settings_v3')||'{}');
+    const id = s && s.lastGridId;
+    const a = $('#readerLink');
+    if (a) a.href = id ? ('index.html#grid='+encodeURIComponent(id)) : 'index.html';
+  }catch(_){}
+}
+function onFilters(){
+  Q = ($('#q')?.value||'').toLowerCase();
+  FILTER_GRID = $('#onlyGrid')?.checked || false;
+  FILTER_META = $('#onlyMeta')?.checked || false;
+  saveFilters();
+  render();
+}
+['input','change'].forEach(ev=>{
+  $('#q')?.addEventListener(ev, onFilters);
+  $('#onlyGrid')?.addEventListener(ev, onFilters);
+  $('#onlyMeta')?.addEventListener(ev, onFilters);
+});
+
+async function loadLibrary(){
+  const r = await fetch(API);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  LIB = await r.json();
+  render();
+}
+
+function matches(it){
+  const hay = (it.title||'')+' '+(it.composer||'')+' '+(it.id||'');
+  if (Q && hay.toLowerCase().indexOf(Q)===-1) return false;
+  const hasText = !!(it.grid_text && it.grid_text.trim());
+  if (FILTER_GRID && !hasText) return false;
+  if (FILTER_META && hasText) return false;
   return true;
 }
-function render(){
-  const el=$('#lib-list'); if(!el) return;
-  el.innerHTML=(LIB||[]).filter(match).map(it=>{
-    const has = !!(it.grid_text && it.grid_text.trim());
-    return `<div class="row">
-      <div>
-        <div style="font-weight:700">${(it.title||it.id)}</div>
-        <div class="muted">${it.composer||''}</div>
-      </div>
-      <div class="actions">
-        <button class="iconbtn" data-play="${it.id}" title="Jouer">${icons.play}</button>
-        <button class="iconbtn" data-edit="${it.id}" title="Éditer">${icons.edit}</button>
-      </div>
-    </div>`;
-  }).join('') || '<div class="badge muted">Aucune grille</div>';
-}
-async function loadLib(){
-  const r=await fetch(API); if(!r.ok) throw new Error('HTTP '+r.status);
-  LIB=await r.json(); render();
-}
-document.addEventListener('click',(e)=>{
-  const p=e.target.closest('[data-play]'); const ed=e.target.closest('[data-edit]');
-  if(p){ location.href='index.html#grid='+encodeURIComponent(p.getAttribute('data-play'))+'&auto=1'; }
-  if(ed){ location.href='editor.html?id='+encodeURIComponent(ed.getAttribute('data-edit')); }
-});
-$('#q').addEventListener('input',()=>{ Q=$('#q').value.toLowerCase(); render(); });
-$('#onlyGrid').addEventListener('change',()=>{ FG=$('#onlyGrid').checked; render(); });
-$('#onlyMeta').addEventListener('change',()=>{ FM=$('#onlyMeta').checked; render(); });
 
-loadLib().catch(e=>{ console.error(e); $('#lib-list').innerHTML='<div class="badge muted">Erreur: '+e.message+'</div>'; });
+function render(){
+  const el = $('#lib-list');
+  if (!el){ console.warn('lib-list introuvable'); return; }
+  const rows = (LIB||[]).filter(matches).map(it=>{
+    const hasText = !!(it.grid_text && it.grid_text.trim());
+    const meta = [
+      badge(it.composer||'Anonyme'),
+      badge(it.style||'—'),
+      hasText ? '<span class="badge" style="border-color:#2d5135;background:#0d1410;color:#a6f3b9">grille</span>'
+              : '<span class="badge" style="border-color:#51422d;background:#14110d;color:#f3d3a6">métadonnées</span>'
+    ].join(' ');
+    return `
+      <div class="row">
+        <div>
+          <div style="font-weight:700">${(it.title||it.id||'')}</div>
+          <div class="meta">${meta}</div>
+        </div>
+        <div class="actions">
+          <button class="iconbtn" title="Jouer" data-play="${it.id}">${icons.play}</button>
+          <button class="iconbtn" title="Éditer" data-edit="${it.id}">${icons.edit}</button>
+        </div>
+      </div>`;
+  }).join('');
+  el.innerHTML = rows || '<div class="badge muted">Aucune grille</div>';
+}
+
+document.addEventListener('click', (e)=>{
+  const p = e.target.closest('[data-play]');
+  const ed = e.target.closest('[data-edit]');
+  if (p){
+    const id = p.getAttribute('data-play');
+    try{ localStorage.setItem('mp_settings_v3', JSON.stringify({ lastGridId:id })); }catch(_){}
+    location.href = 'index.html#grid=' + encodeURIComponent(id);
+  }
+  if (ed){
+    const id = ed.getAttribute('data-edit');
+    location.href = 'editor.html?id=' + encodeURIComponent(id);
+  }
+});
+
+async function call(path, confirmText){
+  if (confirmText && !confirm(confirmText)) return;
+  const btn = event?.target;
+  if (btn){ btn.disabled=true; btn.textContent='…'; }
+  try{
+    const r = await fetch(API+path, {method:'POST'});
+    const data = await r.json().catch(_=>({}));
+    if (!r.ok) throw new Error(data.error || ('HTTP '+r.status));
+    await loadLibrary();
+    alert(JSON.stringify(data, null, 2));
+  }catch(e){ alert(e.message); }
+  finally{ if (btn){ btn.disabled=false; btn.textContent=btn.getAttribute('id')==='wipeBtn'?'Vider':btn.textContent='OK'; } }
+}
+
+$('#seedBtn')?.addEventListener('click', ()=>call('/seed'));
+$('#resyncBtn')?.addEventListener('click', ()=>call('/resync-seed'));
+$('#backfillBtn')?.addEventListener('click', ()=>call('/backfill'));
+$('#wipeBtn')?.addEventListener('click', ()=>call('/wipe', 'Confirmer la suppression de toutes les grilles ?'));
+
+loadFilters();
+refreshReaderLink();
+loadLibrary().catch(e=>{ console.error(e); $('#lib-list') && ($('#lib-list').innerHTML='<div class="badge muted">Erreur : '+e.message+'</div>'); });
 </script>
 </body>
 </html>

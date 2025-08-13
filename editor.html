@@ -98,48 +98,85 @@
   </section>
 </main>
 
-<!-- Dépendances -->
 <script src="js/grid/parse.js"></script>
 <script src="js/grid/grid-bridge.js"></script>
-
 <script>
 (function(){
   'use strict';
   const $ = (id)=>document.getElementById(id);
-  const params=new URLSearchParams(location.search);
-  const itemId=params.get('id')||'temp';
-  const API='/api/library';
+  const params = new URLSearchParams(location.search);
+  const itemId = params.get('id') || 'temp';
+  const API = '/api/library';
 
-  function sanitizePreviewText(s){
-    if (!s) return '';
-    return (GridParse && GridParse._cleanForPreview) ? GridParse._cleanForPreview(s) : String(s);
+  const escapeHtml = s => (''+s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+
+  function parseAll(txt){
+    if (window.GridParse && typeof window.GridParse.parse==='function'){
+      try{ return window.GridParse.parse(String(txt||'')); }catch(_){}
+    }
+    // Fallback ultra simple (pas de symboles dans l'aperçu)
+    const bars = [];
+    const lines = String(txt||'').split(/\r?\n/);
+    for (let raw of lines){
+      const line = raw.trim();
+      if (!line) continue;
+      if (/^\s*[A-Za-z].*:\s*$/.test(line)) continue; // section
+      const parts = line.split('|').map(s=>s.trim()).filter(Boolean);
+      for (const p of parts){
+        if (/^(𝄆|𝄇|Fine|To Coda|Segno|Coda|D\.?S\.?|D\.?C\.?)/i.test(p)) continue;
+        const chords = p.split(/\s+/).filter(Boolean);
+        if (chords.length) bars.push(chords);
+      }
+    }
+    return { bars, sections:[], repeats:{L:[],R:[]}, html:'' };
   }
 
-  function renderPreview(){
-    const txt=$('grid').value||'';
-    const res=(window.GridParse&&GridParse.parse)?GridParse.parse(txt):{bars:[],html:txt};
-    $('preview').textContent = sanitizePreviewText(res.html||txt);
-    $('keyBadge').textContent = 'Mesures : '+ (Array.isArray(res.bars)?res.bars.length:0);
+  function buildNormalizedText(res){
+    // Si le parseur fournit déjà un HTML correct, on l'utilise
+    if (res && typeof res.html==='string' && res.html.trim()) return res.html;
+    // Sinon on fabrique proprement sans " | | "
+    const bars = Array.isArray(res?.bars) ? res.bars : [];
+    if (!bars.length) return '';
+    const perLine = 4;
+    const out = [];
+    for (let i=0;i<bars.length;i+=perLine){
+      const chunk = bars.slice(i,i+perLine).map(m=>{
+        const arr = Array.isArray(m) ? m : (m && m.chords) || [];
+        return arr.join(' ');
+      }).filter(s=>s && s.trim());
+      if (chunk.length) out.push('| '+chunk.join(' | ')+' |');
+    }
+    return escapeHtml(out.join('\n'));
   }
 
-  // Palette insertion
+  function normalizeAndPreview(){
+    const text = ($('grid')?.value)||'';
+    const res = parseAll(text);
+    $('preview').innerHTML = buildNormalizedText(res);
+    $('keyBadge').textContent = 'Mesures : ' + (Array.isArray(res?.bars) ? res.bars.length : 0);
+  }
+
   document.addEventListener('click',(e)=>{
-    const b=e.target.closest('[data-insert]'); if(!b) return;
-    e.preventDefault();
-    const ta=$('grid'); ta.focus();
-    const s=ta.selectionStart, ed=ta.selectionEnd, v=ta.value;
-    const ins=b.dataset.insert;
-    ta.value=v.slice(0,s)+ins+v.slice(ed);
-    const pos=(s||0)+ins.length; ta.selectionStart=ta.selectionEnd=pos;
-    const d=b.closest('details'); if(d) d.removeAttribute('open');
-    renderPreview();
+    const btn = e.target.closest('[data-insert]'); if(btn){
+      e.preventDefault();
+      const ta=$('grid'); ta.focus();
+      const s=ta.selectionStart, ed=ta.selectionEnd, v=ta.value;
+      const ins=btn.dataset.insert;
+      ta.value=v.slice(0,s)+ins+v.slice(ed);
+      const pos=(s||0)+ins.length; ta.selectionStart=ta.selectionEnd=pos;
+      const d=btn.closest('details'); if(d) d.removeAttribute('open');
+      normalizeAndPreview();
+    }
+    document.querySelectorAll('details[open]').forEach(d=>{ if(!d.contains(e.target)) d.removeAttribute('open'); });
   });
 
   function toBridgeGrid(rec){
-    const parsed=(window.GridParse&&GridParse.parse)?GridParse.parse(rec.grid_text||''):{bars:[]};
-    return { id:rec.id, name:rec.title||rec.id, author:rec.composer||'', tpb:4, bars:parsed.bars||[], grid_text:rec.grid_text||'' };
+    const res = parseAll(rec.grid_text||'');
+    return { id:rec.id, name:rec.title||rec.id, title:rec.title||rec.id, author:rec.composer||'', tpb:4,
+             bars: res.bars||[], sections: res.sections||[], repeats: res.repeats||{L:[],R:[]} };
   }
-  function makeRec(){
+
+  function makeDbRecord(){
     return {
       id: $('id').value.trim(),
       title: $('title').value.trim(),
@@ -149,43 +186,58 @@
     };
   }
 
-  $('saveLocal').onclick=function(){
-    const obj=makeRec(); if(!obj.id){ alert('ID requis'); return; }
+  $('saveLocal').onclick = function(){
+    const obj = makeDbRecord();
+    if(!obj.id){ alert('ID requis'); return; }
     localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
-    if (window.Bridge && Bridge.upsertLocalGrid) Bridge.upsertLocalGrid(toBridgeGrid(obj));
+    if (window.Bridge && typeof Bridge.upsertLocalGrid==='function'){
+      Bridge.upsertLocalGrid(toBridgeGrid(obj));
+    }
     $('saveStatus').textContent='Enregistré (local) ✔'; setTimeout(()=>{$('saveStatus').textContent=' ';},1200);
   };
 
-  $('saveDb').onclick=async function(){
-    const obj=makeRec(); if(!obj.id){ alert('ID requis'); return; }
+  $('saveDb').onclick = async function(){
+    const obj = makeDbRecord();
+    if(!obj.id){ alert('ID requis'); return; }
     try{
-      const r=await fetch(API+'/'+encodeURIComponent(obj.id),{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)});
+      const r = await fetch(API+'/'+encodeURIComponent(obj.id),{
+        method:'PATCH',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(obj)
+      });
       if(!r.ok){ const t=await r.text(); throw new Error('HTTP '+r.status+' '+t); }
-      if (window.Bridge && Bridge.upsertLocalGrid) Bridge.upsertLocalGrid(toBridgeGrid(obj));
+      if (window.Bridge && typeof Bridge.upsertLocalGrid==='function'){
+        Bridge.upsertLocalGrid(toBridgeGrid(obj));
+      }
       $('saveStatus').textContent='Enregistré (DB) ✔'; setTimeout(()=>{$('saveStatus').textContent=' ';},1200);
     }catch(e){ alert(e.message); }
   };
 
-  function playNow(){
-    const obj=makeRec(); if(!obj.id){ alert('ID requis'); return; }
-    // miroir local au cas où
+  function doPlay(){
+    const obj = makeDbRecord();
+    if(!obj.id){ alert('ID requis'); return; }
     localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
-    if (window.Bridge && Bridge.upsertLocalGrid) Bridge.upsertLocalGrid(toBridgeGrid(obj));
-    if (window.Bridge && Bridge.playGrid) Bridge.playGrid(obj.id);
-    else location.href='index.html#grid='+encodeURIComponent(obj.id)+'&auto=1';
+    if (window.Bridge && typeof Bridge.upsertLocalGrid==='function'){
+      Bridge.upsertLocalGrid(toBridgeGrid(obj));
+    }
+    if (window.Bridge && typeof Bridge.playGrid==='function'){
+      Bridge.playGrid(obj.id); // plus d'auto-play
+    } else {
+      location.href = 'index.html#grid=' + encodeURIComponent(obj.id);
+    }
   }
-  $('playBtn').onclick=playNow;
+  $('playBtn').onclick = doPlay;
 
-  // Boot
-  (async function(){
-    let rec=null;
+  (async function boot(){
+    const id = itemId;
+    let rec = null;
     try{
-      const r=await fetch(API+'/'+encodeURIComponent(itemId));
-      if(r.ok) rec=await r.json();
+      const r = await fetch(API+'/'+encodeURIComponent(id));
+      if (r.ok) rec = await r.json();
     }catch(_){}
-    if(!rec){
-      rec={ id:itemId, title:'Blue Bossa', composer:'Kenny Dorham', style:'Bossa',
-        grid_text:`A:
+    if (!rec){
+      rec = { id, title:'Blue Bossa', composer:'Kenny Dorham', style:'Bossa', grid_text:
+`A:
 𝄆 Cm7 | Fm7 | Dm7b5 G7 | Cm7 |
 | Cm7 | Fm7 | Dm7b5 G7 | Cm7 𝄇
 
@@ -197,8 +249,12 @@ A:
 
 D.C. al Fine` };
     }
-    $('id').value=rec.id||''; $('title').value=rec.title||''; $('author').value=rec.composer||''; $('style').value=rec.style||''; $('grid').value=rec.grid_text||'';
-    renderPreview();
+    $('id').value     = rec.id || '';
+    $('title').value  = rec.title || '';
+    $('author').value = rec.composer || '';
+    $('style').value  = rec.style || '';
+    $('grid').value   = rec.grid_text || '';
+    normalizeAndPreview();
   })();
 })();
 </script>
