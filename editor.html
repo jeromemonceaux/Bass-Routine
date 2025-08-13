@@ -18,18 +18,17 @@
     textarea{width:100%;min-height:300px;white-space:pre;line-height:1.5}
     .badge{display:inline-block;border:1px solid #262a31;border-radius:999px;padding:2px 8px;font-size:11px;color:#c9ced6}
     .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-    details{position:relative} details>summary{list-style:none;cursor:pointer}
+    details{position:relative}
+    details>summary{list-style:none;cursor:pointer}
     .dropdown-menu{position:absolute;top:100%;left:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#0f1117;border:1px solid #262a31;padding:8px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;z-index:5}
     .chip{padding:6px 8px;border:1px solid #2a2f36;background:#10131a;border-radius:8px;cursor:pointer}
-    .compas{background:#0f1117;border:1px solid #262a31;border-radius:12px;padding:10px}
-    .grid{display:grid;gap:8px}
-    .row{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);gap:8px}
-    .cell{position:relative;min-height:62px;display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;border:1px solid #2a2f3a;border-radius:10px;font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1.25}
-    .cell small{position:absolute;top:6px;left:8px;opacity:.55;font-size:10px}
-    .cell .multi{display:flex;flex-direction:column;gap:2px;white-space:pre-wrap}
-    .cell.empty{opacity:.6;font-style:italic}
-    .bracketL::before{content:'𝄆';position:absolute;left:-14px;top:50%;transform:translateY(-50%);font-size:18px}
-    .bracketR::after{content:'𝄇';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:18px}
+
+    /* Aperçu (texte normalisé) */
+    #preview{white-space:pre-wrap;background:#0f1117;border:1px solid #262a31;border-radius:12px;padding:10px;min-height:140px;font-family:ui-monospace,Menlo,Consolas,monospace}
+    #preview .line{margin:2px 0}
+    #preview .section{display:inline-block;margin:2px 0 6px}
+    #preview .sep{opacity:.85}
+    #preview .dir{margin:0 4px 0 0}
   </style>
 </head>
 <body>
@@ -55,10 +54,9 @@
         <div><div class="badge">Style</div><input id="style"></div>
       </div>
       <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-        <span class="badge">Mesures/ligne</span><select id="cols"><option>2</option><option>3</option><option selected>4</option><option>8</option></select>
         <button id="saveDb" class="badge">Enregistrer (DB)</button>
         <button id="saveLocal" class="badge">Enregistrer (local)</button>
-        <span id="keyBadge" class="badge">Tonalité : —</span>
+        <span id="keyBadge" class="badge">Mesures : —</span>
       </div>
     </div>
   </section>
@@ -103,10 +101,7 @@
     <h2>Aperçus</h2>
     <div class="content">
       <div class="badge">Texte normalisé</div>
-      <div id="preview" style="white-space:pre-wrap;background:#0f1117;border:1px solid #262a31;border-radius:12px;padding:10px;min-height:140px"></div>
-      <div style="height:8px"></div>
-      <div class="badge">Rendu “compas”</div>
-      <div id="compas" class="compas"></div>
+      <div id="preview"></div>
     </div>
   </section>
 </main>
@@ -124,120 +119,107 @@
   const params = new URLSearchParams(location.search);
   const itemId = params.get('id') || 'temp';
   const API = '/api/library';
-  const escapeHtml = s => (''+s)
-    .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 
-  // --- Normalisation “compas” (corrigée, sans mesures fantômes) ---
-  function updateCompas(parse, repeats){
-    const colsN = parseInt(($('cols')||{}).value,10) || 4;
-    const container = $('compas'); if (!container) return;
-    container.innerHTML = '';
+  // Directives (split + test exact) — pas de /g sur DIR_ONLY_RE (évite toute boucle liée à lastIndex)
+  const DIR_PAT = '(D\\.?S\\.?\\s*al\\s*Coda|D\\.?S\\.?\\s*al\\s*Fine|D\\.?C\\.?\\s*al\\s*Coda|D\\.?C\\.?\\s*al\\s*Fine|To\\s*Coda|Fine|Segno\\s*𝄋|Segno|Coda\\s*𝄌|Coda|𝄋|𝄌)';
+  const DIR_SPLIT_RE = new RegExp(DIR_PAT, 'gi');
+  const DIR_ONLY_RE  = new RegExp('^' + DIR_PAT + '$', 'i');
 
-    // 1) Normalise mesures depuis parseur (bars) ou ancien format (measures/items)
-    let measures = [];
-    if (parse && Array.isArray(parse.bars)) {
-      measures = parse.bars.map(arr => ({ section: null, items: Array.isArray(arr) ? arr : [] }));
-    } else if (parse && Array.isArray(parse.measures)) {
-      measures = parse.measures.map(m => ({ section: m.section || null, items: Array.isArray(m.items)? m.items : [] }));
-    }
-
-    // 2) Sections éventuelles
-    let sections = Array.isArray(parse && parse.sections) ? parse.sections.slice().sort((a,b)=>a.index-b.index) : [];
-    let nextSecIdx = 0; let nextSec = sections[0];
-
-    // 3) Reprises (L/R)
-    const repsL = new Set(), repsR = new Set();
-    const R = (repeats && typeof repeats === 'object' && !Array.isArray(repeats)) ? repeats : null;
-    const arrRep = Array.isArray(repeats) ? repeats : null;
-    if (arrRep){
-      arrRep.forEach(r=>{ if(r?.type==='L') repsL.add(r.pos); else if(r?.type==='R') repsR.add(r.pos); });
-    } else if (R){
-      (R.L||[]).forEach(p=>repsL.add(p)); (R.R||[]).forEach(p=>repsR.add(p));
-    } else if (parse && parse.repeats){
-      (parse.repeats.L||[]).forEach(p=>repsL.add(p)); (parse.repeats.R||[]).forEach(p=>repsR.add(p));
-    }
-
-    // 4) Grille
-    const grid = document.createElement('div');
-    grid.className = 'grid';
-    grid.style.setProperty('--cols', colsN);
-
-    let rowEl = null, cellCount = 0, mi = 0;
-    function newRow(){ rowEl = document.createElement('div'); rowEl.className = 'row'; grid.appendChild(rowEl); cellCount = 0; }
-
-    measures.forEach((m, idx) => {
-      // Section (depuis parse.sections)…
-      if (nextSec && (idx+1) === nextSec.index) {
-        const sec = document.createElement('div');
-        sec.textContent = 'Section ' + (nextSec.label || '');
-        sec.className = 'badge';
-        grid.appendChild(sec);
-        newRow();
-        nextSecIdx++; nextSec = sections[nextSecIdx];
-      }
-      // …ou depuis l’ancien parse (section sur la mesure)
-      else if (m.section && (idx === 0 || measures[idx-1].section !== m.section)) {
-        const sec = document.createElement('div');
-        sec.textContent = 'Section ' + m.section;
-        sec.className = 'badge';
-        grid.appendChild(sec);
-        newRow();
-      }
-
-      if (!rowEl || cellCount >= colsN) newRow();
-      mi++;
-
-      const cell = document.createElement('div'); cell.className = 'cell';
-      const list = document.createElement('div'); list.className = 'multi';
-
-      // Filtre les tokens vides, séparateurs et artefacts
-      const items = (m.items||[]).filter(ch => ch && ch!=='|' && ch!=='𝄆' && ch!=='𝄇');
-
-      if (items.length){
-        items.forEach(ch => { const d = document.createElement('div'); d.textContent = ch; list.appendChild(d); });
-      } else {
-        cell.classList.add('empty');
-        const d = document.createElement('div'); d.textContent = '—'; list.appendChild(d);
-      }
-
-      const num = document.createElement('small'); num.textContent = mi;
-      if (repsL.has(mi)) cell.classList.add('bracketL');
-      if (repsR.has(mi)) cell.classList.add('bracketR');
-
-      cell.appendChild(num); cell.appendChild(list);
-      rowEl.appendChild(cell); cellCount++;
-    });
-
-    container.appendChild(grid);
+  function sectionFromLine(line){
+    const m = String(line||'').match(/^\s*[\[(]?(Intro|A\d*|A|B\d*|B|C|D|Bridge|Solo|Solos|Refrain|Coda|Segno)\s*[:\])]?\s*$/i);
+    return m ? m[1] : null;
   }
+  function escapeHtml(s){ return (''+s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
 
-  // Génère un “texte normalisé” de secours à partir des bars si le parseur ne fournit pas html
-  function buildNormalizedText(res){
-    if (res && typeof res.html === 'string' && res.html.trim()) return res.html;
-    const bars = Array.isArray(res?.bars) ? res.bars : [];
-    if (!bars.length) return '';
-    const perLine = 4;
-    const lines = [];
-    for (let i=0; i<bars.length; i+=perLine){
-      const chunk = bars.slice(i,i+perLine).map(m=>{
-        const arr = Array.isArray(m) ? m : (m && m.chords) || [];
-        return arr.length ? arr.join(' ') : '—';
+  // Rendu texte (sans “compas”), en évitant les doubles symboles (ex: “𝄆 |”, “| 𝄇”, “||”)
+  function renderPreview(text){
+    const lines = String(text||'').split(/\r?\n/);
+    const out = [];
+
+    for (let raw of lines){
+      if (!raw.trim()){ out.push(''); continue; }
+
+      // Section → badge dédiée (PAS une mesure)
+      const sec = sectionFromLine(raw);
+      if (sec){
+        out.push('<div class="line section"><span class="badge">▶ ' + escapeHtml(sec.replace(/\d+/g,'')) + '</span></div>');
+        continue;
+      }
+
+      // Normalisation douce (espaces autour des séparateurs)
+      let line = raw.replace(/\s+/g,' ').trim();
+      line = line.replace(/𝄆/g,' 𝄆 ').replace(/𝄇/g,' 𝄇 ').replace(/\|/g,' | ');
+
+      // Découpe en gardant les directives
+      const chunks = line.split(DIR_SPLIT_RE);
+      const tokens = [];
+
+      // Construit des tokens: accords/texte, |, 𝄆, 𝄇, directives
+      for (const chunk of chunks){
+        const c = chunk && chunk.trim();
+        if (!c) continue;
+
+        if (DIR_ONLY_RE.test(c)) {
+          tokens.push({type:'dir',val:c});
+          continue;
+        }
+
+        // re-split sur symboles simples
+        const sub = c.split(/(\||𝄆|𝄇)/);
+        for (const t of sub){
+          const tt = t && t.trim();
+          if (!tt) continue;
+          if (tt==='|' || tt==='𝄆' || tt==='𝄇'){ tokens.push({type:'sym',val:tt}); }
+          else { tokens.push({type:'txt',val:tt}); }
+        }
+      }
+
+      // Filtrage “anti-doublons”:
+      // - supprime '|' si juste après '𝄆'
+      // - supprime '|' si juste avant '𝄇'
+      // - compresse les '|' successifs
+      const cleaned = [];
+      for (let i=0;i<tokens.length;i++){
+        const t = tokens[i];
+        const prev = cleaned[cleaned.length-1];
+        const next = tokens[i+1];
+
+        if (t.type==='sym' && t.val==='|') {
+          if (prev && prev.type==='sym' && prev.val==='𝄆') continue;
+          if (next && next.type==='sym' && next.val==='𝄇') continue;
+          if (prev && prev.type==='sym' && prev.val==='|') continue; // compresse ||
+        }
+        cleaned.push(t);
+      }
+
+      // Sortie HTML
+      const parts = cleaned.map(t=>{
+        if (t.type==='sym' && (t.val==='|' || t.val==='𝄆' || t.val==='𝄇')) return '<span class="sep">'+t.val+'</span>';
+        if (t.type==='dir') return '<span class="badge dir">'+escapeHtml(t.val)+'</span>';
+        return escapeHtml(t.val);
       });
-      lines.push('| '+chunk.join(' | ')+' |');
+
+      out.push('<div class="line">'+parts.join(' ')+'</div>');
     }
-    return escapeHtml(lines.join('\n'));
+
+    return out.join('\n');
   }
 
   function normalizeAndPreview(){
     const text = ($('grid')?.value)||'';
-    const res = (window.GridParse && typeof window.GridParse.parse==='function')
-      ? window.GridParse.parse(text)
-      : { html: escapeHtml(text), bars: [], repeats: {L:[],R:[]}, sections: [] };
+    let barsCount = 0;
+    try{
+      if (window.GridParse && typeof window.GridParse.parse==='function'){
+        const res = window.GridParse.parse(text);
+        barsCount = Array.isArray(res?.bars) ? res.bars.length : 0;
+      } else {
+        // fallback très approximatif
+        barsCount = (text.match(/\|/g)||[]).length;
+      }
+    }catch(_){}
 
-    $('preview').innerHTML = buildNormalizedText(res);
-    updateCompas(res, res.repeats||[]);
-    // Petit indicateur : nombre de mesures détectées
-    $('keyBadge').textContent = 'Mesures : ' + (Array.isArray(res?.bars) ? res.bars.length : (Array.isArray(res?.measures)? res.measures.length : 0));
+    $('preview').innerHTML = renderPreview(text);
+    $('keyBadge').textContent = 'Mesures : ' + barsCount;
   }
 
   // Insertion via la palette
@@ -254,9 +236,8 @@
     }
     document.querySelectorAll('details[open]').forEach(d=>{ if(!d.contains(e.target)) d.removeAttribute('open'); });
   });
-  $('cols').onchange = normalizeAndPreview;
 
-  // Conversion DB -> objet bridge (pour le lecteur)
+  // Conversion DB -> format standard (pour Bridge / lecteur)
   function toBridgeGrid(rec){
     const parsed = (window.GridParse && window.GridParse.parse) ? window.GridParse.parse(rec.grid_text||'') : { bars: [] };
     return {
@@ -266,7 +247,7 @@
       key: rec.key || null,
       mode: rec.mode || null,
       tpb: rec.tpb || 4,
-      bars: Array.isArray(parsed.bars) ? parsed.bars : []
+      bars: Array.isArray(parsed.bars) ? parsed.bars : []   // format: [ [ "Cm7" ], [ "F7" ], ... ]
     };
   }
 
@@ -280,19 +261,18 @@
     };
   }
 
-  // Save local
+  // Save local (et miroir lecteur)
   $('saveLocal').onclick = function(){
     const obj = makeDbRecord();
     if(!obj.id){ alert('ID requis'); return; }
     localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
-    // miroir local pour le lecteur
     if (window.Bridge && typeof Bridge.upsertLocalGrid==='function'){
       Bridge.upsertLocalGrid(toBridgeGrid(obj));
     }
     $('saveStatus').textContent='Enregistré (local) ✔'; setTimeout(()=>{$('saveStatus').textContent=' ';},1200);
   };
 
-  // Save DB
+  // Save DB (et miroir lecteur)
   $('saveDb').onclick = async function(){
     const obj = makeDbRecord();
     if(!obj.id){ alert('ID requis'); return; }
@@ -310,27 +290,29 @@
     }catch(e){ alert(e.message); }
   };
 
-  // Play (même handler pour le bouton entête et — si tu le remets — le bouton dans le formulaire)
+  // Jouer dans le player : on prépare la grille pour le ticker et on redirige
   function doPlay(){
     const obj = makeDbRecord();
     if(!obj.id){ alert('ID requis'); return; }
-    // Sauvegarde locale rapide (pour le lecteur)
+
+    // 1) miroir local brut (pour sécurité)
     localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
+
+    // 2) upsert format standard pour le lecteur (ticker)
     if (window.Bridge && typeof Bridge.upsertLocalGrid==='function'){
       Bridge.upsertLocalGrid(toBridgeGrid(obj));
     }
+
+    // 3) ouverture du player avec l’ID (le Bridge côté lecteur chargera et poussera dans le ticker)
     if (window.Bridge && typeof Bridge.playGrid==='function'){
-      Bridge.playGrid(obj.id); // redirige vers index.html#grid=<id>&auto=1
+      Bridge.playGrid(obj.id); // redirige vers index.html#grid=<id>&auto=1 (selon ton Bridge)
     } else {
       location.href = 'index.html#grid=' + encodeURIComponent(obj.id) + '&auto=1';
     }
   }
   $('playBtn').onclick = doPlay;
-  // si tu gardes un second bouton dans le DOM :
-  const playInReader = document.getElementById('playInReader');
-  if (playInReader) playInReader.onclick = doPlay;
 
-  // Boot : charge l’item par ID (endpoint /api/library/:id), sinon fallback
+  // Boot : charge /api/library/:id si dispo, sinon fallback d’exemple
   (async function boot(){
     const id = itemId;
     let rec = null;
@@ -338,6 +320,7 @@
       const r = await fetch(API+'/'+encodeURIComponent(id));
       if (r.ok) rec = await r.json();
     }catch(_){}
+
     if (!rec){
       rec = {
         id, title:'Blue Bossa', composer:'Kenny Dorham', style:'Bossa',
@@ -354,6 +337,7 @@ A:
 D.C. al Fine`
       };
     }
+
     $('id').value     = rec.id || '';
     $('title').value  = rec.title || '';
     $('author').value = rec.composer || '';
