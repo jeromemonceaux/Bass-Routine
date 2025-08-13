@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Éditeur — Bass Routine</title>
+  <title>Éditeur — Bass-Routine</title>
   <style>
     body{margin:0;background:#0c0d10;color:#e9ebef;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
     header{position:sticky;top:0;background:#0f1117d0;border-bottom:1px solid #262a31;backdrop-filter:blur(6px)}
@@ -30,15 +30,18 @@
     .cell.empty{opacity:.6;font-style:italic}
     .bracketL::before{content:'𝄆';position:absolute;left:-14px;top:50%;transform:translateY(-50%);font-size:18px}
     .bracketR::after{content:'𝄇';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:18px}
-    dialog{border:none;border-radius:12px;background:#14161b;color:#e9ebef;max-width:720px;width:90%}
-    dialog::backdrop{background:rgba(0,0,0,.5)}
-    .modal-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #262a31}
-    .modal-body{padding:12px;max-height:60vh;overflow:auto}
-    .pitem{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:8px;border:1px solid #2a2f36;border-radius:10px;margin-bottom:8px;background:#0f1117}
   </style>
 </head>
 <body>
-<header><div class="wrap"><a href="library.html">← Bibliothèque</a><h1 style="margin-left:8px;font-size:18px">Éditeur</h1><span id="saveStatus" style="margin-left:auto" class="badge"> </span></div></header>
+<header>
+  <div class="wrap">
+    <a href="library.html">← Bibliothèque</a>
+    <h1 style="margin-left:8px;font-size:18px">Éditeur</h1>
+    <span id="saveStatus" style="margin-left:auto" class="badge"> </span>
+    <button id="playBtn" class="badge">▶ Jouer dans le lecteur</button>
+  </div>
+</header>
+
 <main>
   <section class="card">
     <h2>Métadonnées</h2>
@@ -55,7 +58,6 @@
         <span class="badge">Mesures/ligne</span><select id="cols"><option>2</option><option>3</option><option selected>4</option><option>8</option></select>
         <button id="saveDb" class="badge">Enregistrer (DB)</button>
         <button id="saveLocal" class="badge">Enregistrer (local)</button>
-        <button id="insertProg" class="badge">Insérer progression</button>
         <button id="playInReader" class="badge">Jouer dans le lecteur</button>
         <span id="keyBadge" class="badge">Tonalité : —</span>
       </div>
@@ -94,161 +96,276 @@
         </details>
       </div>
       <textarea id="grid" spellcheck="false"></textarea>
-      <div class="badge" style="margin-top:6px">Texte normalisé</div>
-      <pre id="preview" style="white-space:pre-wrap;background:#0f1117;border:1px solid #262a31;border-radius:12px;padding:10px;min-height:120px"></pre>
+      <div id="validation" class="badge" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Aperçus</h2>
+    <div class="content">
+      <div class="badge">Texte normalisé</div>
+      <div id="preview" style="white-space:pre-wrap;background:#0f1117;border:1px solid #262a31;border-radius:12px;padding:10px;min-height:140px"></div>
       <div style="height:8px"></div>
       <div class="badge">Rendu “compas”</div>
       <div id="compas" class="compas"></div>
     </div>
   </section>
-
-  <section class="card">
-    <h2>Aperçu structurel</h2>
-    <div class="content"><div id="validation" class="badge"></div></div>
-  </section>
 </main>
 
-<dialog id="progModal">
-  <div class="modal-head">
-    <div style="font-weight:700">Progressions (tag <code>prog</code>)</div>
-    <button id="closeProg">Fermer</button>
-  </div>
-  <div class="modal-body" id="progList"></div>
-</dialog>
-
+<!-- Dépendances: le parseur + le bridge -->
 <script src="js/grid/parse.js"></script>
+<script src="js/grid/grid-bridge.js"></script>
+
 <script>
-const $=(id)=>document.getElementById(id);
-const params=new URLSearchParams(location.search); const itemId=params.get('id');
-const API='/api/library';
+(function(){
+  'use strict';
 
-function escapeHtml(s){ return (''+s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
-function badge(cls,text){ return '<span class="badge '+cls+'">'+text+'</span>'; }
+  const $ = (id)=>document.getElementById(id);
+  const params = new URLSearchParams(location.search);
+  const itemId = params.get('id') || 'temp';
 
-// --- Compas: rend sans mesures vides dues aux | de début/fin ---
-function updateCompasFromText(text){
-  const parsed = window.GridParse.parse(text||'');
-  const colsN = parseInt($('cols').value,10)||4;
-  const container=$('compas'); container.innerHTML='';
-  const grid=document.createElement('div'); grid.className='grid'; grid.style.setProperty('--cols', colsN);
+  const API = '/api/library';
 
-  let rowEl=null, cellCount=0, mi=0;
-  function newRow(){ rowEl=document.createElement('div'); rowEl.className='row'; grid.appendChild(rowEl); cellCount=0; }
+  function badge(cls,text){ return '<span class="badge '+(cls||'')+'">'+text+'</span>'; }
 
-  (parsed.bars||[]).forEach((measure)=>{
-    if(!rowEl || cellCount>=colsN) newRow();
+// --- remplace TOUTE ta fonction updateCompas par ceci ---
+function updateCompas(parse, repeats){
+  const colsN = parseInt(document.getElementById('cols').value,10) || 4;
+  const container = document.getElementById('compas');
+  container.innerHTML = '';
+
+  // Normalise les mesures depuis l'ancien ou le nouveau parseur
+  let measures = [];
+  if (parse && Array.isArray(parse.measures)) {
+    // ancien: [{section, items:[...]}]
+    measures = parse.measures.map(m => ({ section: m.section || null, items: m.items || [] }));
+  } else if (parse && Array.isArray(parse.bars)) {
+    // nouveau: bars:[ [chords...] ], sections:[{index,label}]
+    measures = parse.bars.map(arr => ({ section: null, items: Array.isArray(arr) ? arr : [] }));
+  }
+
+  // Construit un mapping de sections si fourni par GridParse
+  let sections = Array.isArray(parse && parse.sections) ? parse.sections.slice().sort((a,b)=>a.index-b.index) : [];
+  let nextSecIdx = 0;
+  let nextSec = sections[0];
+
+  // Normalise les reprises: accepte tableau [{type,pos}] ou objet {L:[...],R:[...]}
+  let repsL = new Set(), repsR = new Set();
+  if (Array.isArray(repeats)) {
+    repeats.forEach(r => {
+      if (!r) return;
+      if (r.type === 'L') repsL.add(r.pos);
+      else if (r.type === 'R') repsR.add(r.pos);
+    });
+  } else if (repeats && typeof repeats === 'object') {
+    (repeats.L || []).forEach(p => repsL.add(p));
+    (repeats.R || []).forEach(p => repsR.add(p));
+  } else if (parse && parse.repeats && typeof parse.repeats === 'object') {
+    (parse.repeats.L || []).forEach(p => repsL.add(p));
+    (parse.repeats.R || []).forEach(p => repsR.add(p));
+  }
+
+  const grid = document.createElement('div');
+  grid.className = 'grid';
+  grid.style.setProperty('--cols', colsN);
+
+  let rowEl = null, cellCount = 0, mi = 0;
+  function newRow(){ rowEl = document.createElement('div'); rowEl.className = 'row'; grid.appendChild(rowEl); cellCount = 0; }
+
+  measures.forEach((m, idx) => {
+    // Section depuis sections[index] (GridParse) OU m.section (ancien parse)
+    if (nextSec && (idx+1) === nextSec.index) {
+      const sec = document.createElement('div');
+      sec.textContent = 'Section ' + (nextSec.label || '');
+      sec.className = 'badge';
+      grid.appendChild(sec);
+      newRow();
+      nextSecIdx++; nextSec = sections[nextSecIdx];
+    } else if (m.section && (idx === 0 || measures[idx-1].section !== m.section)) {
+      const sec = document.createElement('div');
+      sec.textContent = 'Section ' + m.section;
+      sec.className = 'badge';
+      grid.appendChild(sec);
+      newRow();
+    }
+
+    if (!rowEl || cellCount >= colsN) newRow();
     mi++;
-    const cell=document.createElement('div'); cell.className='cell';
-    const list=document.createElement('div'); list.className='multi';
-    if(measure && measure.length){ measure.forEach(ch=>{ const line=document.createElement('div'); line.textContent=ch; list.appendChild(line); }); }
-    else { cell.classList.add('empty'); const line=document.createElement('div'); line.textContent='—'; list.appendChild(line); }
-    const num=document.createElement('small'); num.textContent=mi;
-    cell.appendChild(num); cell.appendChild(list); rowEl.appendChild(cell); cellCount++;
+
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+
+    const list = document.createElement('div');
+    list.className = 'multi';
+
+    if (m.items && m.items.length) {
+      m.items.forEach(ch => { const d = document.createElement('div'); d.textContent = ch; list.appendChild(d); });
+    } else {
+      cell.classList.add('empty');
+      const d = document.createElement('div'); d.textContent = '—'; list.appendChild(d);
+    }
+
+    const num = document.createElement('small');
+    num.textContent = mi;
+
+    if (repsL.has(mi)) cell.classList.add('bracketL');
+    if (repsR.has(mi)) cell.classList.add('bracketR');
+
+    cell.appendChild(num);
+    cell.appendChild(list);
+    rowEl.appendChild(cell);
+    cellCount++;
   });
 
   container.appendChild(grid);
 }
 
-// --- Preview "texte normalisé" ---
-function normalizeAndPreview(text){
-  const norm = window.GridParse.normalizeText(text||'');
-  $('preview').textContent = norm;
-  updateCompasFromText(text||'');
-}
+  function normalizeAndPreview(){
+    const text = $('grid').value || '';
+    const res = window.GridParse.parse(text);
+    $('preview').innerHTML = res.html || '';
+    updateCompas(res, res.repeats||[]);
+    // Heuristique simple de tonalité (optionnel) — on affiche juste le nombre de mesures
+    $('keyBadge').textContent = 'Mesures : ' + (res.bars ? res.bars.length : 0);
+  }
 
-// --- API ---
-async function loadFromDB(){ const r=await fetch(API); if(!r.ok) throw new Error('HTTP '+r.status); return await r.json(); }
-async function getOne(id){ const r=await fetch(API+'/'+encodeURIComponent(id)); if(r.status===404) return null; if(!r.ok) throw new Error('HTTP '+r.status); return await r.json(); }
-async function saveOneToDB(item){
-  const r=await fetch(API+'/'+encodeURIComponent(item.id),{
-    method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(item)
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('[data-insert]');
+    if (btn){
+      e.preventDefault();
+      const ta = $('grid');
+      ta.focus();
+      const s = ta.selectionStart, ed = ta.selectionEnd, v = ta.value;
+      const ins = btn.dataset.insert;
+      ta.value = v.slice(0,s) + ins + v.slice(ed);
+      const pos = (s||0) + ins.length;
+      ta.selectionStart = ta.selectionEnd = pos;
+      const d = btn.closest('details'); if (d) d.removeAttribute('open');
+      normalizeAndPreview();
+      return;
+    }
+    // Ferme les menus si click ailleurs
+    document.querySelectorAll('details[open]').forEach(d => { if(!d.contains(e.target)) d.removeAttribute('open'); });
   });
-  if(!r.ok){ const t=await r.text(); throw new Error('HTTP '+r.status+' '+t); }
-  return true;
-}
 
-// --- UI handlers ---
-document.addEventListener('click',(e)=>{
-  const btn=e.target.closest('[data-insert]'); if(btn){
-    e.preventDefault();
-    const ta=$('grid'); ta.focus();
-    const s=ta.selectionStart, ed=ta.selectionEnd, v=ta.value;
-    ta.value=v.slice(0,s)+btn.dataset.insert+v.slice(ed);
-    const pos=(s||0)+btn.dataset.insert.length; ta.selectionStart=ta.selectionEnd=pos;
-    const d=btn.closest('details'); if(d) d.removeAttribute('open');
-    normalizeAndPreview(ta.value);
-    return;
-  }
-  document.querySelectorAll('details[open]').forEach(d=>{ if(!d.contains(e.target)) d.removeAttribute('open'); });
-});
-$('cols').onchange=()=> normalizeAndPreview($('grid').value);
+  $('cols').onchange = normalizeAndPreview;
 
-$('saveLocal').onclick=()=>{
-  const obj={ id:$('id').value.trim(), title:$('title').value.trim(), composer:$('author').value.trim(), style:$('style').value.trim(), grid_text:$('grid').value };
-  localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
-  $('saveStatus').textContent='Enregistré (local) ✔'; setTimeout(()=>{$('saveStatus').textContent=' ';},1200);
-};
-$('saveDb').onclick=async()=>{
-  const obj={ id:$('id').value.trim(), title:$('title').value.trim(), composer:$('author').value.trim(), style:$('style').value.trim(), grid_text:$('grid').value };
-  if(!obj.id){ alert('ID requis'); return; }
-  try{ await saveOneToDB(obj); $('saveStatus').textContent='Enregistré (DB) ✔'; setTimeout(()=>{$('saveStatus').textContent=' ';},1200); }catch(e){ alert(e.message); }
-};
-
-// "Jouer dans le lecteur"
-$('playInReader').onclick=()=>{
-  const id = $('id').value.trim();
-  if(!id){ alert('ID requis'); return; }
-  // on sauvegarde d'abord en local (pratique quand on n’a pas encore push en DB)
-  const obj={ id, title:$('title').value.trim(), composer:$('author').value.trim(), style:$('style').value.trim(), grid_text:$('grid').value };
-  localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
-  // ouvre le player
-  window.open('index.html#grid='+encodeURIComponent(id), '_blank');
-};
-
-// Progressions (inchangé sauf rendu)
-const progModal=$('progModal'), progList=$('progList');
-$('insertProg').onclick=async()=>{
-  try{
-    const lib=await loadFromDB();
-    const progs=lib.filter(x=> (x?.tags||[]).includes('prog') || (x?.id||'').startsWith('prog:')).slice(0,500);
-    progList.innerHTML=progs.map(p=>`<div class="pitem">
-      <div><div style="font-weight:700">${escapeHtml(p.title||p.id)}</div><div class="muted">${escapeHtml((p.tags||[]).join(', '))}</div><pre style="white-space:pre-wrap;margin:6px 0 0">${escapeHtml(p.grid_text||'')}</pre></div>
-      <div><button data-ins="${escapeHtml((p.grid_text||'').replaceAll('"','&quot;'))}">Insérer</button></div>
-    </div>`).join('') || '<div class="muted">Aucune progression <code>prog</code> trouvée.</div>';
-    progModal.showModal();
-  }catch(e){ alert(e.message); }
-};
-$('closeProg').onclick=()=>progModal.close();
-progList?.addEventListener('click',(e)=>{
-  const b=e.target.closest('button[data-ins]'); if(!b) return;
-  const text=b.getAttribute('data-ins')||'';
-  const ta=$('grid'); const cur=ta.selectionStart||ta.value.length; ta.value=ta.value.slice(0,cur)+ (cur? '\n':'' ) + text + '\n' + ta.value.slice(cur);
-  normalizeAndPreview(ta.value); progModal.close();
-});
-
-// Boot
-async function boot(){
-  // DB puis fallback local
-  let it = null;
-  if (itemId) it = await getOne(itemId);
-  if (!it) {
-    const loc = localStorage.getItem('jazzgrid:'+itemId);
-    if (loc) it = JSON.parse(loc);
-  }
-  if (!it) {
-    it = { id:itemId||'temp', title:'Blue Bossa', composer:'Kenny Dorham', style:'Bossa',
-      grid_text:`A:
-𝄆 | Cm7 | Fm7 | Dm7♭5 G7 | Cm7 |
-| Cm7 | Fm7 | Dm7♭5 G7 | Cm7 𝄇
-
-B (Bridge):
-| E♭m7 A♭7 | D♭Δ | Dm7♭5 G7 | Cm7 |`
+  // Sauvegarde locale + DB (si dispo)
+  function makeDbRecord(){
+    return {
+      id: $('id').value.trim(),
+      title: $('title').value.trim(),
+      composer: $('author').value.trim(),
+      style: $('style').value.trim(),
+      grid_text: $('grid').value
     };
   }
-  $('id').value=it.id||''; $('title').value=it.title||''; $('author').value=it.composer||''; $('style').value=it.style||''; $('grid').value=it.grid_text||'';
-  normalizeAndPreview($('grid').value);
-}
-boot();
+
+  $('saveLocal').onclick = function(){
+    const obj = makeDbRecord();
+    if (!obj.id){ alert('ID requis'); return; }
+    localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
+    // Met aussi à jour la librairie locale pour le lecteur
+    const gridObj = Bridge.upsertLocalGrid( (function(rec){ return (Bridge && Bridge.upsertLocalGrid)? Bridge.upsertLocalGrid.fromDbRecord? Bridge.upsertLocalGrid.fromDbRecord(rec) : null : null; })(obj) || (function(){ return (function convert(r){ return { id:r.id, name:r.title||r.id, author:r.composer||'', tpb:4, bars:(window.GridParse.parse(r.grid_text).bars||[]) }; })(obj); })() );
+    $('saveStatus').textContent = 'Enregistré (local) ✔';
+    setTimeout(()=>{ $('saveStatus').textContent=' '; }, 1200);
+  };
+
+  $('saveDb').onclick = async function(){
+    const obj = makeDbRecord();
+    if (!obj.id){ alert('ID requis'); return; }
+    try{
+      const r = await fetch(API + '/' + encodeURIComponent(obj.id), {
+        method:'PATCH',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(obj)
+      });
+      if (!r.ok) {
+        const t = await r.text();
+        throw new Error('HTTP '+r.status+' '+t);
+      }
+      // Miroir local pour le lecteur
+      const gridObj = { id:obj.id, name:obj.title||obj.id, author:obj.composer||'', tpb:4, bars:(window.GridParse.parse(obj.grid_text).bars||[]) };
+      Bridge.upsertLocalGrid(gridObj);
+      $('saveStatus').textContent = 'Enregistré (DB) ✔';
+      setTimeout(()=>{ $('saveStatus').textContent=' '; }, 1200);
+    }catch(e){
+      alert(e.message);
+    }
+  };
+
+  // Jouer dans le lecteur (sauve local pour être sûr)
+  $('playBtn').onclick = function(){
+    const obj = makeDbRecord();
+    if (!obj.id){ alert('ID requis'); return; }
+    const gridObj = { id:obj.id, name:obj.title||obj.id, author:obj.composer||'', tpb:4, bars:(window.GridParse.parse(obj.grid_text).bars||[]) };
+    Bridge.upsertLocalGrid(gridObj);
+    Bridge.playGrid(obj.id); // redirige via hash
+  };
+
+  // Boot : charge DB si présente, sinon initialise Blue Bossa
+  (async function boot(){
+    const id = itemId;
+    // Essaie DB
+    let rec = null;
+    try{
+      const r = await fetch(API);
+      if (r.ok) {
+        const arr = await r.json();
+        rec = (arr||[]).find(x => x && x.id === id) || null;
+      }
+    }catch(_){}
+
+    if (!rec) {
+      // fallback
+      rec = {
+        id: id,
+        title: 'Blue Bossa',
+        composer: 'Kenny Dorham',
+        style: 'Bossa',
+        grid_text:
+`A:
+𝄆 Cm7 | Fm7 | Dm7b5 G7 | Cm7 |
+| Cm7 | Fm7 | Dm7b5 G7 | Cm7 𝄇
+
+B: (Bridge)
+| E♭m7 A♭7 | D♭Δ | Dm7b5 G7 | Cm7 |
+
+A:
+| Cm7 | Fm7 | Dm7b5 G7 | Cm7 | Fine
+
+D.C. al Fine`
+      };
+    }
+
+    $('id').value     = rec.id || '';
+    $('title').value  = rec.title || '';
+    $('author').value = rec.composer || '';
+    $('style').value  = rec.style || '';
+    $('grid').value   = rec.grid_text || '';
+
+    normalizeAndPreview();
+  })();
+  
+  document.getElementById('playInReader').onclick = ()=>{
+  const id = (document.getElementById('id').value || '').trim();
+  if(!id){ alert('Définis un ID avant de jouer dans le lecteur.'); return; }
+  // Sauvegarde locale rapide pour s’assurer que le lecteur pourra retrouver la grille si elle n’est pas encore en DB
+  try{
+    const obj = {
+      id,
+      title: (document.getElementById('title').value||'').trim(),
+      composer: (document.getElementById('author').value||'').trim(),
+      style: (document.getElementById('style').value||'').trim(),
+      grid_text: (document.getElementById('grid').value||'')
+    };
+    localStorage.setItem('jazzgrid:'+obj.id, JSON.stringify(obj));
+  }catch(_){}
+
+  location.href = 'index.html#grid=' + encodeURIComponent(id) + '&auto=1';
+};
+
+})();
 </script>
 </body>
 </html>

@@ -44,8 +44,8 @@ function cors204() {
 
 // ====== Seed file resolution ======
 // 1) ENV override possible: LIBRARY_SEED_FILE
-// 2) sinon on préfère library-seed-200-jazz-latin-funk-soul.json (votre fichier)
-// 3) fallback éventuel sur presets.json
+// 2) sinon on préfère library-seed-200-jazz-latin-funk-soul.json
+// 3) fallback: presets.json
 function resolveSeedCandidates() {
   const envFile = process.env.LIBRARY_SEED_FILE || '';
   const names = [
@@ -55,7 +55,6 @@ function resolveSeedCandidates() {
   ].filter(Boolean);
   return names;
 }
-
 function findSeedPath() {
   const names = resolveSeedCandidates();
   // cwd
@@ -82,7 +81,6 @@ function findSeedPath() {
   } catch (_) {}
   return null;
 }
-
 function readSeed() {
   const fp = findSeedPath();
   if (!fp) throw new Error('Fichier seed introuvable. (LIBRARY_SEED_FILE, library-seed-200-jazz-latin-funk-soul.json ou presets.json)');
@@ -102,45 +100,158 @@ function readSeed() {
   return { data, file: fp, size: Buffer.byteLength(raw, 'utf8') };
 }
 
+// ====== Helpers ======
+// Convertit un tableau de mesures (bars) en texte de grille compact
+function barsToText(bars, tpb = 4) {
+  try {
+    const arr = Array.isArray(bars) ? bars : [];
+    const lines = [];
+    let line = [];
+    for (let i = 0; i < arr.length; i++) {
+      const bar = arr[i];
+      const chords = Array.isArray(bar) ? bar : (bar && Array.isArray(bar.chords) ? bar.chords : []);
+      const cell = (chords && chords.length) ? chords.join(' ') : '—';
+      line.push(cell);
+      // 4 mesures par ligne par défaut
+      if (line.length >= 4) {
+        lines.push('| ' + line.join(' | ') + ' |');
+        line = [];
+      }
+    }
+    if (line.length) {
+      lines.push('| ' + line.join(' | ') + ' |');
+    }
+    return lines.join('\n').trim();
+  } catch (_) {
+    return '';
+  }
+}
+function barsToGridText(bars, perLine = 4) {
+  if (!Array.isArray(bars) || !bars.length) return '';
+  const lines = [];
+  for (let i = 0; i < bars.length; i += perLine) {
+    const chunk = bars.slice(i, i + perLine).map(m => {
+      const arr = Array.isArray(m) ? m : (m && m.chords) || [];
+      return arr.length ? arr.join(' ') : '—';
+    });
+    lines.push('| ' + chunk.join(' | ') + ' |');
+  }
+  return lines.join('\n');
+}
 function normalizeItem(x) {
   if (!x) return null;
   const id = String(x.id || '').trim();
   if (!id) return null;
-  return {
-    id,
-    title: x.title || x.name || '',
-    composer: x.composer || x.author || '',
-    style: x.style || '',
-    tags: x.tags || [],
-    grid_text: x.grid_text || x.grid || '',
-    // champs optionnels, si votre table les a :
-    key: x.key ?? null,
-    mode: x.mode ?? null,
-    tpb: x.tpb ?? null,
-    bars: x.bars ?? null,
-  };
+
+  // Harmonisation des champs
+  const title = x.title || x.name || '';
+  const composer = x.composer || x.author || '';
+  const style = x.style || '';
+  const tags = Array.isArray(x.tags) ? x.tags : (x.tags ? [x.tags] : []);
+  const bars = x.bars || null;
+  const key = x.key || null;
+  const mode = x.mode || null;
+  const tpb = x.tpb || null;
+
+  // grid_text source: grid_text > grid > derive(bars)
+  let grid_text = x.grid_text || x.grid || '';
+  if ((!grid_text || !grid_text.trim()) && bars) {
+    grid_text = barsToText(bars, tpb || 4);
+  }
+
+  return { id, title, composer, style, tags, grid_text, bars, key, mode, tpb };
+}
+function minimalPayloadForTable(payloadRow) {
+  // Si ta table n’a pas certaines colonnes (ex: bars, key, mode, tpb), enlève-les ici.
+  const { id, title, composer, style, tags, grid_text /*, key, mode, tpb, bars*/ } = payloadRow;
+  return { id, title, composer, style, tags, grid_text /*, key, mode, tpb, bars*/ };
 }
 
+function dedupeById(list) {
+  const map = new Map();
+  for (const it of list || []) {
+    if (it && it.id) map.set(it.id, it); // conserve le dernier
+  }
+  return Array.from(map.values());
+}
 // insert/update en chunks
-async function upsertChunked(sb, payload, chunk = 500) {
+async function upsertChunked(sb, payload, chunk = 300) {
   let inserted = 0;
+
+  // dédup globale
+  payload = dedupeById(payload);
+
   for (let i = 0; i < payload.length; i += chunk) {
-    const slice = payload.slice(i, i + chunk);
-    const { data: up, error } = await sb.from(TABLE).upsert(slice, { onConflict: 'id' }).select('id');
-    if (error) throw new Error(error.message);
-    inserted += up?.length || 0;
+    // dédup par tranche (sécurité)
+    let slice = dedupeById(payload.slice(i, i + chunk)).map(minimalPayloadForTable);
+
+    try {
+      const { data: up, error } = await sb
+        .from(TABLE)
+        .upsert(slice, { onConflict: 'id' })
+        .select('id');
+
+      if (error) throw error;
+      inserted += up?.length || 0;
+
+    } catch (e) {
+      // Fallback: on tente en unitaire pour identifier l’élément fautif
+      if (String(e.message || e).includes('cannot affect row a second time')) {
+        for (const row of slice) {
+          try {
+            const { data: one, error: e1 } = await sb
+              .from(TABLE)
+              .upsert(row, { onConflict: 'id' })
+              .select('id')
+              .single();
+            if (e1) throw e1;
+            inserted += one ? 1 : 0;
+          } catch (e2) {
+            console.error('[upsert one failed]', row.id, e2.message || e2);
+          }
+        }
+      } else {
+        throw e;
+      }
+    }
   }
   return inserted;
 }
 
-async function seedManual(sb) {
-  const { data, file, size } = readSeed();
-  const payload = data.map(normalizeItem).filter(Boolean);
-  if (!payload.length) return { inserted: 0, file, size };
-  const inserted = await upsertChunked(sb, payload);
-  return { inserted, file, size };
+// Backfill DB: génère grid_text pour les items qui ont des bars mais pas de grid_text
+async function backfillGridText(sb) {
+  // Récupère les candidates: grid_text NULL ou vide, et bars non NULL
+  const { data, error } = await sb
+    .from(TABLE)
+    .select('id,bars,tpb,grid_text')
+    .or('grid_text.is.null,grid_text.eq.')
+    .not('bars', 'is', null)
+    .limit(5000);
+
+  if (error) throw new Error('select failed: ' + error.message);
+  const rows = Array.isArray(data) ? data : [];
+  let updated = 0;
+
+  for (const row of rows) {
+    const txt = barsToText(row.bars, row.tpb || 4);
+    if (txt && txt.trim()) {
+      const { error: e2 } = await sb.from(TABLE).update({ grid_text: txt }).eq('id', row.id);
+      if (!e2) updated++;
+      else console.error('[backfill update failed]', row.id, e2.message);
+    }
+  }
+  return { scanned: rows.length, updated };
 }
 
+async function seedManual(sb) {
+  const { data, file, size } = readSeed();
+  const payloadRaw = data.map(normalizeItem).filter(Boolean);
+  const payload = dedupeById(payloadRaw);
+  if (!payload.length) return { inserted: 0, file, size, dedupedFrom: payloadRaw.length };
+
+  const inserted = await upsertChunked(sb, payload);
+  return { inserted, file, size, dedupedFrom: payloadRaw.length };
+}
 async function seedIfEmpty(sb) {
   const head = await sb.from(TABLE).select('id').limit(1);
   if (head.error) throw new Error('Supabase select failed: ' + head.error.message);
@@ -148,23 +259,22 @@ async function seedIfEmpty(sb) {
   const res = await seedManual(sb);
   return { seeded: true, ...res };
 }
-
-// Remplit uniquement les enregistrements sans grid_text en se basant sur le seed
+// Hydrate uniquement les records où grid_text est vide (depuis seed). Si le seed n’a que "bars", on génère grid_text.
 async function resyncSeed(sb) {
   const { data: dbItems, error: e1 } = await sb.from(TABLE).select('id,grid_text');
   if (e1) throw new Error('select failed: ' + e1.message);
 
-  const have = new Map((dbItems || []).map((r) => [r.id, r.grid_text || '']));
-
+  const have = new Map((dbItems || []).map((r) => [r.id, (r.grid_text || '').trim()]));
   const { data: seed } = readSeed();
+
   const todo = [];
   for (const raw of seed) {
     const it = normalizeItem(raw);
     if (!it) continue;
-    const current = have.get(it.id);
-    // Si en base c'est vide ET dans le seed il y a du contenu => on alimente
-    if ((current == null || current === '') && (it.grid_text && it.grid_text.trim())) {
-      todo.push({ id: it.id, title: it.title, composer: it.composer, style: it.style, tags: it.tags, grid_text: it.grid_text, key: it.key, mode: it.mode, tpb: it.tpb, bars: it.bars });
+    const cur = have.get(it.id);
+    const needs = !cur; // vide ou undefined
+    if (needs && it.grid_text && it.grid_text.trim()) {
+      todo.push(minimalPayloadForTable(it));
     }
   }
   if (!todo.length) return { updated: 0 };
@@ -183,16 +293,27 @@ export default async (req) => {
 
     const sb = sbAdmin();
 
-    // --- WHOAMI (diagnostic rôles/clé) ---
+    // --- WHOAMI ---
     if (req.method === 'GET' && tail[0] === 'whoami') {
       return j({
         url: SUPABASE_URL?.replace(/^https?:\/\//, '') || null,
-        role: 'service', // on utilise la Service Role ici
+        role: 'service',
         hasServiceKey: !!SUPABASE_SERVICE_ROLE,
       });
     }
 
-    // --- DIAG : seed + table ---
+    // ---- BACKFILL (bars -> grid_text) ----
+    if (req.method === 'POST' && tail[0] === 'backfill') {
+      try {
+        const out = await backfillGridText(sb);
+        return j({ ok: true, ...out });
+      } catch (e) {
+        console.error('[backfill]', e);
+        return j({ ok: false, error: e.message }, 500);
+      }
+    }
+
+    // --- DIAG ---
     if (req.method === 'GET' && tail[0] === 'diag') {
       const diag = {
         env: {
@@ -227,7 +348,7 @@ export default async (req) => {
       return j({ total, withText, withoutText: total - withText });
     }
 
-    // --- SEED manuel (force) ---
+    // --- SEED manuel ---
     if (req.method === 'POST' && tail[0] === 'seed') {
       try {
         const out = await seedManual(sb);
@@ -249,13 +370,22 @@ export default async (req) => {
       }
     }
 
+    // --- WIPE: vider complètement la table (service role requis) ---
+    if (req.method === 'POST' && tail[0] === 'wipe') {
+      try {
+        // supprime toutes les lignes en filtrant sur un champ non-null
+        const { error } = await sb.from(TABLE).delete().neq('id', null);
+        if (error) return j({ ok: false, error: error.message }, 500);
+        return j({ ok: true });
+      } catch (e) {
+        console.error('[wipe]', e);
+        return j({ ok: false, error: e.message }, 500);
+      }
+    }
+
     // --- LISTE (seed auto si vide) ---
     if (req.method === 'GET' && tail.length === 0) {
-      try {
-        await seedIfEmpty(sb);
-      } catch (e) {
-        console.warn('[seedIfEmpty]', e.message);
-      }
+      try { await seedIfEmpty(sb); } catch (e) { console.warn('[seedIfEmpty]', e.message); }
       const { data, error } = await sb
         .from(TABLE)
         .select('id,title,composer,style,tags,grid_text')
@@ -277,12 +407,14 @@ export default async (req) => {
     if (req.method === 'PATCH' && tail.length === 1) {
       const id = decodeURIComponent(tail[0]);
       let body = {};
-      try {
-        body = await req.json();
-      } catch (_) {}
+      try { body = await req.json(); } catch (_) {}
+      // si l’appelant envoie seulement bars -> on génère grid_text aussi
+      if ((!body.grid_text || !String(body.grid_text).trim()) && Array.isArray(body.bars)) {
+        body.grid_text = barsToGridText(body.bars);
+      }
       const payload = normalizeItem({ ...body, id });
       if (!payload) return j({ error: 'invalid payload' }, 400);
-      const { data, error } = await sb.from(TABLE).upsert(payload, { onConflict: 'id' }).select('*').single();
+      const { data, error } = await sb.from(TABLE).upsert(minimalPayloadForTable(payload), { onConflict: 'id' }).select('*').single();
       if (error) return j({ error: error.message }, 500);
       return j(data);
     }

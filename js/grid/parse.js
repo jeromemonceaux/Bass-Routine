@@ -1,57 +1,71 @@
-// js/grid/parse.js
-(function (w) {
-  function trimArr(a) { return (a || []).filter(Boolean); }
+(function(w){
+  function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-  // Découpe une ligne " | C7 | F7 | G7 | " en mesures, en ignorant les vides aux extrémités
-  function splitBars(line) {
-    // retire les symboles de reprise mais on les garde ailleurs si besoin
-    const noRep = String(line).replace(/[𝄆𝄇]/g, ' ');
-    // scinde sur | et nettoie
-    let parts = noRep.split('|').map(s => s.trim());
-    // enlève les segments vides en début/fin
-    while (parts.length && !parts[0]) parts.shift();
-    while (parts.length && !parts[parts.length - 1]) parts.pop();
-    return parts;
+  // Split a line into tokens and collect chords per bar.
+  function parseLine(line){
+    var bars=[], cur=[];
+    var tokens = String(line||'').split('|');
+    for (var i=0;i<tokens.length;i++){
+      var t = tokens[i].trim();
+      if (!t){ // empty from leading/trailing ||
+        // commit only if cur has content
+        if (cur.length){ bars.push(cur); cur=[]; }
+        continue;
+      }
+      var parts = t.split(/\s+/).filter(Boolean);
+      for (var j=0;j<parts.length;j++){
+        var p = parts[j].trim();
+        if (!p) continue;
+        if (/^𝄆$|^𝄇$/.test(p)){ continue; }
+        cur.push(p);
+      }
+      if (cur.length){ bars.push(cur); cur=[]; }
+    }
+    if (cur.length){ bars.push(cur); }
+    return bars;
   }
 
-  const SECTION_RE = /^\s*[\[(]?(Intro|A\d*|A|B\d*|B|C|D|Bridge|Solo|Solos|Refrain|Coda|Segno)\s*[:\])]?\s*$/i;
+  function parse(text){
+    var lines = String(text||'').split(/\r?\n/);
+    var allBars=[]; var htmlLines=[]; var repeats=[]; var measureIndex=0;
+    for (var li=0; li<lines.length; li++){
+      var raw = lines[li];
+      if (!raw.trim()){ htmlLines.push(''); continue; }
+      var line = raw.replace(/\s+/g,' ').trim();
+      // Normalize double bars / repeats to have separators around them
+      line = line.replace(/𝄆/g,' 𝄆 ').replace(/𝄇/g,' 𝄇 ');
+      var bars = parseLine(line);
+      // Build HTML preview for this line
+      var preview = [];
+      for (var bi=0; bi<bars.length; bi++){
+        var bar = bars[bi];
+        measureIndex++;
+        var content = bar.length? esc(bar.join(' ')) : '—';
+        preview.push('| '+content+' ');
+        // repeats detection around measure boundaries
+      }
+      if (preview.length) preview.push('|');
+      allBars = allBars.concat(bars);
+      htmlLines.push(preview.join(''));
+    }
+    // Remove accidental empties (shouldn't have any, but just in case)
+    allBars = allBars.filter(function(b){ return Array.isArray(b) && b.length; });
+    return { html: htmlLines.join('\n'), bars: allBars, repeats: repeats };
+  }
 
-  function parse(text) {
-    const lines = String(text || '').split(/\r?\n/);
-    const outBars = [];
-    let tpb = 4;
-    let key = null, mode = null;
-
-    for (let raw of lines) {
-      if (!raw.trim()) continue;
-      // ignore lignes de section/titres
-      if (SECTION_RE.test(raw)) continue;
-
-      const parts = splitBars(raw);
-      for (const cell of parts) {
-        if (!cell) continue;
-        // multi-accord (séparé par espaces)
-        const chords = trimArr(cell.split(/\s+/).map(s => s.trim()));
-        outBars.push(chords);
+  function toGridText(bars, perLine){
+    perLine = perLine || 4;
+    var out=[], buf=[];
+    for (var i=0;i<(bars||[]).length;i++){
+      var cell = (Array.isArray(bars[i]) && bars[i].length)? bars[i].join(' ') : '—';
+      buf.push(cell);
+      if (buf.length>=perLine){
+        out.push('| '+buf.join(' | ')+' |'); buf=[];
       }
     }
-
-    return {
-      key, mode, tpb,
-      bars: outBars
-    };
+    if (buf.length) out.push('| '+buf.join(' | ')+' |');
+    return out.join('\n');
   }
 
-  function normalizeText(text) {
-    // Normalise en remettant 4 mesures par ligne par défaut
-    const p = parse(text);
-    const rows = [];
-    for (let i = 0; i < p.bars.length; i += 4) {
-      const chunk = p.bars.slice(i, i + 4).map(m => (m && m.length ? m.join(' ') : '—'));
-      rows.push('| ' + chunk.join(' | ') + ' |');
-    }
-    return rows.join('\n');
-  }
-
-  w.GridParse = { parse, normalizeText };
+  w.GridParse = { parse: parse, toGridText: toGridText };
 })(window);

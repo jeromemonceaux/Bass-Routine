@@ -3,134 +3,157 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bibliothèque — Bass-Routine</title>
+  <title>Bibliothèque</title>
   <style>
-    body{margin:0;background:#0c0d10;color:#e9ebef;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
-    header{position:sticky;top:0;background:#0f1117d0;border-bottom:1px solid #262a31;backdrop-filter:blur(6px)}
+    :root{--bg:#0c0d10;--card:#14161b;--ink:#e9ebef;--muted:#aeb6c2;--line:#262a31;}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+    a{color:inherit;text-decoration:none}
+    header{position:sticky;top:0;background:#0f1117d0;border-bottom:1px solid var(--line);backdrop-filter:blur(6px);z-index:10}
     .wrap{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center}
-    a{color:inherit;text-decoration:none;border:1px solid #262a31;padding:6px 10px;border-radius:10px;background:#0f1117}
-    main{max-width:1100px;margin:18px auto;padding:0 16px}
+    .title{font-weight:700;font-size:18px}
+    .badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;background:#0f1117}
+    .muted{color:var(--muted)}
+    main{max-width:1100px;margin:16px auto;padding:0 16px}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .chip{border:1px solid var(--line);border-radius:10px;background:#0f1117;color:var(--ink);padding:8px 10px}
     .list{display:grid;gap:8px}
-    .row{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;background:#14161b;border:1px solid #262a31;border-radius:12px;padding:8px}
-    .row .title{font-weight:600}
-    .badge{display:inline-block;border:1px solid #262a31;border-radius:999px;padding:2px 8px;font-size:11px;color:#c9ced6}
-    button{border:1px solid #262a31;background:#0f1117;color:#e9ebef;border-radius:10px;padding:6px 10px;cursor:pointer}
-    input{border:1px solid #262a31;background:#0f1117;color:#e9ebef;border-radius:10px;padding:8px 10px}
+    .row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:10px}
+    .meta{display:flex;gap:8px;flex-wrap:wrap}
+    .badges{display:flex;gap:8px;flex-wrap:wrap}
+    .actions{display:flex;gap:6px}
+    button{cursor:pointer}
+    .iconbtn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid var(--line);border-radius:10px;background:#10131a}
+    .iconbtn:hover{transform:translateY(-1px)}
+    input[type="text"]{min-width:220px}
+    .admin{margin-left:auto}
+    details.admin summary{list-style:none}
+    .adminmenu{display:flex;gap:6px;margin-top:8px}
   </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <a href="index.html">← Lecteur</a>
-    <h1 style="margin-left:8px;font-size:18px">Bibliothèque</h1>
-    <input id="q" placeholder="Rechercher…" style="margin-left:auto; min-width:220px">
+    <div class="title">Bibliothèque</div>
+    <input id="q" class="chip" type="text" placeholder="Rechercher (titre, auteur, id)…">
+    <label class="badge"><input id="onlyGrid" type="checkbox" style="margin-right:6px">avec grille uniquement</label>
+    <label class="badge"><input id="onlyMeta" type="checkbox" style="margin-right:6px">métadonnées seulement</label>
+    <a class="badge" href="index.html">Lecteur</a>
+    <details class="admin">
+      <summary class="badge">Admin ▾</summary>
+      <div class="adminmenu">
+        <button id="seedBtn" class="badge">Seed</button>
+        <button id="resyncBtn" class="badge">Resync</button>
+        <button id="backfillBtn" class="badge">Backfill</button>
+        <button id="wipeBtn" class="badge" style="border-color:#7a2f2f;color:#ffb3b3">Vider</button>
+      </div>
+    </details>
   </div>
 </header>
-
 <main>
-  <div class="list" id="libList"></div>
+  <div class="list" id="lib-list"></div>
 </main>
 
-<script src="js/grid/parse.js"></script>
-<script src="js/grid/grid-bridge.js"></script>
 <script>
-const API = '/api/library';
+const $=s=>document.querySelector(s);
+const API='/api/library';
 
-function openInReader(id, auto=true){
-  if(!id) return;
-  const url = 'index.html#grid=' + encodeURIComponent(id) + (auto ? '&auto=1' : '');
-  location.href = url;
-}
-function openInEditor(id){
-  const url = 'editor.html?id=' + encodeURIComponent(id);
-  location.href = url;
-}
+const icons = {
+  play: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
+  edit: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41L18.37 3.29a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>',
+  doc:  '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>'
+};
 
-async function fetchLibrary(){
+function badge(text){ return '<span class="badge">'+text+'</span>'; }
+
+let LIB=[];
+let Q=''; let FILTER_GRID=false; let FILTER_META=false;
+
+function onFilters(){
+  Q = ($('#q')?.value||'').toLowerCase();
+  FILTER_GRID = $('#onlyGrid')?.checked || false;
+  FILTER_META = $('#onlyMeta')?.checked || false;
+  render();
+}
+$('#q')?.addEventListener('input', onFilters);
+$('#onlyGrid')?.addEventListener('change', onFilters);
+$('#onlyMeta')?.addEventListener('change', onFilters);
+
+async function loadLibrary(){
   const r = await fetch(API);
   if(!r.ok) throw new Error('HTTP '+r.status);
-  return await r.json();
+  LIB = await r.json();
+  render();
 }
 
-function hasFullGrid(item){
-  return !!(item?.grid_text && item.grid_text.trim()) || (Array.isArray(item?.bars) && item.bars.length);
+function matches(it){
+  const hay = (it.title||'')+' '+(it.composer||'')+' '+(it.id||'');
+  if (Q && hay.toLowerCase().indexOf(Q)===-1) return false;
+  const hasText = !!(it.grid_text && it.grid_text.trim());
+  if (FILTER_GRID && !hasText) return false;
+  if (FILTER_META && hasText) return false;
+  return true;
 }
 
-function renderLibrary(list){
-  const el = document.getElementById('libList'); // IMPORTANT: assure-toi d'avoir <div id="libList"></div> dans le HTML
-  if(!el){ console.error('#libList introuvable'); return; }
-  if(!Array.isArray(list)) list = [];
-
-  // tri simple par titre
-  list.sort((a,b)=> String(a.title||a.id||'').localeCompare(String(b.title||b.id||''), 'fr'));
-
-  el.innerHTML = list.map(it=>{
-    const id = it.id || '';
-    const title = it.title || id;
-    const composer = it.composer || it.author || '';
-    const style = it.style || '';
-    const badge = hasFullGrid(it)
-      ? '<span class="badge" title="Grille complète disponible">grid</span>'
-      : '<span class="badge" title="Seulement métadonnées">meta</span>';
+function render(){
+  const el = $('#lib-list');
+  if (!el){ console.warn('lib-list introuvable'); return; }
+  const rows = (LIB||[]).filter(matches).map(it=>{
+    const hasText = !!(it.grid_text && it.grid_text.trim());
+    const meta = [
+      badge(it.composer||'Anonyme'),
+      badge(it.style||'—'),
+      hasText ? '<span class="badge" style="border-color:#2d5135;background:#0d1410;color:#a6f3b9">grille</span>'
+              : '<span class="badge" style="border-color:#51422d;background:#14110d;color:#f3d3a6">métadonnées</span>'
+    ].join(' ');
     return `
-      <div class="rowItem" data-id="${id}" style="display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;margin:6px 0;padding:8px;border:1px solid #262a31;border-radius:10px">
+      <div class="row">
         <div>
-          <div style="font-weight:700">${title}</div>
-          <div style="opacity:.7;font-size:12px">${composer}${style ? ' • '+style : ''}</div>
+          <div style="font-weight:700">${(it.title||it.id||'')}</div>
+          <div class="meta">${meta}</div>
         </div>
-        <div>${badge}</div>
-        <div><button class="btnPlay" data-action="play" data-id="${id}">Jouer</button></div>
-        <div><button class="btnEdit" data-action="edit" data-id="${id}">Éditer</button></div>
-      </div>
-    `;
-  }).join('') || '<div class="muted">Bibliothèque vide.</div>';
+        <div class="actions">
+          <button class="iconbtn" title="Jouer" data-play="${it.id}">${icons.play}</button>
+          <button class="iconbtn" title="Éditer" data-edit="${it.id}">${icons.edit}</button>
+        </div>
+      </div>`;
+  }).join('');
+  el.innerHTML = rows || '<div class="badge muted">Aucune grille</div>';
 }
 
-async function bootLibrary(){
-  try{
-    const lib = await fetch('/api/library').then(r=>r.json());
-    const el = document.getElementById('lib-list') || document.getElementById('libList');
-    if(!el) return;
-
-    if(Array.isArray(lib) && lib.length){
-      renderLibrary(lib); // ta fonction existante
-      return;
-    }
-
-    // Vide => propose de charger les presets
-    el.innerHTML = `
-      <div style="padding:12px;border:1px dashed #3a3f46;border-radius:10px">
-        Bibliothèque vide.
-        <button id="seedBtn" style="margin-left:8px">Charger les presets</button>
-      </div>
-    `;
-    document.getElementById('seedBtn')?.addEventListener('click', async ()=>{
-      const r = await fetch('/api/library/seed', { method:'POST' });
-      if(r.ok) location.reload();
-      else alert('Echec du seed');
-    });
-  }catch(e){
-    console.error(e);
-    const el = document.getElementById('lib-list') || document.getElementById('libList');
-    if(el) el.innerHTML = '<div class="muted">Erreur de chargement</div>';
-  }
-}
-document.addEventListener('DOMContentLoaded', bootLibrary);
-
-// Écouteurs délégués pour Play / Edit
 document.addEventListener('click', (e)=>{
-  const b = e.target.closest('[data-action]');
-  if(!b) return;
-  const id = b.getAttribute('data-id');
-  if(!id) return;
-  if(b.dataset.action === 'play'){
-    e.preventDefault();
-    openInReader(id, true);
-  }else if(b.dataset.action === 'edit'){
-    e.preventDefault();
-    openInEditor(id);
+  const p = e.target.closest('[data-play]');
+  const ed = e.target.closest('[data-edit]');
+  if (p){
+    const id = p.getAttribute('data-play');
+    location.href = 'index.html#grid=' + encodeURIComponent(id) + '&auto=1';
+  }
+  if (ed){
+    const id = ed.getAttribute('data-edit');
+    location.href = 'editor.html?id=' + encodeURIComponent(id);
   }
 });
+
+async function call(path, confirmText){
+  if (confirmText && !confirm(confirmText)) return;
+  const btn = event?.target;
+  if (btn){ btn.disabled=true; btn.textContent='…'; }
+  try{
+    const r = await fetch(API+path, {method:'POST'});
+    const data = await r.json().catch(_=>({}));
+    if (!r.ok) throw new Error(data.error || ('HTTP '+r.status));
+    await loadLibrary();
+    alert(JSON.stringify(data, null, 2));
+  }catch(e){ alert(e.message); }
+  finally{ if (btn){ btn.disabled=false; btn.textContent=btn.getAttribute('id')==='wipeBtn'?'Vider':btn.textContent='OK'; } }
+}
+
+$('#seedBtn')?.addEventListener('click', ()=>call('/seed'));
+$('#resyncBtn')?.addEventListener('click', ()=>call('/resync-seed'));
+$('#backfillBtn')?.addEventListener('click', ()=>call('/backfill'));
+$('#wipeBtn')?.addEventListener('click', ()=>call('/wipe', 'Confirmer la suppression de toutes les grilles ?'));
+
+loadLibrary().catch(e=>{ console.error(e); $('#lib-list') && ($('#lib-list').innerHTML='<div class="badge muted">Erreur : '+e.message+'</div>'); });
 </script>
 </body>
 </html>
