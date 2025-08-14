@@ -42,6 +42,19 @@
   .tile.brL::before{content:'𝄆'; position:absolute; left:-14px; top:50%; transform:translateY(-50%); font-size:18px; opacity:.9}
   .tile.brR::after{content:'𝄇'; position:absolute; right:-14px; top:50%; transform:translateY(-50%); font-size:18px; opacity:.9}
   .marker{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:999px;padding:4px 8px;font-size:12px;color:var(--muted);background:#171e29;margin:0 6px}
+  /* Thèmes (restaurés) */
+  [data-theme="light"]{
+    --bg:#f9fbff; --panel:#ffffff; --ink:#0b1220; --muted:#5c6b80; --accent:#0b67d9; --good:#0aa770;
+    --tile:#f2f5fb; --string:#8b6e4a; --border:#d7e0ea; --tile-border:#dfe6ef;
+  }
+  [data-theme="jazz"]{
+    --bg:#0d0b0a; --panel:#16110d; --ink:#f5ead3; --muted:#c7bca6; --accent:#f6c945; --good:#70e1b7;
+    --tile:#1a1410; --string:#d0a46a; --border:#3a2b1f; --tile-border:#3a2b1f;
+  }
+
+  /* Grossir l’accord principal */
+  .big-chord{font-size: clamp(28px, 8.5vw, 60px); font-weight:900; letter-spacing:.5px; margin:0 0 2px}
+  .notes{font-size: clamp(12px, 2.4vw, 18px)}
 </style>
 </head>
 <body>
@@ -117,19 +130,26 @@
   var bigChord=el('bigChord'), chordNotes=el('chordNotes'), ticker=el('ticker'), fretboard=el('fretboard');
   var pulseDot=el('pulseDot'), scaleLabel=el('scaleLabel'), pentaLabel=el('pentaLabel'), gridTitleChip=el('gridTitleChip');
   var metroToggle=el('metroToggle'), metroMode=el('metroMode'), bpm=el('bpm'), bpmVal=el('bpmVal');
+  var centerSkips = 0; // évite le recentrage pendant 1-2 cycles quand on remplace toute la grille
 
   // ——— Notes helpers (support unicode ♭/♯) ———
   var NOTES_SHARP = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
   var NOTES_FLAT  = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
-  function prefersFlats(key){ return ["F","Bb","Eb","Ab","Db","Gb"].indexOf(key)>=0 || /b/.test(key); }
-  function normAcc(s){ return s.replace(/\u266D/g,'b').replace(/\u266F/g,'#'); } // ♭ -> b, ♯ -> #
+  // ——— Accords & enharmoniques ———
+  function normAcc(s){ return String(s||'').replace(/\u266D/g,'b').replace(/\u266F/g,'#'); } // ♭→b, ♯→#
   function splitRoot(sym){
-    var m = String(sym||'').match(/^([A-G](?:[b#\u266D\u266F])?)(.*)$/);
-    if(!m) return {root:"C", suff:""};
-    return { root: normAcc(m[1]), suff: m[2]||"" };
+    const m = String(sym||'').match(/^([A-G](?:[b#\u266D\u266F])?)(.*)$/);
+    return m ? {root: normAcc(m[1]), suff: m[2]||''} : {root:'C', suff:''};
   }
+  // Choisit flats/sharps pour CE symbole :
+  function flatsForSymbol(sym, keyForFallback){
+    const r = splitRoot(sym).root;
+    if (r.includes('b')) return true;
+    if (r.includes('#')) return false;
+    return ["F","Bb","Eb","Ab","Db","Gb"].includes(keyForFallback||'C');
+  }
+  function prefersFlats(key){ return ["F","Bb","Eb","Ab","Db","Gb"].indexOf(key)>=0 || /b/.test(key); }
   function idxOf(note, flats){ var arr = flats ? NOTES_FLAT : NOTES_SHARP; return arr.indexOf(note); }
-  function noteIndexAny(n){ var i = NOTES_SHARP.indexOf(n); if (i<0) i = NOTES_FLAT.indexOf(n); return i; }
 
   // ——— State & persistence ———
   var state = {
@@ -175,65 +195,119 @@
   }
 
   // ——— Fretboard & chord tones ———
-  function chordTones(sym, flats){
-    var sp = splitRoot(sym); var root = sp.root, s = sp.suff||"";
-    var A = flats ? NOTES_FLAT : NOTES_SHARP;
-    var r = idxOf(root, flats); if (r<0) r = idxOf(root, !flats);
-    function pitch(o){ return A[(r + o + 120)%12]; }
-    var third = /m(?!aj)/.test(s) || /°|dim/.test(s) ? 3 : 4;
-    var fifth = /b5/.test(s) ? 6 : /#5|\+5|aug/.test(s) ? 8 : 7;
-    var seventh = /maj7/.test(s) ? 11 : (/7/.test(s) ? 10 : null);
-    var adds = []; if(/b9/.test(s)) adds.push(13); if(/#9/.test(s)) adds.push(15);
-    if(/9(?![0-9])/.test(s)) adds.push(14); if(/11/.test(s)) adds.push(17); if(/13/.test(s)) adds.push(21);
-    if (/sus4|sus/.test(s)) third = 5;
-    var base=[0,third,fifth]; if(seventh!==null) base.push(seventh); base=base.concat(adds);
-    var uniq=[]; base.forEach(n=>{ if(uniq.indexOf(n)<0) uniq.push(n); });
-    return {tones: uniq.map(pitch)};
+  function chordTones(sym, keyForFallback){
+    const {root, suff} = splitRoot(sym);
+    const flats = flatsForSymbol(sym, keyForFallback);
+    const A = flats ? NOTES_FLAT : NOTES_SHARP;
+
+    let r = A.indexOf(root);
+    if (r<0){
+      const other = flats ? NOTES_SHARP : NOTES_FLAT;
+      r = other.indexOf(root);
+    }
+    if (r<0) r = 0;
+
+    const pitch = (o)=> A[(r + o + 120)%12];
+
+    let third = /m(?!aj)/.test(suff) || /°|dim/.test(suff) ? 3 : 4;
+    let fifth = /b5/.test(suff) ? 6 : /#5|\+5|aug/.test(suff) ? 8 : 7;
+    let seventh = /maj7/.test(suff) ? 11 : (/7/.test(suff) ? 10 : null);
+
+    const adds = [];
+    if (/b9/.test(suff)) adds.push(13);
+    if (/#9/.test(suff)) adds.push(15);
+    if (/9(?![0-9])/.test(suff)) adds.push(14);
+    if (/11/.test(suff)) adds.push(17);
+    if (/13/.test(suff)) adds.push(21);
+    if (/sus4|sus/.test(suff)) third = 5;
+
+    let base = [0, third, fifth];
+    if (seventh!==null) base.push(seventh);
+    base = base.concat(adds);
+
+    const uniq=[]; base.forEach(n=>{ if(!uniq.includes(n)) uniq.push(n); });
+    return { tones: uniq.map(pitch) };
   }
   function renderFretboardForChord(sym){
-    var flats = prefersFlats(state.key);
-    var ctones = chordTones(sym, flats);
-    var root = splitRoot(sym).root;
-    var tones = ctones.tones;
-    var stringsIdx = (state.strings==='5') ? ["G","D","A","E","B"] : ["G","D","A","E"];
-    var stringsInt = []; for(var i=0;i<stringsIdx.length;i++){ stringsInt.push(noteIndexAny(stringsIdx[i])); }
-    var frets = 25, W = 1000, H = (window.matchMedia && window.matchMedia('(orientation: landscape)').matches) ? 160 : 190;
-    var top = 10, bottom = H-10, left = 30, right = W-14;
-    var stringGap = (bottom - top) / (stringsInt.length - 1);
-    var fretGap = (right - left) / frets;
-    var rootIdx = noteIndexAny(root);
-    var noteSet = {}; for(var i=0;i<tones.length;i++){ noteSet[noteIndexAny(tones[i])] = true; }
+    const flats = flatsForSymbol(sym, state.key);
+    const ctones = chordTones(sym, state.key);
+    const root = splitRoot(sym).root;
+    const tones = ctones.tones;
 
-    var svg = [];
+    const stringsIdx = (state.strings==='5') ? ["G","D","A","E","B"] : ["G","D","A","E"];
+    const stringsInt = stringsIdx.map(n => {
+      let i = NOTES_SHARP.indexOf(n);
+      if (i<0) i = NOTES_FLAT.indexOf(n);
+      return i<0 ? 0 : i;
+    });
+
+    const frets=25, W=1000, H=(matchMedia && matchMedia('(orientation: landscape)').matches)?160:190;
+    const top=10,bottom=H-10,left=30,right=W-14;
+    const stringGap=(bottom-top)/(stringsInt.length-1), fretGap=(right-left)/frets;
+
+    const rootIdx = (()=>{ let i=NOTES_SHARP.indexOf(root); if(i<0) i=NOTES_FLAT.indexOf(root); return i<0?0:i; })();
+    const noteSet = {}; tones.forEach(t=>{ let i=NOTES_SHARP.indexOf(t); if(i<0) i=NOTES_FLAT.indexOf(t); if(i>=0) noteSet[i]=true; });
+
+    const svg=[];
     svg.push('<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="var(--tile)" rx="12"/>');
     svg.push('<rect x="'+(left-5)+'" y="'+(top-8)+'" width="5" height="'+(bottom-top+16)+'" fill="var(--string)"/>');
-    for (var f=1; f<=frets-1; f++){
-      var x = left + f * fretGap;
-      svg.push('<line x1="'+x+'" y1="'+(top-8)+'" x2="'+x+'" y2="'+(bottom+8)+'" stroke="rgba(255,255,255,.12)" stroke-width="'+((f%12===0)?2:1)+'"/>');
-      var mod = f % 12;
-      if (mod===3||mod===5||mod===7||mod===9){ svg.push('<circle cx="'+(x - fretGap/2)+'" cy="'+(H/2)+'" r="4.2" fill="rgba(255,255,255,.14)"/>'); }
-      if (f%12===0){ svg.push('<circle cx="'+(x - fretGap/2)+'" cy="'+(H/2 - 10)+'" r="4.2" fill="rgba(255,255,255,.14)"/><circle cx="'+(x - fretGap/2)+'" cy="'+(H/2 + 10)+'" r="4.2" fill="rgba(255,255,255,.14)"/>'); }
+
+    for (let f=1; f<=frets-1; f++){
+      const x = left + f*fretGap, mod=f%12;
+      svg.push('<line x1="'+x+'" y1="'+(top-8)+'" x2="'+x+'" y2="'+(bottom+8)+'" stroke="rgba(255,255,255,.12)" stroke-width="'+((mod===0)?2:1)+'"/>');
+      if ([3,5,7,9].includes(mod)) svg.push('<circle cx="'+(x - fretGap/2)+'" cy="'+(H/2)+'" r="4.2" fill="rgba(255,255,255,.14)"/>');
+      if (mod===0) svg.push('<circle cx="'+(x - fretGap/2)+'" cy="'+(H/2 - 10)+'" r="4.2" fill="rgba(255,255,255,.14)"/><circle cx="'+(x - fretGap/2)+'" cy="'+(H/2 + 10)+'" r="4.2" fill="rgba(255,255,255,.14)"/>');
     }
-    for (var s=0; s<stringsInt.length; s++){
-      var y = top + s*stringGap;
+    for (let s=0; s<stringsInt.length; s++){
+      const y = top + s*stringGap;
       svg.push('<line x1="'+left+'" y1="'+y+'" x2="'+right+'" y2="'+y+'" stroke="var(--string)" stroke-width="'+(2.6 - s*0.2)+'"/>');
       svg.push('<text x="6" y="'+(y+3)+'" font-size="11" fill="#9aa4b2" font-weight="700">'+stringsIdx[s]+'</text>');
     }
-    for (s=0; s<stringsInt.length; s++){
-      for (var f=0; f<=frets-1; f++){
-        var noteIdx = (stringsInt[s] + f) % 12;
+    for (let s=0; s<stringsInt.length; s++){
+      for (let f=0; f<=frets-1; f++){
+        const noteIdx = (stringsInt[s] + f) % 12;
         if (noteSet[noteIdx]){
-          var x2 = left + f*fretGap - fretGap/2;
-          var y2 = top + s*stringGap;
-          var isRoot = (noteIdx === rootIdx);
-          var r = isRoot ? 8.5 : 6.4;
-          var fill = isRoot ? "var(--good)" : "var(--accent)";
-          svg.push('<circle cx="'+x2+'" cy="'+y2+'" r="'+r+'" fill="'+fill+'" stroke="rgba(0,0,0,.35)" stroke-width="2"/>');
+          const x2 = left + f*fretGap - fretGap/2;
+          const y2 = top + s*stringGap;
+          const isRoot = (noteIdx === rootIdx);
+          svg.push('<circle cx="'+x2+'" cy="'+y2+'" r="'+(isRoot?8.5:6.4)+'" fill="'+(isRoot?'var(--good)':'var(--accent)')+'" stroke="rgba(0,0,0,.35)" stroke-width="2"/>');
         }
       }
     }
-    fretboard.setAttribute('viewBox', '0 0 '+W+' '+H);
-    fretboard.innerHTML = svg.join("");
+    document.getElementById('fretboard').setAttribute('viewBox', '0 0 '+W+' '+H);
+    document.getElementById('fretboard').innerHTML = svg.join('');
+  }
+
+  function centerTickerOnActive(opts){
+    opts = opts || {};
+    var smooth = (opts.smooth !== false);
+
+    if (!ticker) return;
+    var active = ticker.querySelector('.measure.active');
+    if (!active) return;
+
+    var isPortrait = window.matchMedia && window.matchMedia('(orientation: portrait)').matches;
+    if (isPortrait){
+      try{ active.scrollIntoView({block:'nearest', inline:'center'}); }catch(_){}
+      return;
+    }
+
+    var desired = Math.max(
+      0,
+      Math.min(
+        active.offsetLeft + active.offsetWidth/2 - ticker.clientWidth/2,
+        ticker.scrollWidth - ticker.clientWidth
+      )
+    );
+
+    if (centerSkips > 0){ centerSkips--; return; }
+
+    var diff = desired - ticker.scrollLeft;
+    if (Math.abs(diff) < 8){
+      ticker.scrollLeft = desired;
+    } else {
+      ticker.scrollTo({ left: desired, behavior: smooth ? 'smooth' : 'auto' });
+    }
   }
 
   // ——— Ticker / sections / reprises ———
@@ -273,7 +347,7 @@
           if (!m.split){ d.classList.add('active'); }
           else {
             if ((state.beatsPerBar===4 && ((state.curBeat<2 && k===0) || (state.curBeat>=2 && k===1)))
-             || (state.beatsPerBar!==4 && ((state.curBeat<1 && k===0) || (state.curBeat>=1 && k===1)))){
+            || (state.beatsPerBar!==4 && ((state.curBeat<1 && k===0) || (state.curBeat>=1 && k===1)))){
               d.classList.add('active');
             }
           }
@@ -285,6 +359,7 @@
       }
       wrap.appendChild(grid); ticker.appendChild(wrap);
     }
+    centerTickerOnActive({ smooth: true });
   }
   function renderMain(){
     var sym = getCurrentChordSym();
@@ -318,33 +393,69 @@
   // ——— Audio (métronome + tempo réglable) ———
   var audioCtx=null, timer=null;
   function ensureAudio(){ try{ if (!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); if (audioCtx && audioCtx.state==='suspended') audioCtx.resume(); }catch(_){ } }
-  function beep(accent){
+
+  // clique-t-on ce temps ? (jazz = 2&4 en 4/4, 3&1 en 3/4)
+  function shouldClick(beat, bpb){
+    const jazz = (metroMode && metroMode.value==='jazz');
+    if (!jazz) return true;                      // classic: tous les temps
+    if (bpb === 4) return (beat===1 || beat===3);// 2 & 4
+    if (bpb === 3) return (beat===2 || beat===0);// 3 & 1
+    return true;
+  }
+  // nature du clic à produire
+  function beatKind(beat, bpb){
+    const jazz = (metroMode && metroMode.value==='jazz');
+    if (jazz){
+      if (bpb===4) return (beat===1 || beat===3) ? 'accent' : null;     // 2&4
+      if (bpb===3) return (beat===2 ? 'accent' : (beat===0 ? 'weak' : null)); // 3 fort, 1 grave
+      return 'accent';
+    } else {
+      return (beat===0 ? 'strong' : 'weak'); // classic : 1 fort
+    }
+  }
+  // kind: 'strong' | 'accent' | 'weak'
+  function beep(kind){
+    if (!kind) return;
     if (!metroToggle || !metroToggle.checked) return;
     ensureAudio(); if(!audioCtx) return;
+
     const t = audioCtx.currentTime + 0.005;
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
+
+    const FREQ = { strong: 1600, accent: 1400, weak: 1000 };
+    const VOL  = { strong: 0.42,  accent: 0.30,  weak: 0.20 };
+
+    // 3/4 jazz : temps 1 grave (si cliqué)
+    if (metroMode && metroMode.value==='jazz' && state.beatsPerBar===3 && state.curBeat===0){
+      osc.frequency.setValueAtTime(600, t);
+    } else {
+      osc.frequency.setValueAtTime(FREQ[kind]||1200, t);
+    }
     osc.type='square';
-    const jazz = (metroMode && metroMode.value==='jazz');
-    osc.frequency.setValueAtTime(accent ? (jazz?1400:1600) : (jazz?900:1100), t);
+
     gain.gain.setValueAtTime(0.0001, t);
-    try{ gain.gain.exponentialRampToValueAtTime(accent?0.35:0.24, t+0.006); }catch(_){ gain.gain.linearRampToValueAtTime(accent?0.35:0.24, t+0.006); }
-    try{ gain.gain.exponentialRampToValueAtTime(0.0001, t+0.08); }catch(_){ gain.gain.linearRampToValueAtTime(0.0001, t+0.08); }
-    osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t+0.08);
-  }
-  function isAccent(beat){
-    const jazz = (metroMode && metroMode.value==='jazz');
-    return jazz ? ((state.beatsPerBar===4) ? (beat===1||beat===3) : beat===0) : (beat===0);
+    try{ gain.gain.exponentialRampToValueAtTime(VOL[kind]||0.2, t + 0.006); }catch(_){ gain.gain.linearRampToValueAtTime(VOL[kind]||0.2, t + 0.006); }
+    try{ gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.08); }catch(_){ gain.gain.linearRampToValueAtTime(0.0001, t + 0.08); }
+
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(t); osc.stop(t+0.08);
   }
   function pulseBlink(){
     if(pulseDot){ pulseDot.classList.add('on'); setTimeout(function(){ pulseDot.classList.remove('on'); }, 110); }
   }
   function tickBeat(){
-    const accent = isAccent(state.curBeat);
-    pulseBlink(); beep(accent);
+    // clic éventuel pour ce temps
+    if (shouldClick(state.curBeat, state.beatsPerBar)){
+      beep(beatKind(state.curBeat, state.beatsPerBar));
+    }
+    pulseBlink();
+
+    // avance du temps
     state.curBeat++;
     if (state.curBeat >= state.beatsPerBar){
       state.curBeat = 0;
+
       let nextBar = (state.curBar + 1);
       const seg = state.repeatSegments.find(s => s.end === state.curBar);
       if (seg){
@@ -357,7 +468,9 @@
       }
       state.curBar = nextBar;
     }
-    renderMain(); renderTicker();
+    renderMain();
+    centerTickerOnActive({ smooth: true });
+    renderTicker();
   }
   function start(){ if(state.playing) return; state.playing=true; playBtn.textContent="⏸︎"; ensureAudio(); tickBeat(); timer=setInterval(tickBeat, state.msPerBeat); }
   function stop(){ if(!state.playing) return; state.playing=false; playBtn.textContent="▶︎"; if(timer){clearInterval(timer); timer=null;} }
@@ -391,6 +504,10 @@
     state.curBar = 0; state.curBeat = 0;
     state.title = g.name || g.title || g.id || '—';
     renderMain(); renderTicker();
+    // évite le recentrage pendant 2 cycles puis 1er centrage sans animation
+    centerSkips = 2;
+    centerTickerOnActive({ smooth: false });
+
     // persiste la grille courante pour la biblio
     try{
       const blob = { lastGridId: g.id };
@@ -419,6 +536,15 @@
     if(state.playing){ if(timer){ clearInterval(timer); timer=null; } start(); }
   });
 
+  // Espace = Play/Pause (hors champs)
+  document.addEventListener('keydown', function(e){
+    if ((e.code === 'Space' || e.key === ' ') &&
+        !['INPUT','TEXTAREA','SELECT'].includes((document.activeElement||{}).tagName)){
+      e.preventDefault();
+      (state.playing) ? stop() : start();
+    }
+  });
+
   // ——— Boot ———
   function getHashParam(name){
     const h = location.hash || '';
@@ -428,7 +554,6 @@
   async function bootFromHash(){
     const id = getHashParam('grid');
     if (!id){
-      // pas de hash → essaie la dernière grille connue
       try{
         const s = JSON.parse(localStorage.getItem('mp_settings_v3')||'{}');
         if (s && s.lastGridId){ await Bridge.loadGridToReader(s.lastGridId); stop(); return; }
@@ -439,10 +564,8 @@
   }
   window.addEventListener('hashchange', bootFromHash);
 
-  applySettings(); // restaure UI (métronome, jazz, bpm, thème…)
-
+  applySettings();
   document.addEventListener('DOMContentLoaded', function(){
-    // default mini progression si rien n’est chargé
     if ((location.hash||'').indexOf('grid=')<0){
       try{
         const s = JSON.parse(localStorage.getItem('mp_settings_v3')||'{}');
@@ -451,7 +574,6 @@
     }
     bootFromHash();
     renderHeader();
-    // déverrouille audio sur interaction
     document.addEventListener('pointerdown', function(){ try{ if (audioCtx && audioCtx.state==='suspended') audioCtx.resume(); }catch(_){} }, {once:true, passive:true});
   });
 })();

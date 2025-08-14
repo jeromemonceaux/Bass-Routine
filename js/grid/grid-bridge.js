@@ -18,27 +18,40 @@
     const lines = String(txt||'').split(/\r?\n/);
     const bars = []; const sections=[]; const L=[], R=[];
     let idx=0;
-    const symRe = /^(𝄆|𝄇|Fine|To Coda|Segno|Coda|D\.?S\.?|D\.?C\.?)/i;
+
     for (let raw of lines){
       const line = raw.trim();
       if (!line) continue;
-      // Section markers: "A:", "Bridge:", "(Intro):", etc.
+
+      // Section seule sur la ligne (A:, Bridge:, Intro:, etc.)
       const sm = line.match(/^\s*[\[(]?\s*([A-Za-z][A-Za-z0-9 ]*)\s*:\s*[\])]?\s*$/);
       if (sm){ sections.push({ index: idx+1, label: sm[1] }); continue; }
-      // bar chunks
-      const parts = line.split('|').map(s=>s.trim()).filter(Boolean);
-      for (const p of parts){
-        if (symRe.test(p)){
-          if (/𝄆/.test(p)) L.push(idx+1);
-          if (/𝄇/.test(p)) R.push(idx+1);
-          continue;
-        }
+
+      // Découpe en segments de "barres" par |
+      const parts = line.split('|');
+
+      for (let part of parts){
+        let p = part.trim();
+        if (!p) continue;
+
+        // Retire les reprises éventuelles à gauche/droite SANS perdre les accords
+        // Ex: "𝄆 Cm7", "Dm7 𝄇", "𝄆 Fm7 𝄇"
+        if (/^𝄆/.test(p)){ L.push(idx+1); p = p.replace(/^𝄆\s*/, ''); }
+        if (/𝄇$/.test(p)){ R.push(idx+1); p = p.replace(/\s*𝄇$/, ''); }
+
+        // Si devenait vide après symbole, passe
+        if (!p) continue;
+
+        // Tokens d’accords (séparés par espaces)
         const chords = p.split(/\s+/).filter(Boolean);
-        if (chords.length){ bars.push(chords); idx++; }
+        if (!chords.length) continue;
+
+        bars.push(chords);
+        idx++;
       }
     }
     return { bars, sections, repeats:{L,R} };
-  }
+}
   function parseAll(txt){ return parseUsingGridParse(txt) || crudeParse(txt); }
 
   // ——— Fetch helpers ———
